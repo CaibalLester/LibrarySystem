@@ -18,9 +18,7 @@ public class LibrarianDashboard extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -34,12 +32,10 @@ public class LibrarianDashboard extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public LibrarianDashboard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 520, 381);
+		setBounds(100, 100, 631, 375);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(177, 216, 216));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -91,35 +87,35 @@ public class LibrarianDashboard extends JFrame {
 		btnManageStudents.setForeground(new Color(255, 255, 255));
 		btnManageStudents.setFont(new Font("Arial", Font.BOLD, 15));
 		btnManageStudents.setBackground(new Color(0, 128, 128));
-		btnManageStudents.setBounds(31, 134, 207, 43);
+		btnManageStudents.setBounds(31, 134, 255, 43);
 		contentPane.add(btnManageStudents);
 		
 		JButton btnManageStudents_1 = new JButton("Manage Books");
 		btnManageStudents_1.setForeground(Color.WHITE);
 		btnManageStudents_1.setFont(new Font("Arial", Font.BOLD, 15));
 		btnManageStudents_1.setBackground(new Color(0, 128, 128));
-		btnManageStudents_1.setBounds(266, 134, 207, 43);
+		btnManageStudents_1.setBounds(323, 134, 255, 43);
 		contentPane.add(btnManageStudents_1);
 		
 		JButton btnManageStudents_1_1 = new JButton("Manage Students");
 		btnManageStudents_1_1.setForeground(Color.WHITE);
 		btnManageStudents_1_1.setFont(new Font("Arial", Font.BOLD, 15));
 		btnManageStudents_1_1.setBackground(new Color(0, 128, 128));
-		btnManageStudents_1_1.setBounds(31, 261, 442, 43);
+		btnManageStudents_1_1.setBounds(31, 261, 547, 43);
 		contentPane.add(btnManageStudents_1_1);
 		
 		JButton btnManageStudents_1_2 = new JButton("Manage Reservations");
 		btnManageStudents_1_2.setForeground(Color.WHITE);
 		btnManageStudents_1_2.setFont(new Font("Arial", Font.BOLD, 15));
 		btnManageStudents_1_2.setBackground(new Color(0, 128, 128));
-		btnManageStudents_1_2.setBounds(266, 196, 207, 43);
+		btnManageStudents_1_2.setBounds(323, 196, 255, 43);
 		contentPane.add(btnManageStudents_1_2);
 		
 		JButton btnManageStudents_1_3 = new JButton("Manage Fines");
 		btnManageStudents_1_3.setForeground(Color.WHITE);
 		btnManageStudents_1_3.setFont(new Font("Arial", Font.BOLD, 15));
 		btnManageStudents_1_3.setBackground(new Color(0, 128, 128));
-		btnManageStudents_1_3.setBounds(31, 196, 207, 43);
+		btnManageStudents_1_3.setBounds(31, 196, 255, 43);
 		contentPane.add(btnManageStudents_1_3);
 	}
 }
