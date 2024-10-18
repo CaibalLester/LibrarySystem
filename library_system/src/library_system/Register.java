@@ -42,14 +42,14 @@ public class Register extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 683, 436);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(153, 102, 102));
+		contentPane.setBackground(new Color(0, 128, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JTextArea txtrRegister = new JTextArea();
 		txtrRegister.setFont(new Font("Arial", Font.BOLD, 30));
-		txtrRegister.setBackground(new Color(153, 102, 102));
+		txtrRegister.setBackground(new Color(0, 128, 128));
 		txtrRegister.setForeground(new Color(255, 255, 255));
 		txtrRegister.setText("REGISTER");
 		txtrRegister.setBounds(245, 39, 181, 40);
@@ -59,12 +59,12 @@ public class Register extends JFrame {
 		txtrUsername.setText("Username:");
 		txtrUsername.setForeground(Color.WHITE);
 		txtrUsername.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername.setBackground(new Color(153, 102, 102));
-		txtrUsername.setBounds(181, 103, 133, 30);
+		txtrUsername.setBackground(new Color(0, 128, 128));
+		txtrUsername.setBounds(181, 103, 107, 30);
 		contentPane.add(txtrUsername);
 		
 		username = new JTextField();
-		username.setBackground(new Color(245, 235, 235));
+		username.setBackground(new Color(177, 216, 216));
 		username.setFont(new Font("Arial", Font.PLAIN, 16));
 		username.setBounds(298, 103, 216, 30);
 		contentPane.add(username);
@@ -74,12 +74,12 @@ public class Register extends JFrame {
 		txtrPassword.setText("Password:");
 		txtrPassword.setForeground(Color.WHITE);
 		txtrPassword.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrPassword.setBackground(new Color(153, 102, 102));
-		txtrPassword.setBounds(181, 143, 125, 30);
+		txtrPassword.setBackground(new Color(0, 128, 128));
+		txtrPassword.setBounds(181, 143, 107, 30);
 		contentPane.add(txtrPassword);
 		
 		password = new JTextField();
-		password.setBackground(new Color(245, 235, 235));
+		password.setBackground(new Color(177, 216, 216));
 		password.setFont(new Font("Arial", Font.PLAIN, 16));
 		password.setColumns(10);
 		password.setBounds(298, 143, 216, 30);
@@ -89,12 +89,12 @@ public class Register extends JFrame {
 		txtrEmail.setText("Email:");
 		txtrEmail.setForeground(Color.WHITE);
 		txtrEmail.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrEmail.setBackground(new Color(153, 102, 102));
+		txtrEmail.setBackground(new Color(0, 128, 128));
 		txtrEmail.setBounds(223, 182, 65, 30);
 		contentPane.add(txtrEmail);
 		
 		email = new JTextField();
-		email.setBackground(new Color(245, 235, 235));
+		email.setBackground(new Color(177, 216, 216));
 		email.setFont(new Font("Arial", Font.PLAIN, 16));
 		email.setColumns(10);
 		email.setBounds(298, 181, 216, 30);
@@ -104,12 +104,12 @@ public class Register extends JFrame {
 		txtrFullName.setText("Full Name:");
 		txtrFullName.setForeground(Color.WHITE);
 		txtrFullName.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrFullName.setBackground(new Color(153, 102, 102));
+		txtrFullName.setBackground(new Color(0, 128, 128));
 		txtrFullName.setBounds(182, 220, 111, 30);
 		contentPane.add(txtrFullName);
 		
 		fullname = new JTextField();
-		fullname.setBackground(new Color(245, 235, 235));
+		fullname.setBackground(new Color(177, 216, 216));
 		fullname.setFont(new Font("Arial", Font.PLAIN, 16));
 		fullname.setColumns(10);
 		fullname.setBounds(298, 220, 216, 30);
@@ -120,18 +120,19 @@ public class Register extends JFrame {
 		role.setText("User Role:");
 		role.setForeground(Color.WHITE);
 		role.setFont(new Font("Arial", Font.BOLD, 20));
-		role.setBackground(new Color(153, 102, 102));
+		role.setBackground(new Color(0, 128, 128));
 		role.setBounds(182, 259, 111, 30);
 		contentPane.add(role);
 		
 		userrole = new JComboBox<>();
-		userrole.setBackground(new Color(245, 235, 235));
+		userrole.setBackground(new Color(177, 216, 216));
 		userrole.setModel(new DefaultComboBoxModel<>(new String[] {"Select role...", "Librarian", "Student"}));
 		userrole.setFont(new Font("Arial", Font.PLAIN, 16));
 		userrole.setBounds(298, 261, 216, 28);
 		contentPane.add(userrole);
 		
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.setForeground(new Color(255, 255, 255));
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String uname = username.getText();
@@ -147,7 +148,7 @@ public class Register extends JFrame {
 				}
 			}
 		});
-		btnSubmit.setBackground(new Color(216, 235, 235));
+		btnSubmit.setBackground(new Color(41, 82, 82));
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 15));
 		btnSubmit.setBounds(415, 315, 99, 30);
 		contentPane.add(btnSubmit);
@@ -173,6 +174,5 @@ public class Register extends JFrame {
 		    e.printStackTrace();
 		    JOptionPane.showMessageDialog(null, "Failed to register user! " + e.getMessage());
 		}
-
 	}
 }
