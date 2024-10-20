@@ -74,7 +74,7 @@ public class S_BorrowingComplianceManagement extends JFrame {
 		contentPane.add(textField_2);
 		
 		JTextArea txtrBorrowingComplianceManagement = new JTextArea();
-		txtrBorrowingComplianceManagement.setText("Borrowing Compliance Management");
+		txtrBorrowingComplianceManagement.setText("BORROWING COMPLIANCE MANAGEMENT");
 		txtrBorrowingComplianceManagement.setForeground(Color.WHITE);
 		txtrBorrowingComplianceManagement.setFont(new Font("Arial", Font.BOLD, 30));
 		txtrBorrowingComplianceManagement.setBackground(new Color(0, 128, 128));

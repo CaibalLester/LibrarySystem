@@ -65,11 +65,11 @@ public class S_Books extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTextArea txtrBorrowingComplianceManagement = new JTextArea();
-		txtrBorrowingComplianceManagement.setText("Student Books");
+		txtrBorrowingComplianceManagement.setText("STUDENT BOOK INFORMATION");
 		txtrBorrowingComplianceManagement.setForeground(Color.WHITE);
 		txtrBorrowingComplianceManagement.setFont(new Font("Arial", Font.BOLD, 30));
 		txtrBorrowingComplianceManagement.setBackground(new Color(0, 128, 128));
-		txtrBorrowingComplianceManagement.setBounds(30, 28, 407, 40);
+		txtrBorrowingComplianceManagement.setBounds(30, 28, 522, 40);
 		contentPane.add(txtrBorrowingComplianceManagement);
 		
 		scrollPane = new JScrollPane();

@@ -25,7 +25,6 @@ public class S_Reservation extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
@@ -82,7 +81,7 @@ public class S_Reservation extends JFrame {
 		contentPane.add(textField_3);
 		
 		JTextArea txtrManageStudentResrvation = new JTextArea();
-		txtrManageStudentResrvation.setText("STUDENT RESERVATION");
+		txtrManageStudentResrvation.setText("STUDENT BOOK RESERVATION");
 		txtrManageStudentResrvation.setForeground(Color.WHITE);
 		txtrManageStudentResrvation.setFont(new Font("Arial", Font.BOLD, 30));
 		txtrManageStudentResrvation.setBackground(new Color(0, 128, 128));
@@ -93,7 +92,7 @@ public class S_Reservation extends JFrame {
 		btnSubmit.setForeground(Color.WHITE);
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 15));
 		btnSubmit.setBackground(new Color(41, 82, 82));
-		btnSubmit.setBounds(1120, 473, 99, 30);
+		btnSubmit.setBounds(1120, 433, 99, 30);
 		contentPane.add(btnSubmit);
 		
 		JTextArea txtrPassword_1 = new JTextArea();
@@ -128,20 +127,12 @@ public class S_Reservation extends JFrame {
 		txtrEmergencyContact_1.setBounds(752, 269, 175, 30);
 		contentPane.add(txtrEmergencyContact_1);
 		
-		JTextArea txtrFullName_1_1_1 = new JTextArea();
-		txtrFullName_1_1_1.setText("Reservation Expiry Date");
-		txtrFullName_1_1_1.setForeground(new Color(0, 128, 128));
-		txtrFullName_1_1_1.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrFullName_1_1_1.setBackground(Color.WHITE);
-		txtrFullName_1_1_1.setBounds(752, 309, 235, 30);
-		contentPane.add(txtrFullName_1_1_1);
-		
 		JTextArea txtrFullName_1_2_1 = new JTextArea();
 		txtrFullName_1_2_1.setText("Pick-Up Date");
 		txtrFullName_1_2_1.setForeground(new Color(0, 128, 128));
 		txtrFullName_1_2_1.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrFullName_1_2_1.setBackground(Color.WHITE);
-		txtrFullName_1_2_1.setBounds(752, 349, 138, 30);
+		txtrFullName_1_2_1.setBounds(752, 309, 138, 30);
 		contentPane.add(txtrFullName_1_2_1);
 		
 		JTextArea txtrFullName_1_3_1 = new JTextArea();
@@ -149,7 +140,7 @@ public class S_Reservation extends JFrame {
 		txtrFullName_1_3_1.setForeground(new Color(0, 128, 128));
 		txtrFullName_1_3_1.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrFullName_1_3_1.setBackground(Color.WHITE);
-		txtrFullName_1_3_1.setBounds(752, 389, 175, 30);
+		txtrFullName_1_3_1.setBounds(752, 349, 175, 30);
 		contentPane.add(txtrFullName_1_3_1);
 		
 		textField_4 = new JTextField();
@@ -159,32 +150,25 @@ public class S_Reservation extends JFrame {
 		textField_4.setBounds(1003, 270, 216, 30);
 		contentPane.add(textField_4);
 		
-		textField_5 = new JTextField();
-		textField_5.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_5.setColumns(10);
-		textField_5.setBackground(new Color(177, 216, 216));
-		textField_5.setBounds(1003, 309, 216, 30);
-		contentPane.add(textField_5);
-		
 		textField_6 = new JTextField();
 		textField_6.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_6.setColumns(10);
 		textField_6.setBackground(new Color(177, 216, 216));
-		textField_6.setBounds(1003, 349, 216, 30);
+		textField_6.setBounds(1003, 309, 216, 30);
 		contentPane.add(textField_6);
 		
 		textField_7 = new JTextField();
 		textField_7.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_7.setColumns(10);
 		textField_7.setBackground(new Color(177, 216, 216));
-		textField_7.setBounds(1003, 389, 216, 30);
+		textField_7.setBounds(1003, 349, 216, 30);
 		contentPane.add(textField_7);
 		
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.setForeground(Color.WHITE);
 		btnEdit.setFont(new Font("Arial", Font.BOLD, 15));
 		btnEdit.setBackground(new Color(41, 82, 82));
-		btnEdit.setBounds(1003, 473, 99, 30);
+		btnEdit.setBounds(1003, 433, 99, 30);
 		contentPane.add(btnEdit);
 		
 		JButton btnBack = new JButton("Back");
@@ -199,21 +183,21 @@ public class S_Reservation extends JFrame {
 		txtrFullName_1_3_1_1.setForeground(new Color(0, 128, 128));
 		txtrFullName_1_3_1_1.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrFullName_1_3_1_1.setBackground(Color.WHITE);
-		txtrFullName_1_3_1_1.setBounds(752, 429, 175, 30);
+		txtrFullName_1_3_1_1.setBounds(752, 389, 175, 30);
 		contentPane.add(txtrFullName_1_3_1_1);
 		
 		textField_8 = new JTextField();
 		textField_8.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_8.setColumns(10);
 		textField_8.setBackground(new Color(177, 216, 216));
-		textField_8.setBounds(1003, 433, 216, 30);
+		textField_8.setBounds(1003, 393, 216, 30);
 		contentPane.add(textField_8);
 		
 		JTextArea txtrUsername_1_1 = new JTextArea();
 		txtrUsername_1_1.setForeground(new Color(0, 128, 128));
 		txtrUsername_1_1.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrUsername_1_1.setBackground(Color.WHITE);
-		txtrUsername_1_1.setBounds(740, 121, 502, 407);
+		txtrUsername_1_1.setBounds(740, 121, 502, 367);
 		contentPane.add(txtrUsername_1_1);
 		
 		JTextArea txtrPassword_1_1 = new JTextArea();

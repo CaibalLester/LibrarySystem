@@ -61,11 +61,11 @@ public class L_Students extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTextArea txtrManageStudent = new JTextArea();
-		txtrManageStudent.setText("MANAGE STUDENT");
+		txtrManageStudent.setText("MANAGE STUDENT INFORMATION");
 		txtrManageStudent.setForeground(Color.WHITE);
 		txtrManageStudent.setFont(new Font("Arial", Font.BOLD, 30));
 		txtrManageStudent.setBackground(new Color(0, 128, 128));
-		txtrManageStudent.setBounds(34, 25, 407, 40);
+		txtrManageStudent.setBounds(34, 25, 522, 40);
 		contentPane.add(txtrManageStudent);
 		
 		JTextArea txtrStudentInformation = new JTextArea();
@@ -243,7 +243,7 @@ public class L_Students extends JFrame {
 		txtrPassword_1_1_7_1.setForeground(Color.WHITE);
 		txtrPassword_1_1_7_1.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrPassword_1_1_7_1.setBackground(new Color(0, 128, 128));
-		txtrPassword_1_1_7_1.setBounds(783, 459, 130, 30);
+		txtrPassword_1_1_7_1.setBounds(783, 459, 200, 30);
 		contentPane.add(txtrPassword_1_1_7_1);
 		
 		textField_9 = new JTextField();
