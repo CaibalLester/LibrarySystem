@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class S_BorrowingComplianceManagement extends JFrame {
 
@@ -165,6 +167,13 @@ public class S_BorrowingComplianceManagement extends JFrame {
 		contentPane.add(btnEdit);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StudentDashboard studentDashboard = new StudentDashboard();
+				studentDashboard.setVisible(true);
+				dispose();
+			}
+		});
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setFont(new Font("Arial", Font.BOLD, 15));
 		btnBack.setBackground(new Color(41, 82, 82));

@@ -10,6 +10,8 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.CardLayout;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StudentDashboard extends JFrame {
 
@@ -79,32 +81,60 @@ public class StudentDashboard extends JFrame {
 		txtrLibrarianNumber_1.setBounds(164, 85, 134, 22);
 		contentPane.add(txtrLibrarianNumber_1);
 		
-		JButton btnManageStudents = new JButton("Manage Borrowed Books");
-		btnManageStudents.setForeground(Color.WHITE);
-		btnManageStudents.setFont(new Font("Arial", Font.BOLD, 15));
-		btnManageStudents.setBackground(new Color(0, 128, 128));
-		btnManageStudents.setBounds(26, 156, 241, 43);
-		contentPane.add(btnManageStudents);
+		JButton btnManageBorrowing = new JButton("Manage Borrowed Books");
+		btnManageBorrowing.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				S_BorrowingComplianceManagement BorrowingComplianceManagement = new S_BorrowingComplianceManagement();
+				BorrowingComplianceManagement.setVisible(true);
+				dispose();
+			}
+		});
+		btnManageBorrowing.setForeground(Color.WHITE);
+		btnManageBorrowing.setFont(new Font("Arial", Font.BOLD, 15));
+		btnManageBorrowing.setBackground(new Color(0, 128, 128));
+		btnManageBorrowing.setBounds(26, 156, 241, 43);
+		contentPane.add(btnManageBorrowing);
 		
-		JButton btnManageStudents_1 = new JButton("Manage Books");
-		btnManageStudents_1.setForeground(Color.WHITE);
-		btnManageStudents_1.setFont(new Font("Arial", Font.BOLD, 15));
-		btnManageStudents_1.setBackground(new Color(0, 128, 128));
-		btnManageStudents_1.setBounds(296, 156, 241, 43);
-		contentPane.add(btnManageStudents_1);
+		JButton btnManageBooks = new JButton("Manage Books");
+		btnManageBooks.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				S_Books SBooks = new S_Books();
+				SBooks.setVisible(true);
+				dispose();
+			}
+		});
+		btnManageBooks.setForeground(Color.WHITE);
+		btnManageBooks.setFont(new Font("Arial", Font.BOLD, 15));
+		btnManageBooks.setBackground(new Color(0, 128, 128));
+		btnManageBooks.setBounds(296, 156, 241, 43);
+		contentPane.add(btnManageBooks);
 		
-		JButton btnManageStudents_1_3 = new JButton("Manage My Info");
-		btnManageStudents_1_3.setForeground(Color.WHITE);
-		btnManageStudents_1_3.setFont(new Font("Arial", Font.BOLD, 15));
-		btnManageStudents_1_3.setBackground(new Color(0, 128, 128));
-		btnManageStudents_1_3.setBounds(26, 218, 241, 43);
-		contentPane.add(btnManageStudents_1_3);
+		JButton btnManageStudentInfo = new JButton("Manage My Info");
+		btnManageStudentInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				S_StudentInfo SStudentInfo = new S_StudentInfo();
+				SStudentInfo.setVisible(true);
+				dispose();
+			}
+		});
+		btnManageStudentInfo.setForeground(Color.WHITE);
+		btnManageStudentInfo.setFont(new Font("Arial", Font.BOLD, 15));
+		btnManageStudentInfo.setBackground(new Color(0, 128, 128));
+		btnManageStudentInfo.setBounds(26, 218, 241, 43);
+		contentPane.add(btnManageStudentInfo);
 		
-		JButton btnManageStudents_1_2 = new JButton("Manage Reservations");
-		btnManageStudents_1_2.setForeground(Color.WHITE);
-		btnManageStudents_1_2.setFont(new Font("Arial", Font.BOLD, 15));
-		btnManageStudents_1_2.setBackground(new Color(0, 128, 128));
-		btnManageStudents_1_2.setBounds(296, 218, 241, 43);
-		contentPane.add(btnManageStudents_1_2);
+		JButton btnManageReserve = new JButton("Manage Reservations");
+		btnManageReserve.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				S_Reservation SReservation = new S_Reservation();
+				SReservation.setVisible(true);
+				dispose();
+			}
+		});
+		btnManageReserve.setForeground(Color.WHITE);
+		btnManageReserve.setFont(new Font("Arial", Font.BOLD, 15));
+		btnManageReserve.setBackground(new Color(0, 128, 128));
+		btnManageReserve.setBounds(296, 218, 241, 43);
+		contentPane.add(btnManageReserve);
 	}
 }

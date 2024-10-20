@@ -148,6 +148,15 @@ public class Register extends JFrame {
 				}
 			}
 		});
+		
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainFrame mainframe = new MainFrame();
+				mainframe.setVisible(true);
+				dispose(); 
+			}
+		});
+		
 		btnSubmit.setBackground(new Color(41, 82, 82));
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 15));
 		btnSubmit.setBounds(415, 315, 99, 30);

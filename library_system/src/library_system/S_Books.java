@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class S_Books extends JFrame {
 
@@ -167,6 +169,13 @@ public class S_Books extends JFrame {
 		contentPane.add(btnAdd);
 		
 		btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StudentDashboard studentDashboard = new StudentDashboard();
+				studentDashboard.setVisible(true);
+				dispose();
+			}
+		});
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setFont(new Font("Arial", Font.BOLD, 15));
 		btnBack.setBackground(new Color(41, 82, 82));

@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class L_ReservationAccountabilityManagement extends JFrame {
 
@@ -265,6 +267,13 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		contentPane.add(textField_19);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LibrarianDashboard librarianDashboard = new LibrarianDashboard();
+				librarianDashboard.setVisible(true);
+				dispose();
+			}
+		});
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setFont(new Font("Arial", Font.BOLD, 15));
 		btnBack.setBackground(new Color(41, 82, 82));

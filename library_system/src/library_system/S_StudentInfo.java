@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class S_StudentInfo extends JFrame {
 
@@ -271,6 +273,13 @@ public class S_StudentInfo extends JFrame {
 		contentPane.add(txtrUsername_1_1);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StudentDashboard studentDashboard = new StudentDashboard();
+				studentDashboard.setVisible(true);
+				dispose();
+			}
+		});
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setFont(new Font("Arial", Font.BOLD, 15));
 		btnBack.setBackground(new Color(41, 82, 82));
