@@ -11,6 +11,8 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class S_Books extends JFrame {
 
@@ -18,7 +20,6 @@ public class S_Books extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JTextArea txtrMyBooks;
-	private JTable table_1;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -29,6 +30,9 @@ public class S_Books extends JFrame {
 	private JTextField textField_7;
 	private JButton btnAdd;
 	private JButton btnBack;
+	private JScrollPane scrollPane;
+	private JTable table_1;
+	private JScrollPane scrollPane_1;
 
 	/**
 	 * Launch the application.
@@ -68,9 +72,19 @@ public class S_Books extends JFrame {
 		txtrBorrowingComplianceManagement.setBounds(30, 28, 407, 40);
 		contentPane.add(txtrBorrowingComplianceManagement);
 		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(39, 163, 367, 406);
+		contentPane.add(scrollPane);
+		
 		table = new JTable();
-		table.setBounds(39, 163, 367, 406);
-		contentPane.add(table);
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"Title", "Author", "ISBN", "Publisher", "Year Published", "Quantity", "Pages", "Status" 
+				}
+			));
 		
 		JTextArea txtrLibraryBooks = new JTextArea();
 		txtrLibraryBooks.setText("Library Books");
@@ -88,9 +102,6 @@ public class S_Books extends JFrame {
 		txtrMyBooks.setBounds(439, 108, 308, 40);
 		contentPane.add(txtrMyBooks);
 		
-		table_1 = new JTable();
-		table_1.setBounds(458, 163, 367, 406);
-		contentPane.add(table_1);
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -161,6 +172,27 @@ public class S_Books extends JFrame {
 		btnBack.setBackground(new Color(41, 82, 82));
 		btnBack.setBounds(1168, 559, 99, 30);
 		contentPane.add(btnBack);
+		table.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"Title", "Author", "ISBN", "Publisher", "Year Published", "Quantity", "Pages", "Status" 
+				}
+			));
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(438, 163, 342, 406);
+		contentPane.add(scrollPane_1);
+		
+		table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+					"Title", "Author", "ISBN", "Publisher", "Year Published", "Quantity", "Pages", "Status" 
+			}
+		));
+		
 	}
-
 }
