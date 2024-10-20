@@ -31,7 +31,7 @@ public class StudentDashboard extends JFrame {
 
 	public StudentDashboard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 577, 406);
+		setBounds(100, 100, 577, 347);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(175, 216, 216));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -93,7 +93,7 @@ public class StudentDashboard extends JFrame {
 		btnManageStudents_1.setBounds(296, 156, 241, 43);
 		contentPane.add(btnManageStudents_1);
 		
-		JButton btnManageStudents_1_3 = new JButton("Manage Fines");
+		JButton btnManageStudents_1_3 = new JButton("Manage My Info");
 		btnManageStudents_1_3.setForeground(Color.WHITE);
 		btnManageStudents_1_3.setFont(new Font("Arial", Font.BOLD, 15));
 		btnManageStudents_1_3.setBackground(new Color(0, 128, 128));
@@ -106,12 +106,5 @@ public class StudentDashboard extends JFrame {
 		btnManageStudents_1_2.setBackground(new Color(0, 128, 128));
 		btnManageStudents_1_2.setBounds(296, 218, 241, 43);
 		contentPane.add(btnManageStudents_1_2);
-		
-		JButton btnManageStudents_1_1 = new JButton("Manage My Information");
-		btnManageStudents_1_1.setForeground(Color.WHITE);
-		btnManageStudents_1_1.setFont(new Font("Arial", Font.BOLD, 15));
-		btnManageStudents_1_1.setBackground(new Color(0, 128, 128));
-		btnManageStudents_1_1.setBounds(26, 283, 511, 43);
-		contentPane.add(btnManageStudents_1_1);
 	}
 }

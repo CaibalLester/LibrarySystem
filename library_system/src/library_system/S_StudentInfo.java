@@ -57,7 +57,7 @@ public class S_StudentInfo extends JFrame {
 		setContentPane(contentPane);
 		
 		JTextArea txtrStudentInformation = new JTextArea();
-		txtrStudentInformation.setBounds(51, 28, 505, 40);
+		txtrStudentInformation.setBounds(51, 28, 631, 40);
 		txtrStudentInformation.setText("STUDENT PERSONAL INFORMATION");
 		txtrStudentInformation.setForeground(new Color(255, 255, 255));
 		txtrStudentInformation.setFont(new Font("Arial", Font.BOLD, 30));
