@@ -10,13 +10,17 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JLabel;
 
 public class Login extends JFrame {
 
@@ -53,17 +57,17 @@ public class Login extends JFrame {
         contentPane.setLayout(null);
         
         username = new JTextField();
-        username.setBackground(new Color(177, 216, 216));
+        username.setBackground(new Color(255, 255, 255));
         username.setFont(new Font("Arial", Font.PLAIN, 16));
-        username.setBounds(252, 99, 181, 28);
+        username.setBounds(252, 87, 181, 28);
         contentPane.add(username);
         username.setColumns(10);
         
         password = new JTextField();
-        password.setBackground(new Color(177, 216, 216));
+        password.setBackground(new Color(255, 255, 255));
         password.setFont(new Font("Arial", Font.PLAIN, 16));
         password.setColumns(10);
-        password.setBounds(252, 137, 181, 28);
+        password.setBounds(252, 125, 181, 28);
         contentPane.add(password);
         
         JTextArea txtrLogin = new JTextArea();
@@ -71,14 +75,14 @@ public class Login extends JFrame {
         txtrLogin.setFont(new Font("Arial", Font.BOLD, 30));
         txtrLogin.setText("LOG IN");
         txtrLogin.setBackground(new Color(0, 128, 128));
-        txtrLogin.setBounds(201, 29, 112, 40);
+        txtrLogin.setBounds(115, 24, 112, 40);
         contentPane.add(txtrLogin);
         
         JComboBox<String> comboBox = new JComboBox<>();
-        comboBox.setBackground(new Color(177, 216, 216));
+        comboBox.setBackground(new Color(255, 255, 255));
         comboBox.setModel(new DefaultComboBoxModel<>(new String[] {"Librarian", "Student"}));
         comboBox.setFont(new Font("Arial", Font.PLAIN, 16));
-        comboBox.setBounds(252, 175, 181, 28);
+        comboBox.setBounds(252, 163, 181, 28);
         contentPane.add(comboBox);
         
         JTextArea txtrUsername_1 = new JTextArea();
@@ -86,7 +90,7 @@ public class Login extends JFrame {
         txtrUsername_1.setForeground(Color.WHITE);
         txtrUsername_1.setFont(new Font("Arial", Font.BOLD, 20));
         txtrUsername_1.setBackground(new Color(0, 128, 128));
-        txtrUsername_1.setBounds(115, 99, 133, 30);
+        txtrUsername_1.setBounds(115, 87, 133, 30);
         contentPane.add(txtrUsername_1);
         
         JTextArea txtrPassword_1 = new JTextArea();
@@ -94,7 +98,7 @@ public class Login extends JFrame {
         txtrPassword_1.setForeground(Color.WHITE);
         txtrPassword_1.setFont(new Font("Arial", Font.BOLD, 20));
         txtrPassword_1.setBackground(new Color(0, 128, 128));
-        txtrPassword_1.setBounds(115, 139, 125, 30);
+        txtrPassword_1.setBounds(115, 127, 125, 30);
         contentPane.add(txtrPassword_1);
         
         JTextArea txtrUserRole = new JTextArea();
@@ -102,11 +106,11 @@ public class Login extends JFrame {
         txtrUserRole.setForeground(Color.WHITE);
         txtrUserRole.setFont(new Font("Arial", Font.BOLD, 20));
         txtrUserRole.setBackground(new Color(0, 128, 128));
-        txtrUserRole.setBounds(115, 175, 111, 30);
+        txtrUserRole.setBounds(115, 163, 111, 30);
         contentPane.add(txtrUserRole);
         
         JButton btnLogin = new JButton("Login");
-        btnLogin.setForeground(new Color(255, 255, 255));
+        btnLogin.setForeground(new Color(0, 128, 128));
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String user = username.getText();
@@ -128,9 +132,21 @@ public class Login extends JFrame {
             }
         });
         btnLogin.setFont(new Font("Arial", Font.BOLD, 15));
-        btnLogin.setBackground(new Color(41, 82, 82));
-        btnLogin.setBounds(332, 226, 99, 30);
+        btnLogin.setBackground(new Color(255, 255, 255));
+        btnLogin.setBounds(334, 233, 99, 30);
         contentPane.add(btnLogin);
+        
+        JLabel lblNewLabel_1 = new JLabel("");
+        Image lineimg = new ImageIcon(this.getClass().getResource("/lone.png")).getImage();
+		lblNewLabel_1.setIcon(new ImageIcon(lineimg));
+        lblNewLabel_1.setBounds(242, 0, 297, 77);
+        contentPane.add(lblNewLabel_1);
+        
+        JLabel lblNewLabel_1_1 = new JLabel("");
+        Image lineim = new ImageIcon(this.getClass().getResource("/lone.png")).getImage();
+        lblNewLabel_1_1.setIcon(new ImageIcon(lineim));
+        lblNewLabel_1_1.setBounds(-43, 203, 350, 77);
+        contentPane.add(lblNewLabel_1_1);
     }
 
     private boolean authenticate(String username, String password, String role) {

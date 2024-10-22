@@ -5,10 +5,12 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.Window.Type;
 
 public class Register extends JFrame {
 
@@ -36,6 +38,7 @@ public class Register extends JFrame {
 	}
 
 	public Register() {
+		setType(Type.POPUP);
 		db = new DbConnect();
 		db.connect();
 
@@ -48,90 +51,91 @@ public class Register extends JFrame {
 		contentPane.setLayout(null);
 
 		JTextArea txtrRegister = new JTextArea();
+		txtrRegister.setBounds(120, 72, 159, 40);
 		txtrRegister.setFont(new Font("Arial", Font.BOLD, 30));
 		txtrRegister.setBackground(new Color(0, 128, 128));
 		txtrRegister.setForeground(new Color(255, 255, 255));
 		txtrRegister.setText("REGISTER");
-		txtrRegister.setBounds(245, 39, 181, 40);
 		contentPane.add(txtrRegister);
 		
 		JTextArea txtrUsername = new JTextArea();
+		txtrUsername.setBounds(110, 138, 107, 22);
 		txtrUsername.setText("Username:");
 		txtrUsername.setForeground(Color.WHITE);
-		txtrUsername.setFont(new Font("Arial", Font.BOLD, 20));
+		txtrUsername.setFont(new Font("Arial", Font.BOLD, 15));
 		txtrUsername.setBackground(new Color(0, 128, 128));
-		txtrUsername.setBounds(181, 103, 107, 30);
 		contentPane.add(txtrUsername);
 		
 		username = new JTextField();
-		username.setBackground(new Color(177, 216, 216));
+		username.setBounds(110, 162, 216, 30);
+		username.setBackground(new Color(255, 255, 255));
 		username.setFont(new Font("Arial", Font.PLAIN, 16));
-		username.setBounds(298, 103, 216, 30);
 		contentPane.add(username);
 		username.setColumns(10);
 		
 		JTextArea txtrPassword = new JTextArea();
+		txtrPassword.setBounds(110, 195, 107, 22);
 		txtrPassword.setText("Password:");
 		txtrPassword.setForeground(Color.WHITE);
-		txtrPassword.setFont(new Font("Arial", Font.BOLD, 20));
+		txtrPassword.setFont(new Font("Arial", Font.BOLD, 15));
 		txtrPassword.setBackground(new Color(0, 128, 128));
-		txtrPassword.setBounds(181, 143, 107, 30);
 		contentPane.add(txtrPassword);
 		
 		password = new JTextField();
-		password.setBackground(new Color(177, 216, 216));
+		password.setBounds(110, 217, 216, 30);
+		password.setBackground(new Color(255, 255, 255));
 		password.setFont(new Font("Arial", Font.PLAIN, 16));
 		password.setColumns(10);
-		password.setBounds(298, 143, 216, 30);
 		contentPane.add(password);
 		
 		JTextArea txtrEmail = new JTextArea();
+		txtrEmail.setBounds(110, 257, 65, 17);
 		txtrEmail.setText("Email:");
 		txtrEmail.setForeground(Color.WHITE);
-		txtrEmail.setFont(new Font("Arial", Font.BOLD, 20));
+		txtrEmail.setFont(new Font("Arial", Font.BOLD, 15));
 		txtrEmail.setBackground(new Color(0, 128, 128));
-		txtrEmail.setBounds(223, 182, 65, 30);
 		contentPane.add(txtrEmail);
 		
 		email = new JTextField();
-		email.setBackground(new Color(177, 216, 216));
+		email.setBounds(110, 284, 216, 30);
+		email.setBackground(new Color(255, 255, 255));
 		email.setFont(new Font("Arial", Font.PLAIN, 16));
 		email.setColumns(10);
-		email.setBounds(298, 181, 216, 30);
 		contentPane.add(email);
 		
 		JTextArea txtrFullName = new JTextArea();
+		txtrFullName.setBounds(352, 138, 111, 22);
 		txtrFullName.setText("Full Name:");
 		txtrFullName.setForeground(Color.WHITE);
-		txtrFullName.setFont(new Font("Arial", Font.BOLD, 20));
+		txtrFullName.setFont(new Font("Arial", Font.BOLD, 15));
 		txtrFullName.setBackground(new Color(0, 128, 128));
-		txtrFullName.setBounds(182, 220, 111, 30);
 		contentPane.add(txtrFullName);
 		
 		fullname = new JTextField();
-		fullname.setBackground(new Color(177, 216, 216));
+		fullname.setBounds(352, 162, 216, 30);
+		fullname.setBackground(new Color(255, 255, 255));
 		fullname.setFont(new Font("Arial", Font.PLAIN, 16));
 		fullname.setColumns(10);
-		fullname.setBounds(298, 220, 216, 30);
 		contentPane.add(fullname);
 		
 		// User Role label and combo box
 		JTextArea role = new JTextArea();
+		role.setBounds(352, 194, 111, 22);
 		role.setText("User Role:");
 		role.setForeground(Color.WHITE);
-		role.setFont(new Font("Arial", Font.BOLD, 20));
+		role.setFont(new Font("Arial", Font.BOLD, 15));
 		role.setBackground(new Color(0, 128, 128));
-		role.setBounds(182, 259, 111, 30);
 		contentPane.add(role);
 		
 		userrole = new JComboBox<>();
-		userrole.setBackground(new Color(177, 216, 216));
+		userrole.setBounds(352, 219, 216, 28);
+		userrole.setBackground(new Color(255, 255, 255));
 		userrole.setModel(new DefaultComboBoxModel<>(new String[] {"Select role...", "Librarian", "Student"}));
 		userrole.setFont(new Font("Arial", Font.PLAIN, 16));
-		userrole.setBounds(298, 261, 216, 28);
 		contentPane.add(userrole);
 		
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.setBounds(469, 284, 99, 30);
 		btnSubmit.setForeground(new Color(255, 255, 255));
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -159,8 +163,31 @@ public class Register extends JFrame {
 		
 		btnSubmit.setBackground(new Color(41, 82, 82));
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 15));
-		btnSubmit.setBounds(415, 315, 99, 30);
 		contentPane.add(btnSubmit);
+		
+		JLabel lblNewLabel = new JLabel("");
+		Image img = new ImageIcon(this.getClass().getResource("/lone.png")).getImage();
+		lblNewLabel.setIcon(new ImageIcon(img));
+		lblNewLabel.setBounds(301, 51, 368, 77);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		Image lineimg = new ImageIcon(this.getClass().getResource("/lone.png")).getImage();
+		lblNewLabel_1.setIcon(new ImageIcon(lineimg));
+		lblNewLabel_1.setBounds(-22, 51, 107, 77);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		Image lineimgs = new ImageIcon(this.getClass().getResource("/lone.png")).getImage();
+		lblNewLabel_2.setIcon(new ImageIcon(lineimgs));
+		lblNewLabel_2.setBounds(-14, 22, 437, 40);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		Image lineimge = new ImageIcon(this.getClass().getResource("/lone.png")).getImage();
+		lblNewLabel_3.setIcon(new ImageIcon(lineimge));
+		lblNewLabel_3.setBounds(-22, 312, 700, 77);
+		contentPane.add(lblNewLabel_3);
 	}
 
 	private void insertData(String username, String password, String email, String fullname, String userrole) {

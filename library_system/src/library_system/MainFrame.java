@@ -8,9 +8,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class MainFrame extends JFrame {
 
@@ -49,15 +53,15 @@ public class MainFrame extends JFrame {
 		contentPane_2.setBounds(0, 0, 738, 490);
 		contentPane_2.setLayout(null);
 		contentPane_2.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane_2.setBackground(new Color(64, 128, 128));
+		contentPane_2.setBackground(new Color(0, 128, 128));
 		contentPane.add(contentPane_2);
 		
 		JTextArea txtrWelcome = new JTextArea();
 		txtrWelcome.setText("Welcome");
 		txtrWelcome.setForeground(new Color(255, 255, 255));
 		txtrWelcome.setFont(new Font("Gigi", Font.BOLD, 97));
-		txtrWelcome.setBackground(new Color(64, 128, 128));
-		txtrWelcome.setBounds(128, 38, 410, 105);
+		txtrWelcome.setBackground(new Color(0, 128, 128));
+		txtrWelcome.setBounds(138, 10, 368, 105);
 		contentPane_2.add(txtrWelcome);
 		
 		JButton btnLogIn = new JButton("LOG IN");
@@ -68,10 +72,10 @@ public class MainFrame extends JFrame {
                 dispose(); 
 			}
 		});
-		btnLogIn.setForeground(Color.WHITE);
-		btnLogIn.setFont(new Font("Arial", Font.BOLD, 15));
-		btnLogIn.setBackground(new Color(0, 185, 185));
-		btnLogIn.setBounds(116, 256, 193, 43);
+		btnLogIn.setForeground(new Color(0, 128, 128));
+		btnLogIn.setFont(new Font("Arial Black", Font.BOLD, 15));
+		btnLogIn.setBackground(new Color(255, 255, 255));
+		btnLogIn.setBounds(247, 228, 149, 43);
 		contentPane_2.add(btnLogIn);
 		
 		JButton btnManageStudents_1_4 = new JButton("REGISTER");
@@ -82,19 +86,31 @@ public class MainFrame extends JFrame {
 				dispose(); 
 			}
 		});
-		btnManageStudents_1_4.setForeground(Color.WHITE);
-		btnManageStudents_1_4.setFont(new Font("Arial", Font.BOLD, 15));
-		btnManageStudents_1_4.setBackground(new Color(0, 185, 185));
-		btnManageStudents_1_4.setBounds(319, 256, 193, 43);
+		btnManageStudents_1_4.setForeground(new Color(0, 128, 128));
+		btnManageStudents_1_4.setFont(new Font("Arial Black", Font.BOLD, 15));
+		btnManageStudents_1_4.setBackground(new Color(255, 255, 255));
+		btnManageStudents_1_4.setBounds(247, 281, 149, 43);
 		contentPane_2.add(btnManageStudents_1_4);
 		
 		JTextArea txtrToLibrarySystem = new JTextArea();
 		txtrToLibrarySystem.setText("to Library System");
 		txtrToLibrarySystem.setForeground(Color.WHITE);
 		txtrToLibrarySystem.setFont(new Font("Century Gothic", Font.BOLD, 69));
-		txtrToLibrarySystem.setBackground(new Color(64, 128, 128));
-		txtrToLibrarySystem.setBounds(49, 134, 612, 105);
+		txtrToLibrarySystem.setBackground(new Color(0, 128, 128));
+		txtrToLibrarySystem.setBounds(49, 100, 579, 105);
 		contentPane_2.add(txtrToLibrarySystem);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		Image lineimgs = new ImageIcon(this.getClass().getResource("/lone.png")).getImage();
+		lblNewLabel_1.setIcon(new ImageIcon(lineimgs));
+		lblNewLabel_1.setBounds(0, 228, 201, 77);
+		contentPane_2.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("");
+		Image lineimg = new ImageIcon(this.getClass().getResource("/lone.png")).getImage();
+		lblNewLabel_1_1.setIcon(new ImageIcon(lineimg));
+		lblNewLabel_1_1.setBounds(441, 228, 227, 77);
+		contentPane_2.add(lblNewLabel_1_1);
 		
 		JPanel contentPane_1 = new JPanel();
 		contentPane_1.setBounds(371, 10, 1, 1);

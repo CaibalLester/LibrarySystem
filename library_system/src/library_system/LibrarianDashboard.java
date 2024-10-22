@@ -3,14 +3,18 @@ package library_system;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -37,7 +41,7 @@ public class LibrarianDashboard extends JFrame {
 
 	public LibrarianDashboard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 577, 347);
+		setBounds(100, 100, 465, 395);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(175, 216, 216));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -45,16 +49,18 @@ public class LibrarianDashboard extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
 		JTextArea txtrLibrarianDashboard = new JTextArea();
-		txtrLibrarianDashboard.setBounds(31, 10, 310, 43);
+		txtrLibrarianDashboard.setBounds(114, 9, 310, 43);
 		txtrLibrarianDashboard.setText("Librarian Dashboard");
 		txtrLibrarianDashboard.setForeground(new Color(0, 128, 128));
 		txtrLibrarianDashboard.setFont(new Font("Arial", Font.BOLD, 30));
 		txtrLibrarianDashboard.setBackground(new Color(177, 216, 216));
 		contentPane.add(txtrLibrarianDashboard);
 		
+		
 		JTextArea txtrLibrarianNumber = new JTextArea();
-		txtrLibrarianNumber.setBounds(30, 63, 144, 22);
+		txtrLibrarianNumber.setBounds(113, 62, 144, 22);
 		txtrLibrarianNumber.setText("Librarian Number :");
 		txtrLibrarianNumber.setForeground(new Color(0, 128, 128));
 		txtrLibrarianNumber.setFont(new Font("Arial", Font.BOLD, 15));
@@ -62,7 +68,7 @@ public class LibrarianDashboard extends JFrame {
 		contentPane.add(txtrLibrarianNumber);
 		
 		JTextArea txtrName = new JTextArea();
-		txtrName.setBounds(30, 86, 60, 22);
+		txtrName.setBounds(113, 85, 60, 22);
 		txtrName.setText("Name : ");
 		txtrName.setForeground(new Color(0, 128, 128));
 		txtrName.setFont(new Font("Arial", Font.BOLD, 15));
@@ -70,7 +76,7 @@ public class LibrarianDashboard extends JFrame {
 		contentPane.add(txtrName);
 		
 		JTextArea txtrLibrarianNumber_1 = new JTextArea();
-		txtrLibrarianNumber_1.setBounds(169, 63, 134, 22);
+		txtrLibrarianNumber_1.setBounds(262, 62, 134, 22);
 		txtrLibrarianNumber_1.setText("***");
 		txtrLibrarianNumber_1.setForeground(new Color(0, 128, 128));
 		txtrLibrarianNumber_1.setFont(new Font("Arial", Font.BOLD, 15));
@@ -78,7 +84,7 @@ public class LibrarianDashboard extends JFrame {
 		contentPane.add(txtrLibrarianNumber_1);
 		
 		JTextArea txtrName_1 = new JTextArea();
-		txtrName_1.setBounds(86, 86, 167, 22);
+		txtrName_1.setBounds(183, 85, 167, 22);
 		txtrName_1.setText("***");
 		txtrName_1.setForeground(new Color(0, 128, 128));
 		txtrName_1.setFont(new Font("Arial", Font.BOLD, 15));
@@ -96,7 +102,7 @@ public class LibrarianDashboard extends JFrame {
 		btnManageStudentBooks.setForeground(Color.WHITE);
 		btnManageStudentBooks.setFont(new Font("Arial", Font.BOLD, 15));
 		btnManageStudentBooks.setBackground(new Color(0, 128, 128));
-		btnManageStudentBooks.setBounds(31, 153, 241, 43);
+		btnManageStudentBooks.setBounds(114, 125, 241, 43);
 		contentPane.add(btnManageStudentBooks);
 		
 		JButton btnManageBook = new JButton("Manage Books");
@@ -110,7 +116,7 @@ public class LibrarianDashboard extends JFrame {
 		btnManageBook.setForeground(Color.WHITE);
 		btnManageBook.setFont(new Font("Arial", Font.BOLD, 15));
 		btnManageBook.setBackground(new Color(0, 128, 128));
-		btnManageBook.setBounds(301, 153, 241, 43);
+		btnManageBook.setBounds(114, 232, 241, 43);
 		contentPane.add(btnManageBook);
 		
 		JButton btnManageMyInfo = new JButton("Manage My Info");
@@ -124,7 +130,7 @@ public class LibrarianDashboard extends JFrame {
 		btnManageMyInfo.setForeground(Color.WHITE);
 		btnManageMyInfo.setFont(new Font("Arial", Font.BOLD, 15));
 		btnManageMyInfo.setBackground(new Color(0, 128, 128));
-		btnManageMyInfo.setBounds(31, 215, 241, 43);
+		btnManageMyInfo.setBounds(114, 178, 241, 43);
 		contentPane.add(btnManageMyInfo);
 		
 		JButton btnManageStudents = new JButton("Manage Students");
@@ -138,7 +144,13 @@ public class LibrarianDashboard extends JFrame {
 		btnManageStudents.setForeground(Color.WHITE);
 		btnManageStudents.setFont(new Font("Arial", Font.BOLD, 15));
 		btnManageStudents.setBackground(new Color(0, 128, 128));
-		btnManageStudents.setBounds(301, 215, 241, 43);
+		btnManageStudents.setBounds(114, 286, 241, 43);
 		contentPane.add(btnManageStudents);
+		
+		JLabel lblNewLabel = new JLabel("");
+		Image img = new ImageIcon(this.getClass().getResource("/stwo.png")).getImage();
+		lblNewLabel.setIcon(new ImageIcon(img));
+		lblNewLabel.setBounds(31, 0, 60, 382);
+		contentPane.add(lblNewLabel);
 	}
 }
