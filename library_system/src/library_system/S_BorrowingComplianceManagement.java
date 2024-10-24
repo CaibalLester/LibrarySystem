@@ -4,14 +4,19 @@ import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTextArea;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import com.toedter.calendar.JDateChooser;
 
 public class S_BorrowingComplianceManagement extends JFrame {
 
@@ -21,7 +26,6 @@ public class S_BorrowingComplianceManagement extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	private JTextField textField_4;
 	private JTextField textField_5;
 
 	/**
@@ -145,13 +149,6 @@ public class S_BorrowingComplianceManagement extends JFrame {
 		textField_3.setBounds(1011, 324, 216, 30);
 		contentPane.add(textField_3);
 		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_4.setColumns(10);
-		textField_4.setBackground(new Color(177, 216, 216));
-		textField_4.setBounds(1011, 363, 216, 30);
-		contentPane.add(textField_4);
-		
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_5.setColumns(10);
@@ -179,13 +176,6 @@ public class S_BorrowingComplianceManagement extends JFrame {
 		btnBack.setBackground(new Color(41, 82, 82));
 		btnBack.setBounds(1151, 553, 99, 30);
 		contentPane.add(btnBack);
-		
-		JTextArea txtrUsername_1_1 = new JTextArea();
-		txtrUsername_1_1.setForeground(new Color(0, 128, 128));
-		txtrUsername_1_1.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_1_1.setBackground(Color.WHITE);
-		txtrUsername_1_1.setBounds(748, 120, 502, 407);
-		contentPane.add(txtrUsername_1_1);
 		
 		JTextArea txtrPassword_1_1 = new JTextArea();
 		txtrPassword_1_1.setText("Student ID :");
@@ -378,6 +368,15 @@ public class S_BorrowingComplianceManagement extends JFrame {
 		txtrPassword_1_1_8_2_2_1.setBackground(new Color(0, 128, 128));
 		txtrPassword_1_1_8_2_2_1.setBounds(218, 395, 415, 30);
 		contentPane.add(txtrPassword_1_1_8_2_2_1);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(1011, 363, 216, 30);
+		contentPane.add(dateChooser);
+		
+		JLabel lblNewLabel = new JLabel("");
+        Image img = new ImageIcon(this.getClass().getResource("/white.png")).getImage();
+        lblNewLabel.setIcon(new ImageIcon(img));
+        lblNewLabel.setBounds(770, 108, 494, 398);
+        contentPane.add(lblNewLabel);
 	}
-
 }

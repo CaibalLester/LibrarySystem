@@ -8,17 +8,23 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
 
 
 public class S_StudentInfo extends JFrame {
@@ -33,6 +39,8 @@ public class S_StudentInfo extends JFrame {
     private JTextField Program;
     private JComboBox<String> YearLevel;
     private JTextField StudentAddress;
+    private DbConnect dbConnect;
+    private String userId;
     DbConnect db; 
 
 
@@ -51,6 +59,7 @@ public class S_StudentInfo extends JFrame {
 
 
 	public S_StudentInfo(String userId) {
+		this.userId = userId;
 		db = new DbConnect();
         db.connect();
         
@@ -104,9 +113,9 @@ public class S_StudentInfo extends JFrame {
 		JTextArea txtrUsername = new JTextArea();
 		txtrUsername.setBounds(73, 122, 111, 30);
 		txtrUsername.setText("Full Name :");
-		txtrUsername.setForeground(Color.WHITE);
+		txtrUsername.setForeground(new Color(0, 128, 128));
 		txtrUsername.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername.setBackground(new Color(0, 128, 128));
+		txtrUsername.setBackground(new Color(255, 255, 255));
 		
 		FullName = new JTextField(20);
 		FullName.setBounds(1018, 119, 216, 30);
@@ -117,16 +126,16 @@ public class S_StudentInfo extends JFrame {
 		JTextArea txtrPassword = new JTextArea();
 		txtrPassword.setBounds(73, 162, 107, 30);
 		txtrPassword.setText("Gender :");
-		txtrPassword.setForeground(Color.WHITE);
+		txtrPassword.setForeground(new Color(0, 128, 128));
 		txtrPassword.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrPassword.setBackground(new Color(0, 128, 128));
+		txtrPassword.setBackground(new Color(255, 255, 255));
 		
 		JTextArea txtrEmail = new JTextArea();
 		txtrEmail.setBounds(73, 202, 65, 30);
 		txtrEmail.setText("Email :");
-		txtrEmail.setForeground(Color.WHITE);
+		txtrEmail.setForeground(new Color(0, 128, 128));
 		txtrEmail.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrEmail.setBackground(new Color(0, 128, 128));
+		txtrEmail.setBackground(new Color(255, 255, 255));
 		
 		Email = new JTextField(20);
 		Email.setBounds(1018, 203, 216, 30);
@@ -137,9 +146,9 @@ public class S_StudentInfo extends JFrame {
 		JTextArea txtrFullName = new JTextArea();
 		txtrFullName.setBounds(73, 242, 188, 30);
 		txtrFullName.setText("Contact Number :");
-		txtrFullName.setForeground(Color.WHITE);
+		txtrFullName.setForeground(new Color(0, 128, 128));
 		txtrFullName.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrFullName.setBackground(new Color(0, 128, 128));
+		txtrFullName.setBackground(new Color(255, 255, 255));
 		
 		ContactNumber = new JTextField(20);
 		ContactNumber.setBounds(1018, 243, 216, 30);
@@ -150,30 +159,30 @@ public class S_StudentInfo extends JFrame {
 		JTextArea txtrEmergencyContact = new JTextArea();
 		txtrEmergencyContact.setBounds(73, 282, 202, 30);
 		txtrEmergencyContact.setText("Emergency Contact :");
-		txtrEmergencyContact.setForeground(Color.WHITE);
+		txtrEmergencyContact.setForeground(new Color(0, 128, 128));
 		txtrEmergencyContact.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrEmergencyContact.setBackground(new Color(0, 128, 128));
+		txtrEmergencyContact.setBackground(new Color(255, 255, 255));
 		
 		JTextArea txtrFullName_1_1 = new JTextArea();
 		txtrFullName_1_1.setBounds(73, 322, 111, 30);
 		txtrFullName_1_1.setText("Program :");
-		txtrFullName_1_1.setForeground(Color.WHITE);
+		txtrFullName_1_1.setForeground(new Color(0, 128, 128));
 		txtrFullName_1_1.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrFullName_1_1.setBackground(new Color(0, 128, 128));
+		txtrFullName_1_1.setBackground(new Color(255, 255, 255));
 		
 		JTextArea txtrFullName_1_2 = new JTextArea();
 		txtrFullName_1_2.setBounds(73, 358, 118, 30);
 		txtrFullName_1_2.setText("Year Level :");
-		txtrFullName_1_2.setForeground(Color.WHITE);
+		txtrFullName_1_2.setForeground(new Color(0, 128, 128));
 		txtrFullName_1_2.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrFullName_1_2.setBackground(new Color(0, 128, 128));
+		txtrFullName_1_2.setBackground(new Color(255, 255, 255));
 		
 		JTextArea txtrFullName_1_3 = new JTextArea();
 		txtrFullName_1_3.setBounds(73, 398, 175, 30);
 		txtrFullName_1_3.setText("Student Address :");
-		txtrFullName_1_3.setForeground(Color.WHITE);
+		txtrFullName_1_3.setForeground(new Color(0, 128, 128));
 		txtrFullName_1_3.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrFullName_1_3.setBackground(new Color(0, 128, 128));
+		txtrFullName_1_3.setBackground(new Color(255, 255, 255));
 		contentPane.setLayout(null);
 		contentPane.add(txtrPassword);
 		contentPane.add(txtrUsername);
@@ -297,80 +306,94 @@ public class S_StudentInfo extends JFrame {
 		
 		JTextArea txtrUsername_2 = new JTextArea();
 		txtrUsername_2.setText("*****");
-		txtrUsername_2.setForeground(Color.WHITE);
+		txtrUsername_2.setForeground(new Color(0, 128, 128));
 		txtrUsername_2.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2.setBackground(new Color(0, 128, 128));
+		txtrUsername_2.setBackground(new Color(255, 255, 255));
 		txtrUsername_2.setBounds(206, 122, 465, 30);
 		contentPane.add(txtrUsername_2);
 		
 		JTextArea txtrUsername_2_1 = new JTextArea();
 		txtrUsername_2_1.setText("*****");
-		txtrUsername_2_1.setForeground(Color.WHITE);
+		txtrUsername_2_1.setForeground(new Color(0, 128, 128));
 		txtrUsername_2_1.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_1.setBackground(new Color(0, 128, 128));
+		txtrUsername_2_1.setBackground(new Color(255, 255, 255));
 		txtrUsername_2_1.setBounds(181, 162, 490, 30);
 		contentPane.add(txtrUsername_2_1);
 		
 		JTextArea txtrUsername_2_2 = new JTextArea();
 		txtrUsername_2_2.setText("*****");
-		txtrUsername_2_2.setForeground(Color.WHITE);
+		txtrUsername_2_2.setForeground(new Color(0, 128, 128));
 		txtrUsername_2_2.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_2.setBackground(new Color(0, 128, 128));
+		txtrUsername_2_2.setBackground(new Color(255, 255, 255));
 		txtrUsername_2_2.setBounds(161, 202, 510, 30);
 		contentPane.add(txtrUsername_2_2);
 		
 		JTextArea txtrUsername_2_3 = new JTextArea();
 		txtrUsername_2_3.setText("*****");
-		txtrUsername_2_3.setForeground(Color.WHITE);
+		txtrUsername_2_3.setForeground(new Color(0, 128, 128));
 		txtrUsername_2_3.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_3.setBackground(new Color(0, 128, 128));
+		txtrUsername_2_3.setBackground(new Color(255, 255, 255));
 		txtrUsername_2_3.setBounds(263, 242, 408, 30);
 		contentPane.add(txtrUsername_2_3);
 		
 		JTextArea txtrUsername_2_4 = new JTextArea();
 		txtrUsername_2_4.setText("*****");
-		txtrUsername_2_4.setForeground(Color.WHITE);
+		txtrUsername_2_4.setForeground(new Color(0, 128, 128));
 		txtrUsername_2_4.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_4.setBackground(new Color(0, 128, 128));
+		txtrUsername_2_4.setBackground(new Color(255, 255, 255));
 		txtrUsername_2_4.setBounds(297, 282, 374, 30);
 		contentPane.add(txtrUsername_2_4);
 		
 		JTextArea txtrUsername_2_5 = new JTextArea();
 		txtrUsername_2_5.setText("*****");
-		txtrUsername_2_5.setForeground(Color.WHITE);
+		txtrUsername_2_5.setForeground(new Color(0, 128, 128));
 		txtrUsername_2_5.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_5.setBackground(new Color(0, 128, 128));
+		txtrUsername_2_5.setBackground(new Color(255, 255, 255));
 		txtrUsername_2_5.setBounds(194, 322, 477, 30);
 		contentPane.add(txtrUsername_2_5);
 		
 		JTextArea txtrUsername_2_5_1 = new JTextArea();
 		txtrUsername_2_5_1.setText("*****");
-		txtrUsername_2_5_1.setForeground(Color.WHITE);
+		txtrUsername_2_5_1.setForeground(new Color(0, 128, 128));
 		txtrUsername_2_5_1.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_5_1.setBackground(new Color(0, 128, 128));
+		txtrUsername_2_5_1.setBackground(new Color(255, 255, 255));
 		txtrUsername_2_5_1.setBounds(206, 358, 465, 30);
 		contentPane.add(txtrUsername_2_5_1);
 		
 		JTextArea txtrUsername_2_5_2 = new JTextArea();
 		txtrUsername_2_5_2.setText("*****");
-		txtrUsername_2_5_2.setForeground(Color.WHITE);
+		txtrUsername_2_5_2.setForeground(new Color(0, 128, 128));
 		txtrUsername_2_5_2.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_5_2.setBackground(new Color(0, 128, 128));
+		txtrUsername_2_5_2.setBackground(new Color(255, 255, 255));
 		txtrUsername_2_5_2.setBounds(263, 398, 408, 30);
 		contentPane.add(txtrUsername_2_5_2);
 		
 		Gender = new JComboBox<>(new String[]{"Male", "Female"});
 		Gender.setFont(new Font("Arial", Font.PLAIN, 16));
 		Gender.setBackground(Color.WHITE);
-		Gender.setBounds(1028, 163, 181, 28);
+		Gender.setBounds(1018, 163, 216, 28);
 		contentPane.add(Gender);
 		
 		
 		YearLevel = new JComboBox<>(new String[]{"1", "2", "3", "4"});
 		YearLevel.setFont(new Font("Arial", Font.PLAIN, 16));
 		YearLevel.setBackground(Color.WHITE);
-		YearLevel.setBounds(1018, 365, 181, 28);
+		YearLevel.setBounds(1018, 365, 216, 28);
 		contentPane.add(YearLevel);
+		
+		JLabel lblNewLabel = new JLabel("");
+		Image img = new ImageIcon(this.getClass().getResource("/white.png")).getImage();
+        lblNewLabel.setIcon(new ImageIcon(img));
+		lblNewLabel.setBounds(763, 99, 496, 410);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		Image imgs = new ImageIcon(this.getClass().getResource("/white.png")).getImage();
+		lblNewLabel_1.setIcon(new ImageIcon(imgs));
+		lblNewLabel_1.setBounds(51, 99, 667, 410);
+		contentPane.add(lblNewLabel_1);
+		
+		displayUserInfo(userId);
 	}
 	
 	 public void insertData(String FullName, String Gender, String Email, String ContactNumber, String EmergencyNumber, String Program, String YearLevel, String StudentAddress) {
@@ -389,6 +412,26 @@ public class S_StudentInfo extends JFrame {
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            javax.swing.JOptionPane.showMessageDialog(contentPane, "Error inserting student info. Please check your input and try again.");
+	        }
+	    }
+	 
+	 private void displayUserInfo(String userId) {
+	        Connection con = dbConnect.con; 
+	        String query = "SELECT * FROM register WHERE user_id = ?";
+	        try (PreparedStatement stmt = con.prepareStatement(query)) {
+	            stmt.setString(1, userId);
+	            ResultSet rs = stmt.executeQuery();
+	            if (rs.next()) {
+	                String fullname = rs.getString("fullname");
+	                String email = rs.getString("email");
+
+	                FullName.setText(fullname); 
+	                Email.setText(email); 
+	            } else {
+	                System.out.println("User not found");
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
 	        }
 	    }
 }

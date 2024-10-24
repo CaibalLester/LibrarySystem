@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class L_LibrarianInfo extends JFrame {
 
@@ -20,10 +22,8 @@ public class L_LibrarianInfo extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private JTextField textField_6;
 	private JTextField textField_7;
 
 	/**
@@ -108,13 +108,6 @@ public class L_LibrarianInfo extends JFrame {
 		textField_2.setBackground(new Color(177, 216, 216));
 		textField_2.setBounds(1025, 247, 216, 30);
 		contentPane.add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_3.setColumns(10);
-		textField_3.setBackground(new Color(177, 216, 216));
-		textField_3.setBounds(1025, 167, 216, 30);
-		contentPane.add(textField_3);
 		
 		JTextArea txtrFullName_1_1 = new JTextArea();
 		txtrFullName_1_1.setText("Program :");
@@ -241,13 +234,6 @@ public class L_LibrarianInfo extends JFrame {
 		textField_5.setBounds(1025, 326, 216, 30);
 		contentPane.add(textField_5);
 		
-		textField_6 = new JTextField();
-		textField_6.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_6.setColumns(10);
-		textField_6.setBackground(new Color(177, 216, 216));
-		textField_6.setBounds(1025, 362, 216, 30);
-		contentPane.add(textField_6);
-		
 		textField_7 = new JTextField();
 		textField_7.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_7.setColumns(10);
@@ -261,13 +247,6 @@ public class L_LibrarianInfo extends JFrame {
 		btnEdit.setBackground(new Color(41, 82, 82));
 		btnEdit.setBounds(1033, 460, 99, 30);
 		contentPane.add(btnEdit);
-		
-		JTextArea txtrUsername_1_1 = new JTextArea();
-		txtrUsername_1_1.setForeground(new Color(0, 128, 128));
-		txtrUsername_1_1.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_1_1.setBackground(Color.WHITE);
-		txtrUsername_1_1.setBounds(779, 97, 488, 417);
-		contentPane.add(txtrUsername_1_1);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
@@ -346,6 +325,16 @@ public class L_LibrarianInfo extends JFrame {
 		txtrUsername_2_5_2.setBackground(new Color(0, 128, 128));
 		txtrUsername_2_5_2.setBounds(270, 402, 408, 30);
 		contentPane.add(txtrUsername_2_5_2);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Male", "Female"}));
+		comboBox.setBounds(1025, 166, 216, 27);
+		contentPane.add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4"}));
+		comboBox_1.setBounds(1025, 362, 216, 27);
+		contentPane.add(comboBox_1);
 	}
 
 }

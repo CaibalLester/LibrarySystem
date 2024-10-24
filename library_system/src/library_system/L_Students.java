@@ -15,6 +15,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class L_Students extends JFrame {
 
@@ -22,11 +24,9 @@ public class L_Students extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTable table;
@@ -92,13 +92,6 @@ public class L_Students extends JFrame {
 		textField_1.setBounds(1017, 191, 240, 30);
 		contentPane.add(textField_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_2.setColumns(10);
-		textField_2.setBackground(new Color(177, 216, 216));
-		textField_2.setBounds(1017, 231, 240, 30);
-		contentPane.add(textField_2);
-		
 		textField_3 = new JTextField();
 		textField_3.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_3.setColumns(10);
@@ -119,13 +112,6 @@ public class L_Students extends JFrame {
 		textField_5.setBackground(new Color(177, 216, 216));
 		textField_5.setBounds(1017, 348, 240, 30);
 		contentPane.add(textField_5);
-		
-		textField_6 = new JTextField();
-		textField_6.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_6.setColumns(10);
-		textField_6.setBackground(new Color(177, 216, 216));
-		textField_6.setBounds(1017, 424, 240, 30);
-		contentPane.add(textField_6);
 		
 		textField_7 = new JTextField();
 		textField_7.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -268,6 +254,16 @@ public class L_Students extends JFrame {
 		btnAdd.setBackground(new Color(41, 82, 82));
 		btnAdd.setBounds(1019, 500, 114, 30);
 		contentPane.add(btnAdd);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "Male", "Female"}));
+		comboBox.setBounds(1017, 231, 240, 27);
+		contentPane.add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4"}));
+		comboBox_1.setBounds(1017, 424, 240, 27);
+		contentPane.add(comboBox_1);
 	}
 
 }

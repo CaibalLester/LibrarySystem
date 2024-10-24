@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -23,7 +24,7 @@ public class StudentDashboard extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private DbConnect dbConnect;
-    private JTextArea txtstudentfullname;
+    private JTextArea fullname;
     private JTextArea username;
     private String userId;
 
@@ -40,10 +41,6 @@ public class StudentDashboard extends JFrame {
 
     public StudentDashboard(String userId) {
     	this.userId = userId;
-    	
-    	
-        
-        
         dbConnect = new DbConnect();  
         dbConnect.connect(); 
         
@@ -80,13 +77,13 @@ public class StudentDashboard extends JFrame {
         txtrName.setBounds(107, 106, 60, 22);
         contentPane.add(txtrName);
         
-        txtstudentfullname = new JTextArea();
-        txtstudentfullname.setText("***");
-        txtstudentfullname.setForeground(new Color(0, 128, 128));
-        txtstudentfullname.setFont(new Font("Arial", Font.BOLD, 15));
-        txtstudentfullname.setBackground(new Color(177, 216, 216));
-        txtstudentfullname.setBounds(177, 106, 167, 22);
-        contentPane.add(txtstudentfullname);
+        fullname = new JTextArea();
+        fullname.setText("***");
+        fullname.setForeground(new Color(0, 128, 128));
+        fullname.setFont(new Font("Arial", Font.BOLD, 15));
+        fullname.setBackground(new Color(177, 216, 216));
+        fullname.setBounds(177, 106, 167, 22);
+        contentPane.add(fullname);
         
         username = new JTextArea();
         username.setText("***");
@@ -127,11 +124,19 @@ public class StudentDashboard extends JFrame {
         JButton btnManageStudentInfo = new JButton("Manage My Info");
         btnManageStudentInfo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                S_StudentInfo SStudentInfo = new S_StudentInfo(userId);
-                SStudentInfo.setVisible(true);
-                dispose();
+                String user = fullname.getText(); 
+                String userId = setMe(user);
+                
+                if (userId != null) { 
+                    S_StudentInfo SStudentInfo = new S_StudentInfo(userId); 
+                    SStudentInfo.setVisible(true);
+                    dispose(); 
+                } else {
+                    JOptionPane.showMessageDialog(null, "User not found!"); 
+                }
             }
         });
+
         btnManageStudentInfo.setForeground(Color.WHITE);
         btnManageStudentInfo.setFont(new Font("Arial", Font.BOLD, 15));
         btnManageStudentInfo.setBackground(new Color(0, 128, 128));
@@ -158,14 +163,13 @@ public class StudentDashboard extends JFrame {
         lblNewLabel.setBounds(31, 0, 60, 382);
         contentPane.add(lblNewLabel);
 
-        // Call method to display user info based on user_id
-        displayUserInfo(userId); // Replace '1' with the actual user_id
+        displayUserInfo(userId); 
     }
     
     
 
     private void displayUserInfo(String userId) {
-        Connection con = dbConnect.con; // Access the connection from DbConnect
+        Connection con = dbConnect.con; 
         String query = "SELECT user_id, fullname FROM register WHERE user_id = ?";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setString(1, userId);
@@ -175,7 +179,7 @@ public class StudentDashboard extends JFrame {
                 String fetchedPassword = rs.getString("fullname");
 
                 username.setText(fetchedUsername); 
-                txtstudentfullname.setText(fetchedPassword); 
+                fullname.setText(fetchedPassword); 
             } else {
                 System.out.println("User not found");
             }
@@ -183,4 +187,31 @@ public class StudentDashboard extends JFrame {
             e.printStackTrace();
         }
     }
+    
+    private String setMe(String fullname) {
+        try {
+            Connection con = dbConnect.con;
+            String query = "SELECT fullname FROM register where user_id = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, fullname);
+            
+
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getString("user_id"); 
+            } else {
+                return null; 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    
+   
+
+   
+    
+    
 }

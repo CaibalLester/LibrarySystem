@@ -117,13 +117,13 @@ public class Login extends JFrame {
                 String pass = password.getText();
                 String role = comboBox.getSelectedItem().toString();
 
-                String userId = authenticate(user, pass, role); // Get user_id from authenticate method
+                String userId = authenticate(user, pass, role); 
                 if (userId != null) {
                     if (userId.equals("Librarian")) {
-                        LibrarianDashboard librarianDashboard = new LibrarianDashboard(userId); // Pass user_id
+                        LibrarianDashboard librarianDashboard = new LibrarianDashboard(userId); 
                         librarianDashboard.setVisible(true);
                     } else {
-                        StudentDashboard studentDashboard = new StudentDashboard(userId); // Pass user_id
+                        StudentDashboard studentDashboard = new StudentDashboard(userId); 
                         studentDashboard.setVisible(true);
                     }
                     dispose();
@@ -165,9 +165,9 @@ public class Login extends JFrame {
 
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return rs.getString("user_id"); // Return the user_id
+                return rs.getString("user_id"); 
             } else {
-                return null; // Return null if the credentials are incorrect
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();

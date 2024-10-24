@@ -3,12 +3,16 @@ package library_system;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +22,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JCalendar;
 
 public class S_Reservation extends JFrame {
 
@@ -26,15 +32,10 @@ public class S_Reservation extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_6;
-	private JTextField textField_7;
 	private JTextField textField_8;
 	private String userID;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -48,9 +49,7 @@ public class S_Reservation extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public S_Reservation(String userID) {
 		setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -146,27 +145,6 @@ public class S_Reservation extends JFrame {
 		txtrFullName_1_3_1.setBounds(752, 349, 175, 30);
 		contentPane.add(txtrFullName_1_3_1);
 		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_4.setColumns(10);
-		textField_4.setBackground(new Color(177, 216, 216));
-		textField_4.setBounds(1003, 270, 216, 30);
-		contentPane.add(textField_4);
-		
-		textField_6 = new JTextField();
-		textField_6.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_6.setColumns(10);
-		textField_6.setBackground(new Color(177, 216, 216));
-		textField_6.setBounds(1003, 309, 216, 30);
-		contentPane.add(textField_6);
-		
-		textField_7 = new JTextField();
-		textField_7.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_7.setColumns(10);
-		textField_7.setBackground(new Color(177, 216, 216));
-		textField_7.setBounds(1003, 349, 216, 30);
-		contentPane.add(textField_7);
-		
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.setForeground(Color.WHITE);
 		btnEdit.setFont(new Font("Arial", Font.BOLD, 15));
@@ -202,13 +180,6 @@ public class S_Reservation extends JFrame {
 		textField_8.setBackground(new Color(177, 216, 216));
 		textField_8.setBounds(1003, 393, 216, 30);
 		contentPane.add(textField_8);
-		
-		JTextArea txtrUsername_1_1 = new JTextArea();
-		txtrUsername_1_1.setForeground(new Color(0, 128, 128));
-		txtrUsername_1_1.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_1_1.setBackground(Color.WHITE);
-		txtrUsername_1_1.setBounds(740, 121, 502, 367);
-		contentPane.add(txtrUsername_1_1);
 		
 		JTextArea txtrPassword_1_1 = new JTextArea();
 		txtrPassword_1_1.setText("Student ID :");
@@ -337,5 +308,23 @@ public class S_Reservation extends JFrame {
 		txtrPassword_1_1_8.setBackground(new Color(0, 128, 128));
 		txtrPassword_1_1_8.setBounds(266, 429, 413, 30);
 		contentPane.add(txtrPassword_1_1_8);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(1003, 349, 216, 30);
+		contentPane.add(dateChooser);
+		
+		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1.setBounds(1003, 309, 216, 30);
+		contentPane.add(dateChooser_1);
+		
+		JDateChooser dateChooser_2 = new JDateChooser();
+		dateChooser_2.setBounds(1003, 270, 216, 30);
+		contentPane.add(dateChooser_2);
+		
+		JLabel lblNewLabel = new JLabel("");
+        Image img = new ImageIcon(this.getClass().getResource("/white.png")).getImage();
+        lblNewLabel.setIcon(new ImageIcon(img));
+        lblNewLabel.setBounds(770, 108, 494, 398);
+        contentPane.add(lblNewLabel);
 	}
 }
