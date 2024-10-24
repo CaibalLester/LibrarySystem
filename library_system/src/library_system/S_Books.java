@@ -168,7 +168,7 @@ public class S_Books extends JFrame {
         btnBack = new JButton("Back");
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                StudentDashboard studentDashboard = new StudentDashboard();
+                StudentDashboard studentDashboard = new StudentDashboard("userId");
                 studentDashboard.setVisible(true);
                 dispose();
             }

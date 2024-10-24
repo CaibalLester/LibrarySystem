@@ -10,26 +10,33 @@ import java.awt.Color;
 import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.Image;
-
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
+
 
 public class LibrarianDashboard extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private DbConnect dbConnect;
+	private JTextArea libnum;
+    private JTextArea libname;
+	private String userId;
 
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LibrarianDashboard frame = new LibrarianDashboard();
+					LibrarianDashboard frame = new LibrarianDashboard("userId");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +46,11 @@ public class LibrarianDashboard extends JFrame {
 	}
 
 
-	public LibrarianDashboard() {
+	public LibrarianDashboard(String userId) {
+		this.userId = userId;
+		dbConnect = new DbConnect();  
+	        dbConnect.connect(); 
+	        
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 465, 395);
 		contentPane = new JPanel();
@@ -75,21 +86,21 @@ public class LibrarianDashboard extends JFrame {
 		txtrName.setBackground(new Color(177, 216, 216));
 		contentPane.add(txtrName);
 		
-		JTextArea txtrLibrarianNumber_1 = new JTextArea();
-		txtrLibrarianNumber_1.setBounds(262, 62, 134, 22);
-		txtrLibrarianNumber_1.setText("***");
-		txtrLibrarianNumber_1.setForeground(new Color(0, 128, 128));
-		txtrLibrarianNumber_1.setFont(new Font("Arial", Font.BOLD, 15));
-		txtrLibrarianNumber_1.setBackground(new Color(177, 216, 216));
-		contentPane.add(txtrLibrarianNumber_1);
+		JTextArea libnum = new JTextArea();
+		libnum.setBounds(262, 62, 134, 22);
+		libnum.setText("***");
+		libnum.setForeground(new Color(0, 128, 128));
+		libnum.setFont(new Font("Arial", Font.BOLD, 15));
+		libnum.setBackground(new Color(177, 216, 216));
+		contentPane.add(libnum);
 		
-		JTextArea txtrName_1 = new JTextArea();
-		txtrName_1.setBounds(183, 85, 167, 22);
-		txtrName_1.setText("***");
-		txtrName_1.setForeground(new Color(0, 128, 128));
-		txtrName_1.setFont(new Font("Arial", Font.BOLD, 15));
-		txtrName_1.setBackground(new Color(177, 216, 216));
-		contentPane.add(txtrName_1);
+		JTextArea libname = new JTextArea();
+		libname.setBounds(183, 85, 167, 22);
+		libname.setText("***");
+		libname.setForeground(new Color(0, 128, 128));
+		libname.setFont(new Font("Arial", Font.BOLD, 15));
+		libname.setBackground(new Color(177, 216, 216));
+		contentPane.add(libname);
 		
 		JButton btnManageStudentBooks = new JButton("Manage Student Books");
 		btnManageStudentBooks.addActionListener(new ActionListener() {
@@ -152,5 +163,27 @@ public class LibrarianDashboard extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(img));
 		lblNewLabel.setBounds(31, 0, 60, 382);
 		contentPane.add(lblNewLabel);
+		
+		displayUserInfo(userId);
 	}
+	
+	private void displayUserInfo(String userId) {
+        Connection con = dbConnect.con; // Access the connection from DbConnect
+        String query = "SELECT user_id, fullname FROM register WHERE user_id = ?";
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setString(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String fetchedUsername = rs.getString("user_id");
+                String fetchedPassword = rs.getString("fullname");
+
+                libnum.setText(fetchedUsername); 
+                libname.setText(fetchedPassword); 
+            } else {
+                System.out.println("User not found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -40,7 +40,7 @@ public class S_StudentInfo extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					S_StudentInfo frame = new S_StudentInfo();
+					S_StudentInfo frame = new S_StudentInfo("userId");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +50,7 @@ public class S_StudentInfo extends JFrame {
 	}
 
 
-	public S_StudentInfo() {
+	public S_StudentInfo(String userId) {
 		db = new DbConnect();
         db.connect();
         
@@ -284,7 +284,7 @@ public class S_StudentInfo extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				StudentDashboard studentDashboard = new StudentDashboard();
+				StudentDashboard studentDashboard = new StudentDashboard(userId);
 				studentDashboard.setVisible(true);
 				dispose();
 			}

@@ -169,7 +169,7 @@ public class S_BorrowingComplianceManagement extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				StudentDashboard studentDashboard = new StudentDashboard();
+				StudentDashboard studentDashboard = new StudentDashboard("userID");
 				studentDashboard.setVisible(true);
 				dispose();
 			}

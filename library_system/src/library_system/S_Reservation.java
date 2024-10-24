@@ -30,6 +30,7 @@ public class S_Reservation extends JFrame {
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
+	private String userID;
 
 	/**
 	 * Launch the application.
@@ -38,7 +39,7 @@ public class S_Reservation extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					S_Reservation frame = new S_Reservation();
+					S_Reservation frame = new S_Reservation("userID");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +51,7 @@ public class S_Reservation extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public S_Reservation() {
+	public S_Reservation(String userID) {
 		setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1310, 648);
@@ -176,7 +177,7 @@ public class S_Reservation extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				StudentDashboard studentDashboard = new StudentDashboard();
+				StudentDashboard studentDashboard = new StudentDashboard("userID");
 				studentDashboard.setVisible(true);
 				dispose();
 			}

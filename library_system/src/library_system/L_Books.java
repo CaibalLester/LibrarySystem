@@ -213,7 +213,7 @@ public class L_Books extends JFrame {
         JButton btnBack = new JButton("Back");
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                LibrarianDashboard librarianDashboard = new LibrarianDashboard();
+                LibrarianDashboard librarianDashboard = new LibrarianDashboard("userID");
                 librarianDashboard.setVisible(true);
                 dispose();
             }

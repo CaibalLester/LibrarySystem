@@ -117,20 +117,25 @@ public class Login extends JFrame {
                 String pass = password.getText();
                 String role = comboBox.getSelectedItem().toString();
 
-                if (authenticate(user, pass, role)) {
-                    if (role.equals("Librarian")) {
-                        LibrarianDashboard librarianDashboard = new LibrarianDashboard();
+                String userId = authenticate(user, pass, role); // Get user_id from authenticate method
+                if (userId != null) {
+                    if (userId.equals("Librarian")) {
+                        LibrarianDashboard librarianDashboard = new LibrarianDashboard(userId); // Pass user_id
                         librarianDashboard.setVisible(true);
                     } else {
-                        StudentDashboard studentDashboard = new StudentDashboard();
+                        StudentDashboard studentDashboard = new StudentDashboard(userId); // Pass user_id
                         studentDashboard.setVisible(true);
                     }
-                    dispose(); 
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid credentials or role. Please try again.");
                 }
+                
             }
         });
+
+
+
         btnLogin.setFont(new Font("Arial", Font.BOLD, 15));
         btnLogin.setBackground(new Color(255, 255, 255));
         btnLogin.setBounds(334, 233, 99, 30);
@@ -149,10 +154,10 @@ public class Login extends JFrame {
         contentPane.add(lblNewLabel_1_1);
     }
 
-    private boolean authenticate(String username, String password, String role) {
+    private String authenticate(String username, String password, String role) {
         try {
-            Connection con = dbConnect.con;  
-            String query = "SELECT * FROM Register WHERE username = ? AND password = ? AND userrole = ?";
+            Connection con = dbConnect.con;
+            String query = "SELECT user_id FROM register WHERE username = ? AND password = ? AND userrole = ?";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, username);
             pst.setString(2, password);
@@ -160,14 +165,15 @@ public class Login extends JFrame {
 
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return true;
+                return rs.getString("user_id"); // Return the user_id
             } else {
-                return false;
+                return null; // Return null if the credentials are incorrect
             }
-
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
+
+
 }
