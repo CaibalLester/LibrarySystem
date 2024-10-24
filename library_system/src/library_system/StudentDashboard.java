@@ -40,7 +40,7 @@ public class StudentDashboard extends JFrame {
     }
 
     public StudentDashboard(String userId) {
-    	this.userId = userId;
+        this.userId = userId;
         dbConnect = new DbConnect();  
         dbConnect.connect(); 
         
@@ -124,18 +124,17 @@ public class StudentDashboard extends JFrame {
         JButton btnManageStudentInfo = new JButton("Manage My Info");
         btnManageStudentInfo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String user = fullname.getText(); 
-                String userId = setMe(user);
-                
                 if (userId != null) { 
-                    S_StudentInfo SStudentInfo = new S_StudentInfo(userId); 
+                    S_StudentInfo SStudentInfo = new S_StudentInfo(userId, dbConnect); // Pass userId and dbConnect
                     SStudentInfo.setVisible(true);
                     dispose(); 
                 } else {
-                    JOptionPane.showMessageDialog(null, "User not found!"); 
+                    JOptionPane.showMessageDialog(null, "User ID not available!");
                 }
             }
         });
+
+
 
         btnManageStudentInfo.setForeground(Color.WHITE);
         btnManageStudentInfo.setFont(new Font("Arial", Font.BOLD, 15));
@@ -166,8 +165,6 @@ public class StudentDashboard extends JFrame {
         displayUserInfo(userId); 
     }
     
-    
-
     private void displayUserInfo(String userId) {
         Connection con = dbConnect.con; 
         String query = "SELECT user_id, fullname FROM register WHERE user_id = ?";
@@ -176,10 +173,10 @@ public class StudentDashboard extends JFrame {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String fetchedUsername = rs.getString("user_id");
-                String fetchedPassword = rs.getString("fullname");
+                String fetchedFullname = rs.getString("fullname");
 
                 username.setText(fetchedUsername); 
-                fullname.setText(fetchedPassword); 
+                fullname.setText(fetchedFullname); 
             } else {
                 System.out.println("User not found");
             }
@@ -187,31 +184,4 @@ public class StudentDashboard extends JFrame {
             e.printStackTrace();
         }
     }
-    
-    private String setMe(String fullname) {
-        try {
-            Connection con = dbConnect.con;
-            String query = "SELECT fullname FROM register where user_id = ?";
-            PreparedStatement pst = con.prepareStatement(query);
-            pst.setString(1, fullname);
-            
-
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                return rs.getString("user_id"); 
-            } else {
-                return null; 
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    
-   
-
-   
-    
-    
 }

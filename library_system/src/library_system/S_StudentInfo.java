@@ -39,29 +39,43 @@ public class S_StudentInfo extends JFrame {
     private JTextField Program;
     private JComboBox<String> YearLevel;
     private JTextField StudentAddress;
+//    private JTextArea sfullname;
+//    private JTextArea sgender;
+//    private JTextArea semail;
+//    private JTextArea scontactnumber;
+//    private JTextArea semergencynumber;
+//    private JTextArea sprogram;
+//    private JTextArea syearlevel;
+//    private JTextArea saddress;
     private DbConnect dbConnect;
     private String userId;
     DbConnect db; 
 
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					S_StudentInfo frame = new S_StudentInfo("userId");
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    // Create a DbConnect instance and provide a sample userId
+                    DbConnect dbConnect = new DbConnect();
+                    dbConnect.connect();  // Ensure the connection is established
+
+                    String userId = "sampleUserId";  // Replace with a valid userId for testing
+
+                    S_StudentInfo frame = new S_StudentInfo(userId, dbConnect);  // Pass the required parameters
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
 
-	public S_StudentInfo(String userId) {
+
+	public S_StudentInfo(String userId, DbConnect dbConnect) {
 		this.userId = userId;
-		db = new DbConnect();
-        db.connect();
+        this.dbConnect = dbConnect; 
         
 		setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,6 +118,8 @@ public class S_StudentInfo extends JFrame {
                 StudentAddress.setText("");
 		    }
 		});
+		
+			
 
 		btnSubmit.setBounds(1135, 456, 99, 30);
 		btnSubmit.setForeground(Color.WHITE);
@@ -304,69 +320,69 @@ public class S_StudentInfo extends JFrame {
 		btnBack.setBounds(1158, 551, 99, 30);
 		contentPane.add(btnBack);
 		
-		JTextArea txtrUsername_2 = new JTextArea();
-		txtrUsername_2.setText("*****");
-		txtrUsername_2.setForeground(new Color(0, 128, 128));
-		txtrUsername_2.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2.setBackground(new Color(255, 255, 255));
-		txtrUsername_2.setBounds(206, 122, 465, 30);
-		contentPane.add(txtrUsername_2);
+		JTextArea sfullname = new JTextArea();
+		sfullname.setText("*****");
+		sfullname.setForeground(new Color(0, 128, 128));
+		sfullname.setFont(new Font("Arial", Font.BOLD, 20));
+		sfullname.setBackground(new Color(255, 255, 255));
+		sfullname.setBounds(206, 122, 465, 30);
+		contentPane.add(sfullname);
 		
-		JTextArea txtrUsername_2_1 = new JTextArea();
-		txtrUsername_2_1.setText("*****");
-		txtrUsername_2_1.setForeground(new Color(0, 128, 128));
-		txtrUsername_2_1.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_1.setBackground(new Color(255, 255, 255));
-		txtrUsername_2_1.setBounds(181, 162, 490, 30);
-		contentPane.add(txtrUsername_2_1);
+		JTextArea sgender = new JTextArea();
+		sgender.setText("*****");
+		sgender.setForeground(new Color(0, 128, 128));
+		sgender.setFont(new Font("Arial", Font.BOLD, 20));
+		sgender.setBackground(new Color(255, 255, 255));
+		sgender.setBounds(181, 162, 490, 30);
+		contentPane.add(sgender);
 		
-		JTextArea txtrUsername_2_2 = new JTextArea();
-		txtrUsername_2_2.setText("*****");
-		txtrUsername_2_2.setForeground(new Color(0, 128, 128));
-		txtrUsername_2_2.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_2.setBackground(new Color(255, 255, 255));
-		txtrUsername_2_2.setBounds(161, 202, 510, 30);
-		contentPane.add(txtrUsername_2_2);
+		JTextArea semail = new JTextArea();
+		semail.setText("*****");
+		semail.setForeground(new Color(0, 128, 128));
+		semail.setFont(new Font("Arial", Font.BOLD, 20));
+		semail.setBackground(new Color(255, 255, 255));
+		semail.setBounds(161, 202, 510, 30);
+		contentPane.add(semail);
 		
-		JTextArea txtrUsername_2_3 = new JTextArea();
-		txtrUsername_2_3.setText("*****");
-		txtrUsername_2_3.setForeground(new Color(0, 128, 128));
-		txtrUsername_2_3.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_3.setBackground(new Color(255, 255, 255));
-		txtrUsername_2_3.setBounds(263, 242, 408, 30);
-		contentPane.add(txtrUsername_2_3);
+		JTextArea scontactnumber = new JTextArea();
+		scontactnumber.setText("*****");
+		scontactnumber.setForeground(new Color(0, 128, 128));
+		scontactnumber.setFont(new Font("Arial", Font.BOLD, 20));
+		scontactnumber.setBackground(new Color(255, 255, 255));
+		scontactnumber.setBounds(263, 242, 408, 30);
+		contentPane.add(scontactnumber);
 		
-		JTextArea txtrUsername_2_4 = new JTextArea();
-		txtrUsername_2_4.setText("*****");
-		txtrUsername_2_4.setForeground(new Color(0, 128, 128));
-		txtrUsername_2_4.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_4.setBackground(new Color(255, 255, 255));
-		txtrUsername_2_4.setBounds(297, 282, 374, 30);
-		contentPane.add(txtrUsername_2_4);
+		JTextArea semergencycontact = new JTextArea();
+		semergencycontact.setText("*****");
+		semergencycontact.setForeground(new Color(0, 128, 128));
+		semergencycontact.setFont(new Font("Arial", Font.BOLD, 20));
+		semergencycontact.setBackground(new Color(255, 255, 255));
+		semergencycontact.setBounds(297, 282, 374, 30);
+		contentPane.add(semergencycontact);
 		
-		JTextArea txtrUsername_2_5 = new JTextArea();
-		txtrUsername_2_5.setText("*****");
-		txtrUsername_2_5.setForeground(new Color(0, 128, 128));
-		txtrUsername_2_5.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_5.setBackground(new Color(255, 255, 255));
-		txtrUsername_2_5.setBounds(194, 322, 477, 30);
-		contentPane.add(txtrUsername_2_5);
+		JTextArea sprogram = new JTextArea();
+		sprogram.setText("*****");
+		sprogram.setForeground(new Color(0, 128, 128));
+		sprogram.setFont(new Font("Arial", Font.BOLD, 20));
+		sprogram.setBackground(new Color(255, 255, 255));
+		sprogram.setBounds(194, 322, 477, 30);
+		contentPane.add(sprogram);
 		
-		JTextArea txtrUsername_2_5_1 = new JTextArea();
-		txtrUsername_2_5_1.setText("*****");
-		txtrUsername_2_5_1.setForeground(new Color(0, 128, 128));
-		txtrUsername_2_5_1.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_5_1.setBackground(new Color(255, 255, 255));
-		txtrUsername_2_5_1.setBounds(206, 358, 465, 30);
-		contentPane.add(txtrUsername_2_5_1);
+		JTextArea syearlevel = new JTextArea();
+		syearlevel.setText("*****");
+		syearlevel.setForeground(new Color(0, 128, 128));
+		syearlevel.setFont(new Font("Arial", Font.BOLD, 20));
+		syearlevel.setBackground(new Color(255, 255, 255));
+		syearlevel.setBounds(206, 358, 465, 30);
+		contentPane.add(syearlevel);
 		
-		JTextArea txtrUsername_2_5_2 = new JTextArea();
-		txtrUsername_2_5_2.setText("*****");
-		txtrUsername_2_5_2.setForeground(new Color(0, 128, 128));
-		txtrUsername_2_5_2.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_5_2.setBackground(new Color(255, 255, 255));
-		txtrUsername_2_5_2.setBounds(263, 398, 408, 30);
-		contentPane.add(txtrUsername_2_5_2);
+		JTextArea saddress = new JTextArea();
+		saddress.setText("*****");
+		saddress.setForeground(new Color(0, 128, 128));
+		saddress.setFont(new Font("Arial", Font.BOLD, 20));
+		saddress.setBackground(new Color(255, 255, 255));
+		saddress.setBounds(263, 398, 408, 30);
+		contentPane.add(saddress);
 		
 		Gender = new JComboBox<>(new String[]{"Male", "Female"});
 		Gender.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -394,11 +410,13 @@ public class S_StudentInfo extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		displayUserInfo(userId);
+//		studentshow(userId);
 	}
 	
 	 public void insertData(String FullName, String Gender, String Email, String ContactNumber, String EmergencyNumber, String Program, String YearLevel, String StudentAddress) {
+		 Connection con = dbConnect.con; 
 		 String query = "INSERT INTO students ( `FullName`, `Gender`, `Email`, `ContactNumber`, `EmergencyNumber`, `Program`, `YearLevel`, `StudentAddress`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-	        try (PreparedStatement pst = db.con.prepareStatement(query)) {
+	        try (PreparedStatement pst = con.prepareStatement(query)) {
 	            pst.setString(1, FullName);
 	            pst.setString(2, Gender);
 	            pst.setString(3, Email);
@@ -415,23 +433,57 @@ public class S_StudentInfo extends JFrame {
 	        }
 	    }
 	 
+
+	 
 	 private void displayUserInfo(String userId) {
 	        Connection con = dbConnect.con; 
-	        String query = "SELECT * FROM register WHERE user_id = ?";
+	        String query = "SELECT fullname, email FROM register WHERE user_id = ?";
 	        try (PreparedStatement stmt = con.prepareStatement(query)) {
 	            stmt.setString(1, userId);
 	            ResultSet rs = stmt.executeQuery();
 	            if (rs.next()) {
-	                String fullname = rs.getString("fullname");
-	                String email = rs.getString("email");
+	                String fetchedUsername = rs.getString("fullname");
+	                String fetchedPassword = rs.getString("email");
 
-	                FullName.setText(fullname); 
-	                Email.setText(email); 
+	                FullName.setText(fetchedUsername); 
+	                Email.setText(fetchedPassword); 
 	            } else {
 	                System.out.println("User not found");
 	            }
-	        } catch (Exception e) {
+	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
+	 
+//	 private void studentshow(String userId) {
+//	        Connection con = dbConnect.con; 
+//	        String query = "SELECT * FROM students WHERE StudentID = ?";
+//	        try (PreparedStatement stmt = con.prepareStatement(query)) {
+//	            stmt.setString(1, userId);
+//	            ResultSet rs = stmt.executeQuery();
+//	            if (rs.next()) {
+//	                String fetchedFullName = rs.getString("FullName");
+//	                String fetchedGender = rs.getString("Gender");
+//	                String fetchedEmail = rs.getString("Email");
+//	                String fetchedContactNumber = rs.getString("ContactNumber");
+//	                String fetchedEmergencyNumber = rs.getString("EmergencyNumber");
+//	                String fetchedProgram = rs.getString("Program");
+//	                String fetchedYearLevel = rs.getString("YearLevel");
+//	                String fetchedStudentAddress= rs.getString("StudentAddress");
+//
+//	                sfullname.setText(fetchedFullName); 
+//	                sgender.setText(fetchedGender); 
+//	                semail.setText(fetchedEmail); 
+//	                scontactnumber.setText(fetchedContactNumber); 
+//	                semergencynumber.setText(fetchedEmergencyNumber); 
+//	                sprogram.setText(fetchedProgram); 
+//	                syearlevel.setText(fetchedYearLevel); 
+//	                saddress.setText(fetchedStudentAddress);  
+//	            } else {
+//	                System.out.println("User not found");
+//	            }
+//	        } catch (SQLException e) {
+//	            e.printStackTrace();
+//	        }
+//	    } 
 }
