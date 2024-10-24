@@ -2,12 +2,15 @@ package library_system;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -16,6 +19,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -70,13 +75,13 @@ public class L_Books extends JFrame {
         JTextArea txtrBorrowingComplianceManagement = new JTextArea();
         txtrBorrowingComplianceManagement.setText("LIBRARY BOOK INFORMATION");
         txtrBorrowingComplianceManagement.setForeground(Color.WHITE);
-        txtrBorrowingComplianceManagement.setFont(new Font("Arial", Font.BOLD, 30));
+        txtrBorrowingComplianceManagement.setFont(new Font("Arial", Font.BOLD, 33));
         txtrBorrowingComplianceManagement.setBackground(new Color(0, 128, 128));
-        txtrBorrowingComplianceManagement.setBounds(30, 20, 587, 40);
+        txtrBorrowingComplianceManagement.setBounds(20, 20, 587, 40);
         contentPane.add(txtrBorrowingComplianceManagement);
         
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(39, 155, 564, 406);
+        scrollPane.setBounds(20, 158, 551, 405);
         contentPane.add(scrollPane);
         
         model = new DefaultTableModel(
@@ -107,11 +112,17 @@ public class L_Books extends JFrame {
 
         JTextArea txtrLibraryBooks = new JTextArea();
         txtrLibraryBooks.setText("Library Books");
-        txtrLibraryBooks.setForeground(Color.WHITE);
+        txtrLibraryBooks.setForeground(new Color(0, 128, 128));
         txtrLibraryBooks.setFont(new Font("Arial", Font.BOLD, 30));
-        txtrLibraryBooks.setBackground(new Color(0, 128, 128));
-        txtrLibraryBooks.setBounds(20, 100, 214, 40);
+        txtrLibraryBooks.setBackground(new Color(255, 255, 255));
+        txtrLibraryBooks.setBounds(26, 96, 201, 40);
         contentPane.add(txtrLibraryBooks);
+        
+        JLabel lblNewLabel = new JLabel("");
+		Image img = new ImageIcon(this.getClass().getResource("/myone.png")).getImage();
+		lblNewLabel.setIcon(new ImageIcon(img));
+		lblNewLabel.setBounds(20, 89, 296, 59);
+		contentPane.add(lblNewLabel);
         
         title = new JTextField();
         title.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -346,6 +357,8 @@ public class L_Books extends JFrame {
         btnrefresh.setBackground(new Color(41, 82, 82));
         btnrefresh.setBounds(1132, 272, 130, 30);
         contentPane.add(btnrefresh);
+        
+        
 
  }
 

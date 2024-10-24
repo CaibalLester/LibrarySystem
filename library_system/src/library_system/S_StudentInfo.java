@@ -14,24 +14,28 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
 
 public class S_StudentInfo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField FullName;
+    private JComboBox<String> Gender;
+    private JTextField Email;
+    private JTextField ContactNumber;
+    private JTextField EmergencyContact;
+    private JTextField Program;
+    private JComboBox<String> YearLevel;
+    private JTextField StudentAddress;
+    DbConnect db; 
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,10 +49,11 @@ public class S_StudentInfo extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public S_StudentInfo() {
+		db = new DbConnect();
+        db.connect();
+        
 		setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1310, 648);
@@ -66,6 +71,31 @@ public class S_StudentInfo extends JFrame {
 		txtrStudentInformation.setBackground(new Color(0, 128, 128));
 		
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	String fullname = FullName.getText();
+		    	String gender = (String) Gender.getSelectedItem();
+                String email = Email.getText();
+                String contact = ContactNumber.getText();
+                String emergencyContact = EmergencyContact.getText();
+                String program = Program.getText();
+                String yearlevel = (String) YearLevel.getSelectedItem();
+                String address = StudentAddress.getText();
+                
+                System.out.println("Inserting students: " + fullname + ", " + gender + ", " + email + ", " + contact + ", " + emergencyContact + ", " + program + ", " + yearlevel + ", " + address);
+                insertData(fullname, gender, email, contact,emergencyContact,program,yearlevel,address);
+                
+                FullName.setText("");
+                Gender.setSelectedIndex(0);
+                Email.setText("");
+                ContactNumber.setText("");
+                EmergencyContact.setText("");
+                Program.setText("");
+                YearLevel.setSelectedIndex(0); 
+                StudentAddress.setText("");
+		    }
+		});
+
 		btnSubmit.setBounds(1135, 456, 99, 30);
 		btnSubmit.setForeground(Color.WHITE);
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 15));
@@ -78,11 +108,11 @@ public class S_StudentInfo extends JFrame {
 		txtrUsername.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrUsername.setBackground(new Color(0, 128, 128));
 		
-		textField = new JTextField();
-		textField.setBounds(1018, 119, 216, 30);
-		textField.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField.setColumns(10);
-		textField.setBackground(new Color(177, 216, 216));
+		FullName = new JTextField(20);
+		FullName.setBounds(1018, 119, 216, 30);
+		FullName.setFont(new Font("Arial", Font.PLAIN, 16));
+		FullName.setColumns(10);
+		FullName.setBackground(new Color(177, 216, 216));
 		
 		JTextArea txtrPassword = new JTextArea();
 		txtrPassword.setBounds(73, 162, 107, 30);
@@ -91,12 +121,6 @@ public class S_StudentInfo extends JFrame {
 		txtrPassword.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrPassword.setBackground(new Color(0, 128, 128));
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(1018, 163, 216, 30);
-		textField_1.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_1.setColumns(10);
-		textField_1.setBackground(new Color(177, 216, 216));
-		
 		JTextArea txtrEmail = new JTextArea();
 		txtrEmail.setBounds(73, 202, 65, 30);
 		txtrEmail.setText("Email :");
@@ -104,11 +128,11 @@ public class S_StudentInfo extends JFrame {
 		txtrEmail.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrEmail.setBackground(new Color(0, 128, 128));
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(1018, 203, 216, 30);
-		textField_2.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_2.setColumns(10);
-		textField_2.setBackground(new Color(177, 216, 216));
+		Email = new JTextField(20);
+		Email.setBounds(1018, 203, 216, 30);
+		Email.setFont(new Font("Arial", Font.PLAIN, 16));
+		Email.setColumns(10);
+		Email.setBackground(new Color(177, 216, 216));
 		
 		JTextArea txtrFullName = new JTextArea();
 		txtrFullName.setBounds(73, 242, 188, 30);
@@ -117,11 +141,11 @@ public class S_StudentInfo extends JFrame {
 		txtrFullName.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrFullName.setBackground(new Color(0, 128, 128));
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(1018, 243, 216, 30);
-		textField_3.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_3.setColumns(10);
-		textField_3.setBackground(new Color(177, 216, 216));
+		ContactNumber = new JTextField(20);
+		ContactNumber.setBounds(1018, 243, 216, 30);
+		ContactNumber.setFont(new Font("Arial", Font.PLAIN, 16));
+		ContactNumber.setColumns(10);
+		ContactNumber.setBackground(new Color(177, 216, 216));
 		
 		JTextArea txtrEmergencyContact = new JTextArea();
 		txtrEmergencyContact.setBounds(73, 282, 202, 30);
@@ -155,10 +179,9 @@ public class S_StudentInfo extends JFrame {
 		contentPane.add(txtrUsername);
 		contentPane.add(txtrEmail);
 		contentPane.add(txtrFullName);
-		contentPane.add(textField);
-		contentPane.add(textField_2);
-		contentPane.add(textField_3);
-		contentPane.add(textField_1);
+		contentPane.add(FullName);
+		contentPane.add(Email);
+		contentPane.add(ContactNumber);
 		contentPane.add(txtrFullName_1_1);
 		contentPane.add(txtrFullName_1_2);
 		contentPane.add(txtrFullName_1_3);
@@ -230,33 +253,26 @@ public class S_StudentInfo extends JFrame {
 		txtrFullName_1_3_1.setBackground(new Color(255, 255, 255));
 		contentPane.add(txtrFullName_1_3_1);
 		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_4.setColumns(10);
-		textField_4.setBackground(new Color(177, 216, 216));
-		textField_4.setBounds(1018, 283, 216, 30);
-		contentPane.add(textField_4);
+		EmergencyContact = new JTextField(20);
+		EmergencyContact.setFont(new Font("Arial", Font.PLAIN, 16));
+		EmergencyContact.setColumns(10);
+		EmergencyContact.setBackground(new Color(177, 216, 216));
+		EmergencyContact.setBounds(1018, 283, 216, 30);
+		contentPane.add(EmergencyContact);
 		
-		textField_5 = new JTextField();
-		textField_5.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_5.setColumns(10);
-		textField_5.setBackground(new Color(177, 216, 216));
-		textField_5.setBounds(1018, 322, 216, 30);
-		contentPane.add(textField_5);
+		Program = new JTextField(20);
+		Program.setFont(new Font("Arial", Font.PLAIN, 16));
+		Program.setColumns(10);
+		Program.setBackground(new Color(177, 216, 216));
+		Program.setBounds(1018, 322, 216, 30);
+		contentPane.add(Program);
 		
-		textField_6 = new JTextField();
-		textField_6.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_6.setColumns(10);
-		textField_6.setBackground(new Color(177, 216, 216));
-		textField_6.setBounds(1018, 358, 216, 30);
-		contentPane.add(textField_6);
-		
-		textField_7 = new JTextField();
-		textField_7.setFont(new Font("Arial", Font.PLAIN, 16));
-		textField_7.setColumns(10);
-		textField_7.setBackground(new Color(177, 216, 216));
-		textField_7.setBounds(1018, 398, 216, 30);
-		contentPane.add(textField_7);
+		StudentAddress = new JTextField(20);
+		StudentAddress.setFont(new Font("Arial", Font.PLAIN, 16));
+		StudentAddress.setColumns(10);
+		StudentAddress.setBackground(new Color(177, 216, 216));
+		StudentAddress.setBounds(1018, 398, 216, 30);
+		contentPane.add(StudentAddress);
 		
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.setForeground(Color.WHITE);
@@ -264,13 +280,6 @@ public class S_StudentInfo extends JFrame {
 		btnEdit.setBackground(new Color(41, 82, 82));
 		btnEdit.setBounds(1026, 456, 99, 30);
 		contentPane.add(btnEdit);
-		
-		JTextArea txtrUsername_1_1 = new JTextArea();
-		txtrUsername_1_1.setForeground(new Color(0, 128, 128));
-		txtrUsername_1_1.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_1_1.setBackground(Color.WHITE);
-		txtrUsername_1_1.setBounds(772, 93, 488, 417);
-		contentPane.add(txtrUsername_1_1);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
@@ -349,5 +358,37 @@ public class S_StudentInfo extends JFrame {
 		txtrUsername_2_5_2.setBackground(new Color(0, 128, 128));
 		txtrUsername_2_5_2.setBounds(263, 398, 408, 30);
 		contentPane.add(txtrUsername_2_5_2);
+		
+		Gender = new JComboBox<>(new String[]{"Male", "Female"});
+		Gender.setFont(new Font("Arial", Font.PLAIN, 16));
+		Gender.setBackground(Color.WHITE);
+		Gender.setBounds(1028, 163, 181, 28);
+		contentPane.add(Gender);
+		
+		
+		YearLevel = new JComboBox<>(new String[]{"1", "2", "3", "4"});
+		YearLevel.setFont(new Font("Arial", Font.PLAIN, 16));
+		YearLevel.setBackground(Color.WHITE);
+		YearLevel.setBounds(1018, 365, 181, 28);
+		contentPane.add(YearLevel);
 	}
+	
+	 public void insertData(String FullName, String Gender, String Email, String ContactNumber, String EmergencyNumber, String Program, String YearLevel, String StudentAddress) {
+		 String query = "INSERT INTO students ( `FullName`, `Gender`, `Email`, `ContactNumber`, `EmergencyNumber`, `Program`, `YearLevel`, `StudentAddress`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	        try (PreparedStatement pst = db.con.prepareStatement(query)) {
+	            pst.setString(1, FullName);
+	            pst.setString(2, Gender);
+	            pst.setString(3, Email);
+	            pst.setString(4, ContactNumber);
+	            pst.setString(5, EmergencyNumber);
+	            pst.setString(6, Program);
+	            pst.setString(7, YearLevel);
+	            pst.setString(8, StudentAddress);
+	            pst.executeUpdate();
+	            System.out.println("Student Info Inserted");
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            javax.swing.JOptionPane.showMessageDialog(contentPane, "Error inserting student info. Please check your input and try again.");
+	        }
+	    }
 }
