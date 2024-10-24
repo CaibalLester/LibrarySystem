@@ -4,16 +4,20 @@ import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class L_LibrarianInfo extends JFrame {
 
@@ -335,6 +339,12 @@ public class L_LibrarianInfo extends JFrame {
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"", "1", "2", "3", "4"}));
 		comboBox_1.setBounds(1025, 362, 216, 27);
 		contentPane.add(comboBox_1);
+		
+		JLabel lblNewLabel = new JLabel("");
+        Image img = new ImageIcon(this.getClass().getResource("/white.png")).getImage();
+        lblNewLabel.setIcon(new ImageIcon(img));
+        lblNewLabel.setBounds(770, 108, 494, 398);
+        contentPane.add(lblNewLabel);
 	}
 
 }

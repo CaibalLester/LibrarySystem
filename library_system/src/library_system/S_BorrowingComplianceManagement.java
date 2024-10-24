@@ -376,7 +376,7 @@ public class S_BorrowingComplianceManagement extends JFrame {
 		JLabel lblNewLabel = new JLabel("");
         Image img = new ImageIcon(this.getClass().getResource("/white.png")).getImage();
         lblNewLabel.setIcon(new ImageIcon(img));
-        lblNewLabel.setBounds(770, 108, 494, 398);
+        lblNewLabel.setBounds(735, 161, 529, 345);
         contentPane.add(lblNewLabel);
 	}
 }

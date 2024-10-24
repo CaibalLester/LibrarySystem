@@ -324,7 +324,7 @@ public class S_Reservation extends JFrame {
 		JLabel lblNewLabel = new JLabel("");
         Image img = new ImageIcon(this.getClass().getResource("/white.png")).getImage();
         lblNewLabel.setIcon(new ImageIcon(img));
-        lblNewLabel.setBounds(770, 108, 494, 398);
+        lblNewLabel.setBounds(729, 108, 535, 398);
         contentPane.add(lblNewLabel);
 	}
 }
