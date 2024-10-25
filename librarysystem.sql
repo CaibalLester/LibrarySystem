@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 25, 2024 at 01:13 AM
+-- Generation Time: Oct 25, 2024 at 08:50 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -55,6 +55,50 @@ INSERT INTO `book` (`BookID`, `Title`, `Author`, `ISBN`, `Publisher`, `YearPubli
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bookborrowing`
+--
+
+CREATE TABLE `bookborrowing` (
+  `BorrowingID` int NOT NULL,
+  `BookID` int DEFAULT NULL,
+  `StudentID` int DEFAULT NULL,
+  `FullName` varchar(255) DEFAULT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `Author` varchar(255) DEFAULT NULL,
+  `ISBN` varchar(50) DEFAULT NULL,
+  `Publisher` varchar(255) DEFAULT NULL,
+  `YearPublished` year DEFAULT NULL,
+  `Quantity` int DEFAULT NULL,
+  `Pages` int DEFAULT NULL,
+  `Status` varchar(50) DEFAULT NULL,
+  `BorrowDate` date DEFAULT NULL,
+  `ReturnDate` date DEFAULT NULL,
+  `BookStatus` varchar(50) DEFAULT NULL,
+  `DueDate` date DEFAULT NULL,
+  `FineAmount` decimal(10,2) DEFAULT NULL,
+  `DateFineIssued` date DEFAULT NULL,
+  `PaymentDate` date DEFAULT NULL,
+  `FineNotes` text,
+  `ReservationDate` date DEFAULT NULL,
+  `ReservationExpiryDate` date DEFAULT NULL,
+  `PickupDate` date DEFAULT NULL,
+  `ReservationNotes` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `bookborrowing`
+--
+
+INSERT INTO `bookborrowing` (`BorrowingID`, `BookID`, `StudentID`, `FullName`, `Title`, `Author`, `ISBN`, `Publisher`, `YearPublished`, `Quantity`, `Pages`, `Status`, `BorrowDate`, `ReturnDate`, `BookStatus`, `DueDate`, `FineAmount`, `DateFineIssued`, `PaymentDate`, `FineNotes`, `ReservationDate`, `ReservationExpiryDate`, `PickupDate`, `ReservationNotes`) VALUES
+(1, 14, 2, 'Caibal Lester', 'Lester', 'Caibal', '4', 'c', '2005', 6, 7, 'Reserved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 14, NULL, NULL, 'Lester', 'Caibal', '4', 'c', '2005', 6, 7, 'Reserved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 16, NULL, NULL, 'Shiro', 'Caibal', '4', 'c', '2005', 6, 7, 'Reserved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 19, 2, NULL, 'Shiro', 'Caibal', '4', 'c', '2005', 6, 7, 'Reserved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 20, 2, NULL, 'Lixert', 'Lax', '19', 'Lao', '2002', 3, 4, 'Checked Out', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `register`
 --
 
@@ -102,7 +146,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`StudentID`, `FullName`, `Gender`, `Email`, `ContactNumber`, `EmergencyNumber`, `Program`, `YearLevel`, `StudentAddress`, `user_id`) VALUES
-(2, 'Lester Caibal', 'Male', 'lestercaibal@gmail.com', '09912736453', '09987654323', 'BSIT', 1, 'Pambisan', 1);
+(2, 'Zester Caibal', 'Male', 'lestercaibal@gmail.com', '09912736453', '09987654323', 'BSIT', 1, 'Pambisan', 1);
 
 --
 -- Indexes for dumped tables
@@ -113,6 +157,14 @@ INSERT INTO `students` (`StudentID`, `FullName`, `Gender`, `Email`, `ContactNumb
 --
 ALTER TABLE `book`
   ADD PRIMARY KEY (`BookID`);
+
+--
+-- Indexes for table `bookborrowing`
+--
+ALTER TABLE `bookborrowing`
+  ADD PRIMARY KEY (`BorrowingID`),
+  ADD KEY `StudentID` (`StudentID`),
+  ADD KEY `BookID` (`BookID`);
 
 --
 -- Indexes for table `register`
@@ -139,6 +191,12 @@ ALTER TABLE `book`
   MODIFY `BookID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT for table `bookborrowing`
+--
+ALTER TABLE `bookborrowing`
+  MODIFY `BorrowingID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
@@ -153,6 +211,13 @@ ALTER TABLE `students`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `bookborrowing`
+--
+ALTER TABLE `bookborrowing`
+  ADD CONSTRAINT `bookborrowing_ibfk_1` FOREIGN KEY (`StudentID`) REFERENCES `students` (`StudentID`),
+  ADD CONSTRAINT `bookborrowing_ibfk_2` FOREIGN KEY (`BookID`) REFERENCES `book` (`BookID`);
 
 --
 -- Constraints for table `students`

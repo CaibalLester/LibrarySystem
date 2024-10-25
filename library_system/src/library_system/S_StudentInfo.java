@@ -77,7 +77,7 @@ public class S_StudentInfo extends JFrame {
         
 		setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1310, 648);
+		setBounds(100, 100, 816, 629);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 128, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -85,7 +85,7 @@ public class S_StudentInfo extends JFrame {
 		setContentPane(contentPane);
 		
 		JTextArea txtrStudentInformation = new JTextArea();
-		txtrStudentInformation.setBounds(51, 28, 631, 40);
+		txtrStudentInformation.setBounds(107, 47, 631, 40);
 		txtrStudentInformation.setText("STUDENT PERSONAL INFORMATION");
 		txtrStudentInformation.setForeground(new Color(255, 255, 255));
 		txtrStudentInformation.setFont(new Font("Arial", Font.BOLD, 30));
@@ -110,25 +110,25 @@ public class S_StudentInfo extends JFrame {
                
 		    }
 		});
-		btnSubmit.setBounds(1135, 456, 99, 30);
+		btnSubmit.setBounds(559, 124, 99, 30);
 		btnSubmit.setForeground(Color.WHITE);
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 15));
 		btnSubmit.setBackground(new Color(41, 82, 82));
 		
 		FullName = new JTextField(20);
-		FullName.setBounds(1018, 137, 216, 30);
+		FullName.setBounds(320, 164, 216, 30);
 		FullName.setFont(new Font("Arial", Font.PLAIN, 16));
 		FullName.setColumns(10);
 		FullName.setBackground(new Color(177, 216, 216));
 		
 		Email = new JTextField(20);
-		Email.setBounds(1018, 221, 216, 30);
+		Email.setBounds(320, 248, 216, 30);
 		Email.setFont(new Font("Arial", Font.PLAIN, 16));
 		Email.setColumns(10);
 		Email.setBackground(new Color(177, 216, 216));
 		
 		ContactNumber = new JTextField(20);
-		ContactNumber.setBounds(1018, 261, 216, 30);
+		ContactNumber.setBounds(320, 288, 216, 30);
 		ContactNumber.setFont(new Font("Arial", Font.PLAIN, 16));
 		ContactNumber.setColumns(10);
 		ContactNumber.setBackground(new Color(177, 216, 216));
@@ -140,7 +140,7 @@ public class S_StudentInfo extends JFrame {
 		contentPane.add(btnSubmit);
 		
 		JTextArea txtrUsername_1 = new JTextArea();
-		txtrUsername_1.setBounds(871, 136, 111, 30);
+		txtrUsername_1.setBounds(173, 163, 111, 30);
 		txtrUsername_1.setText("Full Name :");
 		txtrUsername_1.setForeground(new Color(0, 128, 128));
 		txtrUsername_1.setFont(new Font("Arial", Font.BOLD, 20));
@@ -148,7 +148,7 @@ public class S_StudentInfo extends JFrame {
 		contentPane.add(txtrUsername_1);
 		
 		JTextArea txtrPassword_1 = new JTextArea();
-		txtrPassword_1.setBounds(895, 180, 107, 30);
+		txtrPassword_1.setBounds(197, 207, 107, 30);
 		txtrPassword_1.setText("Gender :");
 		txtrPassword_1.setForeground(new Color(0, 128, 128));
 		txtrPassword_1.setFont(new Font("Arial", Font.BOLD, 20));
@@ -156,7 +156,7 @@ public class S_StudentInfo extends JFrame {
 		contentPane.add(txtrPassword_1);
 		
 		JTextArea txtrEmail_1 = new JTextArea();
-		txtrEmail_1.setBounds(915, 220, 65, 30);
+		txtrEmail_1.setBounds(217, 247, 65, 30);
 		txtrEmail_1.setText("Email :");
 		txtrEmail_1.setForeground(new Color(0, 128, 128));
 		txtrEmail_1.setFont(new Font("Arial", Font.BOLD, 20));
@@ -164,7 +164,7 @@ public class S_StudentInfo extends JFrame {
 		contentPane.add(txtrEmail_1);
 		
 		JTextArea txtrFullName_1 = new JTextArea();
-		txtrFullName_1.setBounds(815, 260, 188, 30);
+		txtrFullName_1.setBounds(117, 287, 188, 30);
 		txtrFullName_1.setText("Contact Number :");
 		txtrFullName_1.setForeground(new Color(0, 128, 128));
 		txtrFullName_1.setFont(new Font("Arial", Font.BOLD, 20));
@@ -172,7 +172,7 @@ public class S_StudentInfo extends JFrame {
 		contentPane.add(txtrFullName_1);
 		
 		JTextArea txtrEmergencyContact_1 = new JTextArea();
-		txtrEmergencyContact_1.setBounds(784, 300, 202, 30);
+		txtrEmergencyContact_1.setBounds(86, 327, 202, 30);
 		txtrEmergencyContact_1.setText("Emergency Contact :");
 		txtrEmergencyContact_1.setForeground(new Color(0, 128, 128));
 		txtrEmergencyContact_1.setFont(new Font("Arial", Font.BOLD, 20));
@@ -180,7 +180,7 @@ public class S_StudentInfo extends JFrame {
 		contentPane.add(txtrEmergencyContact_1);
 		
 		JTextArea txtrFullName_1_1_1 = new JTextArea();
-		txtrFullName_1_1_1.setBounds(884, 340, 99, 30);
+		txtrFullName_1_1_1.setBounds(186, 367, 99, 30);
 		txtrFullName_1_1_1.setText("Program :");
 		txtrFullName_1_1_1.setForeground(new Color(0, 128, 128));
 		txtrFullName_1_1_1.setFont(new Font("Arial", Font.BOLD, 20));
@@ -188,7 +188,7 @@ public class S_StudentInfo extends JFrame {
 		contentPane.add(txtrFullName_1_1_1);
 		
 		JTextArea txtrFullName_1_2_1 = new JTextArea();
-		txtrFullName_1_2_1.setBounds(864, 376, 118, 30);
+		txtrFullName_1_2_1.setBounds(166, 403, 118, 30);
 		txtrFullName_1_2_1.setText("Year Level :");
 		txtrFullName_1_2_1.setForeground(new Color(0, 128, 128));
 		txtrFullName_1_2_1.setFont(new Font("Arial", Font.BOLD, 20));
@@ -196,7 +196,7 @@ public class S_StudentInfo extends JFrame {
 		contentPane.add(txtrFullName_1_2_1);
 		
 		JTextArea txtrFullName_1_3_1 = new JTextArea();
-		txtrFullName_1_3_1.setBounds(807, 416, 175, 30);
+		txtrFullName_1_3_1.setBounds(109, 443, 175, 30);
 		txtrFullName_1_3_1.setText("Student Address :");
 		txtrFullName_1_3_1.setForeground(new Color(0, 128, 128));
 		txtrFullName_1_3_1.setFont(new Font("Arial", Font.BOLD, 20));
@@ -207,21 +207,21 @@ public class S_StudentInfo extends JFrame {
 		EmergencyContact.setFont(new Font("Arial", Font.PLAIN, 16));
 		EmergencyContact.setColumns(10);
 		EmergencyContact.setBackground(new Color(177, 216, 216));
-		EmergencyContact.setBounds(1018, 301, 216, 30);
+		EmergencyContact.setBounds(320, 328, 216, 30);
 		contentPane.add(EmergencyContact);
 		
 		Program = new JTextField(20);
 		Program.setFont(new Font("Arial", Font.PLAIN, 16));
 		Program.setColumns(10);
 		Program.setBackground(new Color(177, 216, 216));
-		Program.setBounds(1018, 340, 216, 30);
+		Program.setBounds(320, 367, 216, 30);
 		contentPane.add(Program);
 		
 		StudentAddress = new JTextField(20);
 		StudentAddress.setFont(new Font("Arial", Font.PLAIN, 16));
 		StudentAddress.setColumns(10);
 		StudentAddress.setBackground(new Color(177, 216, 216));
-		StudentAddress.setBounds(1018, 416, 216, 30);
+		StudentAddress.setBounds(320, 443, 216, 30);
 		contentPane.add(StudentAddress);
 		
 		JButton btnBack = new JButton("Back");
@@ -235,20 +235,20 @@ public class S_StudentInfo extends JFrame {
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setFont(new Font("Arial", Font.BOLD, 15));
 		btnBack.setBackground(new Color(41, 82, 82));
-		btnBack.setBounds(1158, 551, 99, 30);
+		btnBack.setBounds(601, 527, 99, 30);
 		contentPane.add(btnBack);
 		
 		Gender = new JComboBox<>(new String[]{"Male", "Female"});
 		Gender.setFont(new Font("Arial", Font.PLAIN, 16));
 		Gender.setBackground(Color.WHITE);
-		Gender.setBounds(1018, 181, 216, 28);
+		Gender.setBounds(320, 208, 216, 28);
 		contentPane.add(Gender);
 		
 		
 		YearLevel = new JComboBox<>(new String[]{"1", "2", "3", "4"});
 		YearLevel.setFont(new Font("Arial", Font.PLAIN, 16));
 		YearLevel.setBackground(Color.WHITE);
-		YearLevel.setBounds(1018, 383, 216, 28);
+		YearLevel.setBounds(320, 410, 216, 28);
 		contentPane.add(YearLevel);
 		Image img = new ImageIcon(this.getClass().getResource("/white.png")).getImage();
 		Image imgs = new ImageIcon(this.getClass().getResource("/white.png")).getImage();
@@ -256,7 +256,7 @@ public class S_StudentInfo extends JFrame {
 		USERME = new JTextField(10);
 		USERME.setFont(new Font("Arial", Font.PLAIN, 16));
 		USERME.setBackground(new Color(177, 216, 216));
-		USERME.setBounds(1018, 97, 216, 30);
+		USERME.setBounds(320, 124, 216, 30);
 		contentPane.add(USERME);
 		
 		JTextArea use = new JTextArea();
@@ -264,7 +264,7 @@ public class S_StudentInfo extends JFrame {
 		use.setForeground(new Color(0, 128, 128));
 		use.setFont(new Font("Arial", Font.BOLD, 20));
 		use.setBackground(Color.WHITE);
-		use.setBounds(871, 96, 111, 30);
+		use.setBounds(173, 123, 111, 30);
 		contentPane.add(use);
 		
 		JButton btnUpdate = new JButton("Update");
@@ -291,11 +291,17 @@ public class S_StudentInfo extends JFrame {
 		btnUpdate.setForeground(Color.WHITE);
 		btnUpdate.setFont(new Font("Arial", Font.BOLD, 15));
 		btnUpdate.setBackground(new Color(41, 82, 82));
-		btnUpdate.setBounds(1018, 456, 99, 30);
+		btnUpdate.setBounds(559, 164, 99, 30);
 		contentPane.add(btnUpdate);
 		
 		displayUserInfo(userId);
 		displayme(userId);
+		
+		JLabel lblNewLabel = new JLabel("");
+        Image imgss = new ImageIcon(this.getClass().getResource("/board.png")).getImage();
+        lblNewLabel.setIcon(new ImageIcon(imgss));
+        lblNewLabel.setBounds(51, 97, 727, 411);
+        contentPane.add(lblNewLabel);
 	}
 	
 	 public void insertData(String FullName, String Gender, String Email, String ContactNumber, String EmergencyNumber, String Program, String YearLevel, String StudentAddress, String user_id) {

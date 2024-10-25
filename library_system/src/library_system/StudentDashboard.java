@@ -125,7 +125,7 @@ public class StudentDashboard extends JFrame {
         btnManageStudentInfo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (userId != null) { 
-                    S_StudentInfo SStudentInfo = new S_StudentInfo(userId, dbConnect); // Pass userId and dbConnect
+                    S_StudentInfo SStudentInfo = new S_StudentInfo(userId, dbConnect); 
                     SStudentInfo.setVisible(true);
                     dispose(); 
                 } else {
@@ -147,7 +147,6 @@ public class StudentDashboard extends JFrame {
         lblNewLabel.setIcon(new ImageIcon(img));
         lblNewLabel.setBounds(31, 0, 60, 382);
         contentPane.add(lblNewLabel);
-
         displayUserInfo(userId); 
     }
     

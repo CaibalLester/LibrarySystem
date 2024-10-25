@@ -64,6 +64,7 @@ public class S_BorrowingComplianceManagement extends JFrame {
 	private JDateChooser duedate;
 	private JDateChooser borrowdate;
 	private String userId;
+	private JTextField borrowingid;
 	
 
 	public static void main(String[] args) {
@@ -107,9 +108,9 @@ public class S_BorrowingComplianceManagement extends JFrame {
 		JTextArea txtrBorrowingComplianceManagement = new JTextArea();
 		txtrBorrowingComplianceManagement.setText("BORROWING COMPLIANCE MANAGEMENT");
 		txtrBorrowingComplianceManagement.setForeground(Color.WHITE);
-		txtrBorrowingComplianceManagement.setFont(new Font("Arial", Font.BOLD, 30));
+		txtrBorrowingComplianceManagement.setFont(new Font("Arial", Font.BOLD, 32));
 		txtrBorrowingComplianceManagement.setBackground(new Color(0, 128, 128));
-		txtrBorrowingComplianceManagement.setBounds(44, 30, 795, 40);
+		txtrBorrowingComplianceManagement.setBounds(44, 30, 679, 40);
 		contentPane.add(txtrBorrowingComplianceManagement);
 		
 		JButton btnEdit = new JButton("Edit");
@@ -478,11 +479,27 @@ public class S_BorrowingComplianceManagement extends JFrame {
         table.setModel(model);
         scrollPane.setViewportView(table);
         
+        borrowingid = new JTextField();
+        borrowingid.setFont(new Font("Arial", Font.PLAIN, 16));
+        borrowingid.setColumns(10);
+        borrowingid.setBackground(new Color(177, 216, 216));
+        borrowingid.setBounds(33, 104, 216, 30);
+        contentPane.add(borrowingid);
+        
+        JTextArea txtrPassword_1_1_1_1 = new JTextArea();
+        txtrPassword_1_1_1_1.setText("Book ID :");
+        txtrPassword_1_1_1_1.setForeground(Color.WHITE);
+        txtrPassword_1_1_1_1.setFont(new Font("Arial", Font.BOLD, 17));
+        txtrPassword_1_1_1_1.setBackground(new Color(0, 128, 128));
+        txtrPassword_1_1_1_1.setBounds(33, 80, 130, 25);
+        contentPane.add(txtrPassword_1_1_1_1);
+        
         
         
         
         // Load data into the table
         loadDataIntoTable();
+
 
         // Add table selection listener to display in text fields
         table.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -505,37 +522,35 @@ public class S_BorrowingComplianceManagement extends JFrame {
             Statement stmt = con.createStatement();
             String query = "SELECT * FROM bookborrowing";
             ResultSet rs = stmt.executeQuery(query);
-
             while (rs.next()) {
                 model.addRow(new Object[]{
-                	rs.getString("BorrowingID"),
-                	rs.getString("BookID"),
-                	rs.getString("StudentID"),
-                	rs.getString("FullName"),
-                    rs.getString("Title"),
-                    rs.getString("Author"),
-                    rs.getString("ISBN"),
-                    rs.getString("Publisher"),
-                    rs.getInt("YearPublished"),
-                    rs.getInt("Quantity"),
-                    rs.getInt("Pages"),
-                    rs.getString("Status"),
-                    rs.getString("BorrowDate"),
-                    rs.getString("ReturnDate"),
-                    rs.getString("BookStatus"),
-                    rs.getString("DueDate"),
-                    rs.getString("FineAmount"),
-                    rs.getString("DateFineIssued"),
-                    rs.getString("PaymentDate"),
-                    rs.getString("FineNotes"),
-                    rs.getString("ReservationDate"),
-                    rs.getString("ReservationExpiryDate"),
-                    rs.getString("PickupDate"),
-                    rs.getString("ReservationNotes")
-                    
-                    
+                    getValueOrNA(rs.getString("BorrowingID")),
+                    getValueOrNA(rs.getString("BookID")),
+                    getValueOrNA(rs.getString("StudentID")),
+                    getValueOrNA(rs.getString("FullName")),
+                    getValueOrNA(rs.getString("Title")),
+                    getValueOrNA(rs.getString("Author")),
+                    getValueOrNA(rs.getString("ISBN")),
+                    getValueOrNA(rs.getString("Publisher")),
+                    rs.getInt("YearPublished") == 0 ? "N/A" : rs.getInt("YearPublished"),
+                    rs.getInt("Quantity") == 0 ? "N/A" : rs.getInt("Quantity"),
+                    rs.getInt("Pages") == 0 ? "N/A" : rs.getInt("Pages"),
+                    getValueOrNA(rs.getString("Status")),
+                    getValueOrNA(rs.getString("BorrowDate")),
+                    getValueOrNA(rs.getString("ReturnDate")),
+                    getValueOrNA(rs.getString("BookStatus")),
+                    getValueOrNA(rs.getString("DueDate")),
+                    getValueOrNA(rs.getString("FineAmount")),
+                    getValueOrNA(rs.getString("DateFineIssued")),
+                    getValueOrNA(rs.getString("PaymentDate")),
+                    getValueOrNA(rs.getString("FineNotes")),
+                    getValueOrNA(rs.getString("ReservationDate")),
+                    getValueOrNA(rs.getString("ReservationExpiryDate")),
+                    getValueOrNA(rs.getString("PickupDate")),
+                    getValueOrNA(rs.getString("ReservationNotes"))
                 });
             }
+
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -545,41 +560,41 @@ public class S_BorrowingComplianceManagement extends JFrame {
    
 
     private void displaySelectedRow(int row) {
-        if (row >= 0) {
-        	
-        	bookid.setText(model.getValueAt(row, 1).toString()); 
-        	studentid.setText(model.getValueAt(row, 2).toString()); 
-        	fullname.setText(model.getValueAt(row, 3).toString());        	
-            booktitle.setText(model.getValueAt(row, 4).toString()); 
-            author.setText(model.getValueAt(row, 5).toString()); 
-            isbn.setText(model.getValueAt(row, 6).toString()); 
-            publisher.setText(model.getValueAt(row, 7).toString()); 
-            yearpublished.setText(model.getValueAt(row, 8).toString()); 
-            quantity.setText(model.getValueAt(row, 9).toString()); 
-            pages.setText(model.getValueAt(row, 10).toString());
-            status.setText(model.getValueAt(row, 11).toString());
+    	if (row >= 0) {
+    	    borrowingid.setText(getValueOrNA(model.getValueAt(row, 0).toString()));
+    	    bookid.setText(getValueOrNA(model.getValueAt(row, 1).toString())); 
+    	    studentid.setText(getValueOrNA(model.getValueAt(row, 2).toString())); 
+    	    fullname.setText(getValueOrNA(model.getValueAt(row, 3).toString()));        	
+    	    booktitle.setText(getValueOrNA(model.getValueAt(row, 4).toString())); 
+    	    author.setText(getValueOrNA(model.getValueAt(row, 5).toString())); 
+    	    isbn.setText(getValueOrNA(model.getValueAt(row, 6).toString())); 
+    	    publisher.setText(getValueOrNA(model.getValueAt(row, 7).toString())); 
+    	    yearpublished.setText(getValueOrNA(model.getValueAt(row, 8).toString())); 
+    	    quantity.setText(getValueOrNA(model.getValueAt(row, 9).toString())); 
+    	    pages.setText(getValueOrNA(model.getValueAt(row, 10).toString()));
+    	    status.setText(getValueOrNA(model.getValueAt(row, 11).toString()));
 
-            returndate.setText(model.getValueAt(row, 13).toString());
-            bookstatus.setText(model.getValueAt(row, 14).toString());
+    	    returndate.setText(getValueOrNA(model.getValueAt(row, 13).toString()));
+    	    bookstatus.setText(getValueOrNA(model.getValueAt(row, 14).toString()));
 
-            fineamount.setText(model.getValueAt(row, 16).toString());
-            datefineissued.setText(model.getValueAt(row, 17).toString());
-            paymentdate.setText(model.getValueAt(row, 18).toString());
-            finenotes.setText(model.getValueAt(row, 19).toString());
+    	    fineamount.setText(getValueOrNA(model.getValueAt(row, 16).toString()));
+    	    datefineissued.setText(getValueOrNA(model.getValueAt(row, 17).toString()));
+    	    paymentdate.setText(getValueOrNA(model.getValueAt(row, 18).toString()));
+    	    finenotes.setText(getValueOrNA(model.getValueAt(row, 19).toString()));
 
-            reservationexpirydate.setText(model.getValueAt(row, 21).toString());
+    	    reservationexpirydate.setText(getValueOrNA(model.getValueAt(row, 21).toString()));
+    	    reservationnote.setText(getValueOrNA(model.getValueAt(row, 23).toString()));
 
-            reservationnote.setText(model.getValueAt(row, 23).toString());
-           
-            try {
-                // Parse the date strings to Date objects
-                borrowdate.setDate(parseDate(model.getValueAt(row, 12).toString()));
-                duedate.setDate(parseDate(model.getValueAt(row, 15).toString()));
-                reservationdate.setDate(parseDate(model.getValueAt(row, 20).toString()));
-                pickupdate.setDate(parseDate(model.getValueAt(row, 22).toString()));
-            } catch (ParseException e) {
-                e.printStackTrace(); // Handle parsing errors if needed
-            }
+    	    try {
+    	        borrowdate.setDate(parseDate(getValueOrNA(model.getValueAt(row, 12).toString())));
+    	        duedate.setDate(parseDate(getValueOrNA(model.getValueAt(row, 15).toString())));
+    	        reservationdate.setDate(parseDate(getValueOrNA(model.getValueAt(row, 20).toString())));
+    	        pickupdate.setDate(parseDate(getValueOrNA(model.getValueAt(row, 22).toString())));
+    	    } catch (ParseException e) {
+    	        e.printStackTrace();
+    	    }
+    	}
+
             
             fineamount.setText(model.getValueAt(row, 16).toString());
             datefineissued.setText(model.getValueAt(row, 17).toString());
@@ -587,11 +602,16 @@ public class S_BorrowingComplianceManagement extends JFrame {
             finenotes.setText(model.getValueAt(row, 19).toString());
             reservationexpirydate.setText(model.getValueAt(row, 21).toString());
         }
-    }
+    
     
     private Date parseDate(String dateString) throws ParseException {
         return dateFormat.parse(dateString);
     }
+    
+    private String getValueOrNA(String value) {
+        return value == null ? "N/A" : value;
+    }
+
     
     public void insertData(String Title, String Author, String ISBN, String Publisher, String YearPublished, String Quantity, String Pages, String Status, String BookID) {
         Connection con = dbConnect.con; 
@@ -613,4 +633,6 @@ public class S_BorrowingComplianceManagement extends JFrame {
             e.printStackTrace();
         }
     }
+    
+    
 }
