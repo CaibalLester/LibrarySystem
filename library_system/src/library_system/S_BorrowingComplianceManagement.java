@@ -28,9 +28,6 @@ public class S_BorrowingComplianceManagement extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_5;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,9 +41,7 @@ public class S_BorrowingComplianceManagement extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public S_BorrowingComplianceManagement() {
 		setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 21, 2024 at 03:34 AM
+-- Generation Time: Oct 25, 2024 at 01:13 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -72,10 +72,37 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`user_id`, `username`, `password`, `email`, `fullname`, `userrole`) VALUES
-(1, 'Les', 'pass', 'lestercaibal@gmail.com', 'Lester Caibal', 'Student'),
+(1, 'Les', 'les', 'lestercaibal@gmail.com', 'Lester Caibal', 'Student'),
 (2, 'Kath', 'kath', 'riverakatherine@gmail.com', 'Katherine Rivera', 'Librarian'),
-(3, 'Jhoanna', 'Dolores', 'Dolores@gmail.com', 'Jhoanna Dolores', 'Student'),
-(4, 'Joyce', 'Morales', 'Joyce@gmail.com', 'Joyce Morales', 'Student');
+(3, 'Jhoanna', 'jhoanna', 'Dolores@gmail.com', 'Jhoanna Dolores', 'Librarian'),
+(4, 'Joyce', 'joyce', 'Joyce@gmail.com', 'Joyce Morales', 'Student'),
+(5, 'Lyx', 'caiballester', 'caiballester@gmail.com', 'Les Cai', 'Student');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `students`
+--
+
+CREATE TABLE `students` (
+  `StudentID` int NOT NULL,
+  `FullName` varchar(100) NOT NULL,
+  `Gender` varchar(10) DEFAULT NULL,
+  `Email` varchar(100) NOT NULL,
+  `ContactNumber` varchar(15) DEFAULT NULL,
+  `EmergencyNumber` varchar(15) DEFAULT NULL,
+  `Program` varchar(100) DEFAULT NULL,
+  `YearLevel` int DEFAULT NULL,
+  `StudentAddress` varchar(255) DEFAULT NULL,
+  `user_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`StudentID`, `FullName`, `Gender`, `Email`, `ContactNumber`, `EmergencyNumber`, `Program`, `YearLevel`, `StudentAddress`, `user_id`) VALUES
+(2, 'Lester Caibal', 'Male', 'lestercaibal@gmail.com', '09912736453', '09987654323', 'BSIT', 1, 'Pambisan', 1);
 
 --
 -- Indexes for dumped tables
@@ -94,6 +121,14 @@ ALTER TABLE `register`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `students`
+--
+ALTER TABLE `students`
+  ADD PRIMARY KEY (`StudentID`),
+  ADD UNIQUE KEY `Email` (`Email`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -107,7 +142,23 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `students`
+--
+ALTER TABLE `students`
+  MODIFY `StudentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `students`
+--
+ALTER TABLE `students`
+  ADD CONSTRAINT `students_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `register` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
