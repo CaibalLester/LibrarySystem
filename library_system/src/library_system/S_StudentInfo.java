@@ -267,6 +267,33 @@ public class S_StudentInfo extends JFrame {
 		use.setBounds(871, 96, 111, 30);
 		contentPane.add(use);
 		
+		JButton btnUpdate = new JButton("Update");
+		btnUpdate.addActionListener(new ActionListener() {
+
+			    public void actionPerformed(ActionEvent e) {
+			        String fullname = FullName.getText();
+			        String gender = (String) Gender.getSelectedItem();
+			        String email = Email.getText();
+			        String contact = ContactNumber.getText();
+			        String emergencyContact = EmergencyContact.getText();
+			        String program = Program.getText();
+			        String yearlevel = (String) YearLevel.getSelectedItem();
+			        String address = StudentAddress.getText();
+			        String user_id = USERME.getText();
+
+			        System.out.println("Processing student info: " + fullname + ", " + gender + ", " + email + ", " + contact + ", " + emergencyContact + ", " + program + ", " + yearlevel + ", " + address + ", " + user_id);
+
+			        
+			            updateData(fullname, gender, email, contact, emergencyContact, program, yearlevel, address, user_id);
+			      
+			    }
+			});
+		btnUpdate.setForeground(Color.WHITE);
+		btnUpdate.setFont(new Font("Arial", Font.BOLD, 15));
+		btnUpdate.setBackground(new Color(41, 82, 82));
+		btnUpdate.setBounds(1018, 456, 99, 30);
+		contentPane.add(btnUpdate);
+		
 		displayUserInfo(userId);
 		displayme(userId);
 	}
@@ -292,6 +319,36 @@ public class S_StudentInfo extends JFrame {
 	            javax.swing.JOptionPane.showMessageDialog(contentPane, "Error inserting student info. Please check your input and try again.");
 	        }
 	    }
+	 
+	 public void updateData( String FullName, String Gender, String Email, String ContactNumber, String EmergencyNumber, String Program, String YearLevel, String StudentAddress, String user_id) {
+		    Connection con = dbConnect.con; 
+		    String query = "UPDATE students SET `FullName` = ?, `Gender` = ?, `Email` = ?, `ContactNumber` = ?, `EmergencyNumber` = ?, `Program` = ?, `YearLevel` = ?, `StudentAddress` = ? WHERE `user_id` = ? ";
+		    try (PreparedStatement pst = con.prepareStatement(query)) {
+		        pst.setString(1, FullName);
+		        pst.setString(2, Gender);
+		        pst.setString(3, Email);
+		        pst.setString(4, ContactNumber);
+		        pst.setString(5, EmergencyNumber);
+		        pst.setString(6, Program);
+		        pst.setString(7, YearLevel);
+		        pst.setString(8, StudentAddress);
+		        pst.setString(9, user_id);
+
+		        int rowsAffected = pst.executeUpdate();
+		        
+		        if (rowsAffected > 0) {
+		            System.out.println("Student Info Updated");
+		            javax.swing.JOptionPane.showMessageDialog(contentPane, "Student Info Updated");
+		        } else {
+		            System.out.println("No record found with the given student ID.");
+		            javax.swing.JOptionPane.showMessageDialog(contentPane, "No record found with the given student ID.");
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        javax.swing.JOptionPane.showMessageDialog(contentPane, "Error updating student info. Please check your input and try again.");
+		    }
+		}
+
 	 
 
 	 
