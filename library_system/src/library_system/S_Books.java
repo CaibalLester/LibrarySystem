@@ -6,7 +6,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,13 +28,13 @@ public class S_Books extends JFrame {
     private JPanel contentPane;
     private JTable table;
     private JTextArea txtrMyBooks;
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
-    private JTextField textField_3;
-    private JTextField textField_4;
-    private JTextField textField_5;
-    private JTextField textField_6;
+    private JTextField title;
+    private JTextField author;
+    private JTextField isbn;
+    private JTextField publisher;
+    private JTextField yearpublished;
+    private JTextField quantity;
+    private JTextField pages;
     private JButton btnAdd;
     private JButton btnBack;
     private DefaultTableModel model;
@@ -46,6 +48,9 @@ public class S_Books extends JFrame {
     private JTextArea txtrPages;
     private JTextArea txtrStatus;
     private JComboBox<String> status;
+    private JScrollPane scrollPane_1;
+    private DbConnect dbConnect;
+    private JTextField book_id;
 
     /**
      * Launch the application.
@@ -91,7 +96,7 @@ public class S_Books extends JFrame {
         table = new JTable();
         model = new DefaultTableModel(
                 new Object[][] {},
-                new String[] { "Title", "Author", "ISBN", "Publisher", "Year Published", "Quantity", "Pages", "Status" }
+                new String[] { "BookID", "Title", "Author", "ISBN", "Publisher", "Year Published", "Quantity", "Pages", "Status" }
         );
         table.setModel(model);
         scrollPane.setViewportView(table);
@@ -112,56 +117,74 @@ public class S_Books extends JFrame {
         txtrMyBooks.setBounds(439, 108, 308, 40);
         contentPane.add(txtrMyBooks);
 
-        textField = new JTextField();
-        textField.setFont(new Font("Arial", Font.PLAIN, 16));
-        textField.setColumns(10);
-        textField.setBackground(new Color(177, 216, 216));
-        textField.setBounds(791, 163, 241, 30);
-        contentPane.add(textField);
+        title = new JTextField();
+        title.setFont(new Font("Arial", Font.PLAIN, 16));
+        title.setColumns(10);
+        title.setBackground(new Color(177, 216, 216));
+        title.setBounds(791, 163, 241, 30);
+        contentPane.add(title);
 
-        textField_1 = new JTextField();
-        textField_1.setFont(new Font("Arial", Font.PLAIN, 16));
-        textField_1.setColumns(10);
-        textField_1.setBackground(new Color(177, 216, 216));
-        textField_1.setBounds(791, 221, 241, 30);
-        contentPane.add(textField_1);
+        author = new JTextField();
+        author.setFont(new Font("Arial", Font.PLAIN, 16));
+        author.setColumns(10);
+        author.setBackground(new Color(177, 216, 216));
+        author.setBounds(791, 221, 241, 30);
+        contentPane.add(author);
 
-        textField_2 = new JTextField();
-        textField_2.setFont(new Font("Arial", Font.PLAIN, 16));
-        textField_2.setColumns(10);
-        textField_2.setBackground(new Color(177, 216, 216));
-        textField_2.setBounds(791, 276, 241, 30);
-        contentPane.add(textField_2);
+        isbn = new JTextField();
+        isbn.setFont(new Font("Arial", Font.PLAIN, 16));
+        isbn.setColumns(10);
+        isbn.setBackground(new Color(177, 216, 216));
+        isbn.setBounds(791, 276, 241, 30);
+        contentPane.add(isbn);
 
-        textField_3 = new JTextField();
-        textField_3.setFont(new Font("Arial", Font.PLAIN, 16));
-        textField_3.setColumns(10);
-        textField_3.setBackground(new Color(177, 216, 216));
-        textField_3.setBounds(791, 329, 241, 30);
-        contentPane.add(textField_3);
+        publisher = new JTextField();
+        publisher.setFont(new Font("Arial", Font.PLAIN, 16));
+        publisher.setColumns(10);
+        publisher.setBackground(new Color(177, 216, 216));
+        publisher.setBounds(791, 329, 241, 30);
+        contentPane.add(publisher);
 
-        textField_4 = new JTextField();
-        textField_4.setFont(new Font("Arial", Font.PLAIN, 16));
-        textField_4.setColumns(10);
-        textField_4.setBackground(new Color(177, 216, 216));
-        textField_4.setBounds(791, 382, 241, 30);
-        contentPane.add(textField_4);
+        yearpublished = new JTextField();
+        yearpublished.setFont(new Font("Arial", Font.PLAIN, 16));
+        yearpublished.setColumns(10);
+        yearpublished.setBackground(new Color(177, 216, 216));
+        yearpublished.setBounds(791, 382, 241, 30);
+        contentPane.add(yearpublished);
 
-        textField_5 = new JTextField();
-        textField_5.setFont(new Font("Arial", Font.PLAIN, 16));
-        textField_5.setColumns(10);
-        textField_5.setBackground(new Color(177, 216, 216));
-        textField_5.setBounds(791, 433, 241, 30);
-        contentPane.add(textField_5);
+        quantity = new JTextField();
+        quantity.setFont(new Font("Arial", Font.PLAIN, 16));
+        quantity.setColumns(10);
+        quantity.setBackground(new Color(177, 216, 216));
+        quantity.setBounds(791, 433, 241, 30);
+        contentPane.add(quantity);
 
-        textField_6 = new JTextField();
-        textField_6.setFont(new Font("Arial", Font.PLAIN, 16));
-        textField_6.setColumns(10);
-        textField_6.setBackground(new Color(177, 216, 216));
-        textField_6.setBounds(791, 486, 241, 30);
-        contentPane.add(textField_6);
+        pages = new JTextField();
+        pages.setFont(new Font("Arial", Font.PLAIN, 16));
+        pages.setColumns(10);
+        pages.setBackground(new Color(177, 216, 216));
+        pages.setBounds(791, 486, 241, 30);
+        contentPane.add(pages);
 
         btnAdd = new JButton("Add");
+        btnAdd.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+		    	String stitle = title.getText();
+		    	String sauthor = author.getText();
+                String sisbn = isbn.getText();
+                String spublisher = publisher.getText();
+                String syearpublished = yearpublished.getText();
+                String squantity = quantity.getText();
+                String spages = pages.getText();
+                String sstatus = (String) status.getSelectedItem();
+                String sbook_id = book_id.getText();
+                
+                System.out.println("Inserting students: " + stitle + ", " + sauthor + ", " + sisbn + ", " + spublisher + ", " + syearpublished + ", " + squantity + ", " + spages + ", " + sstatus+ ", " + sbook_id);
+                insertData(stitle, sauthor, sisbn, spublisher,syearpublished,squantity,spages,sstatus,sbook_id);
+                
+               
+		    }
+		});
         btnAdd.setForeground(Color.WHITE);
         btnAdd.setFont(new Font("Arial", Font.BOLD, 15));
         btnAdd.setBackground(new Color(41, 82, 82));
@@ -182,9 +205,19 @@ public class S_Books extends JFrame {
         btnBack.setBounds(1168, 559, 99, 30);
         contentPane.add(btnBack);
         
+        scrollPane_1 = new JScrollPane();
+        scrollPane_1.setBounds(439, 163, 320, 406);
+        contentPane.add(scrollPane_1);
+        
         table_1 = new JTable();
-        table_1.setBounds(439, 163, 320, 406);
-        contentPane.add(table_1);
+        scrollPane_1.setViewportView(table_1);
+        table_1.setModel(new DefaultTableModel(
+        	new Object[][] {
+        	},
+        	new String[] {
+        		"BookID", "Title", "Author", "ISBN", "Publisher", "Year Published", "Quantity", "Pages", "Status"
+        	}
+        ));
         
         txtrTitle = new JTextArea();
         txtrTitle.setText("Title :");
@@ -256,6 +289,21 @@ public class S_Books extends JFrame {
         status.setBackground(new Color(177, 216, 216));
         status.setBounds(791, 539, 241, 30);
         contentPane.add(status);
+        
+        book_id = new JTextField();
+        book_id.setFont(new Font("Arial", Font.PLAIN, 16));
+        book_id.setColumns(10);
+        book_id.setBackground(new Color(177, 216, 216));
+        book_id.setBounds(791, 100, 241, 30);
+        contentPane.add(book_id);
+        
+        JTextArea txtrTitle_1 = new JTextArea();
+        txtrTitle_1.setText("Title :");
+        txtrTitle_1.setForeground(Color.WHITE);
+        txtrTitle_1.setFont(new Font("Arial", Font.BOLD, 14));
+        txtrTitle_1.setBackground(new Color(0, 128, 128));
+        txtrTitle_1.setBounds(791, 76, 111, 23);
+        contentPane.add(txtrTitle_1);
 
         // Load data into the table
         loadDataIntoTable();
@@ -282,6 +330,7 @@ public class S_Books extends JFrame {
 
             while (rs.next()) {
                 model.addRow(new Object[]{
+                	rs.getString("BookID"),
                     rs.getString("Title"),
                     rs.getString("Author"),
                     rs.getString("ISBN"),
@@ -290,6 +339,7 @@ public class S_Books extends JFrame {
                     rs.getInt("Quantity"),
                     rs.getInt("Pages"),
                     rs.getString("Status")
+                    
                 });
             }
             con.close();
@@ -301,14 +351,38 @@ public class S_Books extends JFrame {
     // Method to display selected row in text fields
     private void displaySelectedRow(int row) {
         if (row >= 0) {
-            textField.setText(model.getValueAt(row, 0).toString()); // Title
-            textField_1.setText(model.getValueAt(row, 1).toString()); // Author
-            textField_2.setText(model.getValueAt(row, 2).toString()); // ISBN
-            textField_3.setText(model.getValueAt(row, 3).toString()); // Publisher
-            textField_4.setText(model.getValueAt(row, 4).toString()); // Year Published
-            textField_5.setText(model.getValueAt(row, 5).toString()); // Quantity
-            textField_6.setText(model.getValueAt(row, 6).toString()); // Pages
-            //status.setText(model.getValueAt(row, 7).toString()); // Status
+            title.setText(model.getValueAt(row, 1).toString()); // Title
+            author.setText(model.getValueAt(row, 2).toString()); // Author
+            isbn.setText(model.getValueAt(row, 3).toString()); // ISBN
+            publisher.setText(model.getValueAt(row, 4).toString()); // Publisher
+            yearpublished.setText(model.getValueAt(row, 5).toString()); // Year Published
+            quantity.setText(model.getValueAt(row, 6).toString()); // Quantity
+            pages.setText(model.getValueAt(row, 7).toString()); // Pages
+            String selectedStatus = model.getValueAt(row, 8).toString(); // Status
+            status.setSelectedItem(selectedStatus);
+            book_id.setText(model.getValueAt(row, 0).toString());
         }
     }
+    
+    public void insertData(String Title, String Author, String ISBN, String Publisher, String YearPublished, String Quantity, String Pages, String Status, String BookID) {
+		 Connection con = dbConnect.con; 
+		 String query = "INSERT INTO book ( `Title`, `Author`, `Email`, `ISBN`, `YearPublished`, `Quantity`, `Pages`, `Status`, `BookID`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	        try (PreparedStatement pst = con.prepareStatement(query)) {
+	            pst.setString(1, Title);
+	            pst.setString(2, Author);
+	            pst.setString(3, ISBN);
+	            pst.setString(4, Publisher);
+	            pst.setString(5, YearPublished);
+	            pst.setString(6, Quantity);
+	            pst.setString(7, Pages);
+	            pst.setString(8, Status);
+	            pst.setString(9, BookID);
+	            pst.executeUpdate();
+	            System.out.println("Student Info Inserted");
+	            javax.swing.JOptionPane.showMessageDialog(contentPane, "Student Info Inserted");
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            javax.swing.JOptionPane.showMessageDialog(contentPane, "Error inserting student info. Please check your input and try again.");
+	        }
+	    }
 }

@@ -50,7 +50,7 @@ public class S_StudentInfo extends JFrame {
     private JTextArea saddress;
     private DbConnect dbConnect;
     private String userId;
-    DbConnect db; 
+    
 
 
     public static void main(String[] args) {
@@ -110,9 +110,6 @@ public class S_StudentInfo extends JFrame {
                
 		    }
 		});
-		
-			
-
 		btnSubmit.setBounds(1135, 456, 99, 30);
 		btnSubmit.setForeground(Color.WHITE);
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 15));
@@ -226,13 +223,6 @@ public class S_StudentInfo extends JFrame {
 		StudentAddress.setBackground(new Color(177, 216, 216));
 		StudentAddress.setBounds(1018, 416, 216, 30);
 		contentPane.add(StudentAddress);
-		
-		JButton btnEdit = new JButton("Edit");
-		btnEdit.setForeground(Color.WHITE);
-		btnEdit.setFont(new Font("Arial", Font.BOLD, 15));
-		btnEdit.setBackground(new Color(41, 82, 82));
-		btnEdit.setBounds(1026, 456, 99, 30);
-		contentPane.add(btnEdit);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
