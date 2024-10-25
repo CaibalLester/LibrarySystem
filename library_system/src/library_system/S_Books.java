@@ -51,6 +51,7 @@ public class S_Books extends JFrame {
     private JScrollPane scrollPane_1;
     private DbConnect dbConnect;
     private JTextField book_id;
+    private DefaultTableModel model1;
 
     /**
      * Launch the application.
@@ -72,6 +73,8 @@ public class S_Books extends JFrame {
      * Create the frame.
      */
     public S_Books() {
+        dbConnect = new DbConnect();  
+        dbConnect.connect(); 
         setBackground(new Color(255, 255, 255));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1310, 648);
@@ -211,13 +214,11 @@ public class S_Books extends JFrame {
         
         table_1 = new JTable();
         scrollPane_1.setViewportView(table_1);
-        table_1.setModel(new DefaultTableModel(
-        	new Object[][] {
-        	},
-        	new String[] {
-        		"BookID", "Title", "Author", "ISBN", "Publisher", "Year Published", "Quantity", "Pages", "Status"
-        	}
-        ));
+        model1 = new DefaultTableModel(
+                new Object[][] {},
+                new String[] { "BookID", "Title", "Author", "ISBN", "Publisher", "Year Published", "Quantity", "Pages", "Status" }
+        );
+        table_1.setModel(model1); // Use this model for table_1
         
         txtrTitle = new JTextArea();
         txtrTitle.setText("Title :");
@@ -315,6 +316,8 @@ public class S_Books extends JFrame {
                 displaySelectedRow(selectedRow);
             }
         });
+        
+        anotherloadDataIntoTable();
     }
 
     // Method to load data into the table
@@ -347,14 +350,46 @@ public class S_Books extends JFrame {
             e.printStackTrace();
         }
     }
+    
+    private void anotherloadDataIntoTable() {
+        DbConnect dbConnect = new DbConnect();
+        dbConnect.connect(); // Establish connection
 
-    // Method to display selected row in text fields
+        try {
+            Connection con = dbConnect.con; // Use the connection from DbConnect
+            Statement stmt = con.createStatement();
+            String query = "SELECT * FROM studentbooks";
+            ResultSet rs = stmt.executeQuery(query);
+
+            // Clear existing rows in table_1 before adding new data
+            model1.setRowCount(0);
+
+            while (rs.next()) {
+                model1.addRow(new Object[]{
+                    rs.getString("BookID"),
+                    rs.getString("Title"),
+                    rs.getString("Author"),
+                    rs.getString("ISBN"),
+                    rs.getString("Publisher"),
+                    rs.getInt("YearPublished"),
+                    rs.getInt("Quantity"),
+                    rs.getInt("Pages"),
+                    rs.getString("Status")
+                });
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
+    }
+
     private void displaySelectedRow(int row) {
         if (row >= 0) {
-            title.setText(model.getValueAt(row, 1).toString()); // Title
-            author.setText(model.getValueAt(row, 2).toString()); // Author
-            isbn.setText(model.getValueAt(row, 3).toString()); // ISBN
-            publisher.setText(model.getValueAt(row, 4).toString()); // Publisher
+            title.setText(model.getValueAt(row, 1).toString()); 
+            author.setText(model.getValueAt(row, 2).toString()); 
+            isbn.setText(model.getValueAt(row, 3).toString()); 
+            publisher.setText(model.getValueAt(row, 4).toString()); 
             yearpublished.setText(model.getValueAt(row, 5).toString()); // Year Published
             quantity.setText(model.getValueAt(row, 6).toString()); // Quantity
             pages.setText(model.getValueAt(row, 7).toString()); // Pages
@@ -365,24 +400,23 @@ public class S_Books extends JFrame {
     }
     
     public void insertData(String Title, String Author, String ISBN, String Publisher, String YearPublished, String Quantity, String Pages, String Status, String BookID) {
-		 Connection con = dbConnect.con; 
-		 String query = "INSERT INTO book ( `Title`, `Author`, `Email`, `ISBN`, `YearPublished`, `Quantity`, `Pages`, `Status`, `BookID`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	        try (PreparedStatement pst = con.prepareStatement(query)) {
-	            pst.setString(1, Title);
-	            pst.setString(2, Author);
-	            pst.setString(3, ISBN);
-	            pst.setString(4, Publisher);
-	            pst.setString(5, YearPublished);
-	            pst.setString(6, Quantity);
-	            pst.setString(7, Pages);
-	            pst.setString(8, Status);
-	            pst.setString(9, BookID);
-	            pst.executeUpdate();
-	            System.out.println("Student Info Inserted");
-	            javax.swing.JOptionPane.showMessageDialog(contentPane, "Student Info Inserted");
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            javax.swing.JOptionPane.showMessageDialog(contentPane, "Error inserting student info. Please check your input and try again.");
-	        }
-	    }
+        Connection con = dbConnect.con; 
+        String query = "INSERT INTO studentbooks (`Title`, `Author`, `ISBN`, `Publisher`, `YearPublished`, `Quantity`, `Pages`, `Status`, `BookID`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setString(1, Title);
+            pst.setString(2, Author);
+            pst.setString(3, ISBN);
+            pst.setString(4, Publisher);
+            pst.setString(5, YearPublished);
+            pst.setString(6, Quantity);
+            pst.setString(7, Pages);
+            pst.setString(8, Status);
+            pst.setString(9, BookID);
+            pst.executeUpdate();
+            System.out.println("Student Info Inserted");
+            javax.swing.JOptionPane.showMessageDialog(contentPane, "Student Info Inserted");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
