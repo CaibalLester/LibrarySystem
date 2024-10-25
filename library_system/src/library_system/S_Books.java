@@ -133,49 +133,49 @@ public class S_Books extends JFrame {
         title.setFont(new Font("Arial", Font.PLAIN, 16));
         title.setColumns(10);
         title.setBackground(new Color(177, 216, 216));
-        title.setBounds(785, 238, 241, 30);
+        title.setBounds(780, 283, 241, 30);
         contentPane.add(title);
 
         author = new JTextField();
         author.setFont(new Font("Arial", Font.PLAIN, 16));
         author.setColumns(10);
         author.setBackground(new Color(177, 216, 216));
-        author.setBounds(785, 296, 241, 30);
+        author.setBounds(780, 341, 241, 30);
         contentPane.add(author);
 
         isbn = new JTextField();
         isbn.setFont(new Font("Arial", Font.PLAIN, 16));
         isbn.setColumns(10);
         isbn.setBackground(new Color(177, 216, 216));
-        isbn.setBounds(785, 351, 241, 30);
+        isbn.setBounds(780, 396, 241, 30);
         contentPane.add(isbn);
 
         publisher = new JTextField();
         publisher.setFont(new Font("Arial", Font.PLAIN, 16));
         publisher.setColumns(10);
         publisher.setBackground(new Color(177, 216, 216));
-        publisher.setBounds(785, 404, 241, 30);
+        publisher.setBounds(780, 449, 241, 30);
         contentPane.add(publisher);
 
         yearpublished = new JTextField();
         yearpublished.setFont(new Font("Arial", Font.PLAIN, 16));
         yearpublished.setColumns(10);
         yearpublished.setBackground(new Color(177, 216, 216));
-        yearpublished.setBounds(785, 457, 241, 30);
+        yearpublished.setBounds(780, 502, 241, 30);
         contentPane.add(yearpublished);
 
         quantity = new JTextField();
         quantity.setFont(new Font("Arial", Font.PLAIN, 16));
         quantity.setColumns(10);
         quantity.setBackground(new Color(177, 216, 216));
-        quantity.setBounds(785, 508, 241, 30);
+        quantity.setBounds(1045, 161, 241, 30);
         contentPane.add(quantity);
 
         pages = new JTextField();
         pages.setFont(new Font("Arial", Font.PLAIN, 16));
         pages.setColumns(10);
         pages.setBackground(new Color(177, 216, 216));
-        pages.setBounds(1042, 176, 241, 30);
+        pages.setBounds(1045, 219, 241, 30);
         contentPane.add(pages);
 
         btnAdd = new JButton("Add");
@@ -201,7 +201,7 @@ public class S_Books extends JFrame {
         btnAdd.setForeground(Color.WHITE);
         btnAdd.setFont(new Font("Arial", Font.BOLD, 15));
         btnAdd.setBackground(new Color(41, 82, 82));
-        btnAdd.setBounds(1184, 295, 99, 33);
+        btnAdd.setBounds(1187, 338, 99, 33);
         contentPane.add(btnAdd);
 
         btnBack = new JButton("Back");
@@ -239,7 +239,7 @@ public class S_Books extends JFrame {
         txtrTitle.setForeground(Color.WHITE);
         txtrTitle.setFont(new Font("Arial", Font.BOLD, 14));
         txtrTitle.setBackground(new Color(0, 128, 128));
-        txtrTitle.setBounds(785, 214, 111, 23);
+        txtrTitle.setBounds(780, 259, 111, 23);
         contentPane.add(txtrTitle);
         
         txtrAuthor = new JTextArea();
@@ -247,7 +247,7 @@ public class S_Books extends JFrame {
         txtrAuthor.setForeground(Color.WHITE);
         txtrAuthor.setFont(new Font("Arial", Font.BOLD, 14));
         txtrAuthor.setBackground(new Color(0, 128, 128));
-        txtrAuthor.setBounds(785, 276, 111, 23);
+        txtrAuthor.setBounds(780, 321, 111, 23);
         contentPane.add(txtrAuthor);
         
         txtrIsbn = new JTextArea();
@@ -255,7 +255,7 @@ public class S_Books extends JFrame {
         txtrIsbn.setForeground(Color.WHITE);
         txtrIsbn.setFont(new Font("Arial", Font.BOLD, 14));
         txtrIsbn.setBackground(new Color(0, 128, 128));
-        txtrIsbn.setBounds(785, 329, 111, 23);
+        txtrIsbn.setBounds(780, 374, 111, 23);
         contentPane.add(txtrIsbn);
         
         txtrPublisher = new JTextArea();
@@ -263,7 +263,7 @@ public class S_Books extends JFrame {
         txtrPublisher.setForeground(Color.WHITE);
         txtrPublisher.setFont(new Font("Arial", Font.BOLD, 14));
         txtrPublisher.setBackground(new Color(0, 128, 128));
-        txtrPublisher.setBounds(785, 380, 111, 23);
+        txtrPublisher.setBounds(780, 425, 111, 23);
         contentPane.add(txtrPublisher);
         
         txtrYearPublished = new JTextArea();
@@ -271,7 +271,7 @@ public class S_Books extends JFrame {
         txtrYearPublished.setForeground(Color.WHITE);
         txtrYearPublished.setFont(new Font("Arial", Font.BOLD, 14));
         txtrYearPublished.setBackground(new Color(0, 128, 128));
-        txtrYearPublished.setBounds(785, 435, 111, 23);
+        txtrYearPublished.setBounds(780, 480, 111, 23);
         contentPane.add(txtrYearPublished);
         
         txtrQuantity = new JTextArea();
@@ -279,7 +279,7 @@ public class S_Books extends JFrame {
         txtrQuantity.setForeground(Color.WHITE);
         txtrQuantity.setFont(new Font("Arial", Font.BOLD, 14));
         txtrQuantity.setBackground(new Color(0, 128, 128));
-        txtrQuantity.setBounds(785, 486, 111, 23);
+        txtrQuantity.setBounds(1045, 139, 111, 23);
         contentPane.add(txtrQuantity);
         
         txtrPages = new JTextArea();
@@ -287,7 +287,7 @@ public class S_Books extends JFrame {
         txtrPages.setForeground(Color.WHITE);
         txtrPages.setFont(new Font("Arial", Font.BOLD, 14));
         txtrPages.setBackground(new Color(0, 128, 128));
-        txtrPages.setBounds(1042, 151, 111, 23);
+        txtrPages.setBounds(1045, 194, 111, 23);
         contentPane.add(txtrPages);
         
         txtrStatus = new JTextArea();
@@ -295,21 +295,21 @@ public class S_Books extends JFrame {
         txtrStatus.setForeground(Color.WHITE);
         txtrStatus.setFont(new Font("Arial", Font.BOLD, 14));
         txtrStatus.setBackground(new Color(0, 128, 128));
-        txtrStatus.setBounds(1042, 216, 111, 23);
+        txtrStatus.setBounds(1045, 259, 111, 23);
         contentPane.add(txtrStatus);
         
         status = new JComboBox<String>();
         status.setModel(new DefaultComboBoxModel(new String[] {"", "Available", "Checked Out", "Reserved"}));
         status.setFont(new Font("Arial", Font.PLAIN, 16));
         status.setBackground(new Color(177, 216, 216));
-        status.setBounds(1042, 241, 241, 30);
+        status.setBounds(1045, 284, 241, 30);
         contentPane.add(status);
         
         book_id = new JTextField();
         book_id.setFont(new Font("Arial", Font.PLAIN, 16));
         book_id.setColumns(10);
         book_id.setBackground(new Color(177, 216, 216));
-        book_id.setBounds(785, 175, 241, 30);
+        book_id.setBounds(780, 220, 241, 30);
         contentPane.add(book_id);
         
         JTextArea txtrTitle_1 = new JTextArea();
@@ -317,14 +317,14 @@ public class S_Books extends JFrame {
         txtrTitle_1.setForeground(Color.WHITE);
         txtrTitle_1.setFont(new Font("Arial", Font.BOLD, 14));
         txtrTitle_1.setBackground(new Color(0, 128, 128));
-        txtrTitle_1.setBounds(785, 151, 111, 23);
+        txtrTitle_1.setBounds(780, 196, 111, 23);
         contentPane.add(txtrTitle_1);
         
         studentId = new JTextField();
         studentId.setFont(new Font("Arial", Font.PLAIN, 16));
         studentId.setColumns(10);
         studentId.setBackground(new Color(177, 216, 216));
-        studentId.setBounds(785, 118, 241, 30);
+        studentId.setBounds(780, 163, 241, 30);
         contentPane.add(studentId);
         
         studentid = new JTextArea();
@@ -332,7 +332,7 @@ public class S_Books extends JFrame {
         studentid.setForeground(Color.WHITE);
         studentid.setFont(new Font("Arial", Font.BOLD, 14));
         studentid.setBackground(new Color(0, 128, 128));
-        studentid.setBounds(785, 94, 111, 23);
+        studentid.setBounds(780, 139, 111, 23);
         contentPane.add(studentid);
 
         loadDataIntoTable();
