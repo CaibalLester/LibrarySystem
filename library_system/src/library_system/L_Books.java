@@ -82,13 +82,16 @@ public class L_Books extends JFrame {
         
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(20, 158, 551, 405);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         contentPane.add(scrollPane);
-        
+
         model = new DefaultTableModel(
             new Object[][] {},
             new String[] {"Book ID", "Title", "Author", "ISBN", "Publisher", "Year Published", "Quantity", "Pages", "Status"}
         );
         table = new JTable(model);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
         scrollPane.setViewportView(table);
     	db = new DbConnect();
     	db.connect();

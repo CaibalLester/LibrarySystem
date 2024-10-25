@@ -75,17 +75,21 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(26, 393, 495, 197);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		contentPane.add(scrollPane);
-		
+
 		table = new JTable();
-		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Student ID", "Full Name", "Book Title", "Reservation Date", "Reservation Expiry Date", "Pick-up Date", "Return Date", "Notes"
-			}
+		    new Object[][] {},
+		    new String[] {
+		        "Student ID", "Full Name", "Book Title", "Reservation Date", 
+		        "Reservation Expiry Date", "Pick-up Date", "Return Date", "Notes"
+		    }
 		));
+
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		scrollPane.setViewportView(table);
+
 		
 		JTextArea txtrManageStudentResrvation = new JTextArea();
 		txtrManageStudentResrvation.setText("Manage Student Resrvation");
@@ -105,17 +109,21 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(30, 123, 495, 216);
+		scrollPane_1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		contentPane.add(scrollPane_1);
-		
+
 		table_1 = new JTable();
-		scrollPane_1.setViewportView(table_1);
 		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-					"Student ID", "Full Name", "Book Title", "Author", "Borrow Date", "Return Date", "Status of Borrowed Book", "Due Date", "Fine Amount", "Date Fine Issued", "Payment Date", "Notes"
-			}
+		    new Object[][] {},
+		    new String[] {
+		        "Student ID", "Full Name", "Book Title", "Author", "Borrow Date", "Return Date", 
+		        "Status of Borrowed Book", "Due Date", "Fine Amount", "Date Fine Issued", "Payment Date", "Notes"
+		    }
 		));
+
+		table_1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		scrollPane_1.setViewportView(table_1);
+
 		
 		txtUsername = new JTextField();
 		txtUsername.setToolTipText("user");

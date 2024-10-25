@@ -467,17 +467,25 @@ public class S_BorrowingComplianceManagement extends JFrame {
         
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(543, 109, 707, 231);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         contentPane.add(scrollPane);
-        
+
         table = new JTable();
         model = new DefaultTableModel(
                 new Object[][] {},
                 new String[] {
-                		"BorrowingID", "Book ID", "Student ID", "Full Name", "Title", "Author", "ISBN", "Publisher", "Year Published", "Quantity","Pages", "Status", "Borrow Date", "Return Date", "Book Status", "Due Date", "Fine Amount", "Date Fine Issued", "Payment Date", "Fine Notes", "Reservation Date", "Reservation Expiry Date", "Pick Up Date", "Reservation Notes"
-                	}
+                    "BorrowingID", "Book ID", "Student ID", "Full Name", "Title", "Author", "ISBN", 
+                    "Publisher", "Year Published", "Quantity", "Pages", "Status", "Borrow Date", 
+                    "Return Date", "Book Status", "Due Date", "Fine Amount", "Date Fine Issued", 
+                    "Payment Date", "Fine Notes", "Reservation Date", "Reservation Expiry Date", 
+                    "Pick Up Date", "Reservation Notes"
+                }
         );
         table.setModel(model);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
         scrollPane.setViewportView(table);
+
         
         borrowingid = new JTextField();
         borrowingid.setFont(new Font("Arial", Font.PLAIN, 16));

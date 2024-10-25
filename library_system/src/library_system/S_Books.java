@@ -97,6 +97,7 @@ public class S_Books extends JFrame {
 
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(39, 163, 367, 406);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         contentPane.add(scrollPane);
 
         table = new JTable();
@@ -105,7 +106,12 @@ public class S_Books extends JFrame {
                 new String[] { "BookID", "Title", "Author", "ISBN", "Publisher", "Year Published", "Quantity", "Pages", "Status" }
         );
         table.setModel(model);
+
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         scrollPane.setViewportView(table);
+  
+        JScrollPane scrollPane_2 = new JScrollPane();
+        scrollPane.setColumnHeaderView(scrollPane_2);
 
         JTextArea txtrLibraryBooks = new JTextArea();
         txtrLibraryBooks.setText("Library Books");
@@ -214,15 +220,19 @@ public class S_Books extends JFrame {
         
         scrollPane_1 = new JScrollPane();
         scrollPane_1.setBounds(439, 163, 320, 406);
+        scrollPane_1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         contentPane.add(scrollPane_1);
-        
+
         table_1 = new JTable();
-        scrollPane_1.setViewportView(table_1);
         model1 = new DefaultTableModel(
                 new Object[][] {},
                 new String[] { "BookID", "Title", "Author", "ISBN", "Publisher", "Year Published", "Quantity", "Pages", "Status" }
         );
-        table_1.setModel(model1); 
+        table_1.setModel(model1);
+
+        table_1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        scrollPane_1.setViewportView(table_1);
+ 
         
         txtrTitle = new JTextArea();
         txtrTitle.setText("Title :");
