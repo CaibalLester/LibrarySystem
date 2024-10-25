@@ -45,7 +45,7 @@ public class StudentDashboard extends JFrame {
         dbConnect.connect(); 
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 439, 395);
+        setBounds(100, 100, 439, 362);
         contentPane = new JPanel();
         contentPane.setBackground(new Color(175, 216, 216));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -96,7 +96,7 @@ public class StudentDashboard extends JFrame {
         JButton btnManageBorrowing = new JButton("Manage Borrowed Books");
         btnManageBorrowing.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                S_BorrowingComplianceManagement BorrowingComplianceManagement = new S_BorrowingComplianceManagement();
+                S_BorrowingComplianceManagement BorrowingComplianceManagement = new S_BorrowingComplianceManagement(userId);
                 BorrowingComplianceManagement.setVisible(true);
                 dispose();
             }
@@ -110,7 +110,7 @@ public class StudentDashboard extends JFrame {
         JButton btnManageBooks = new JButton("Manage Books");
         btnManageBooks.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                S_Books SBooks = new S_Books();
+                S_Books SBooks = new S_Books(userId);
                 SBooks.setVisible(true);
                 dispose();
             }
@@ -141,20 +141,6 @@ public class StudentDashboard extends JFrame {
         btnManageStudentInfo.setBackground(new Color(0, 128, 128));
         btnManageStudentInfo.setBounds(107, 191, 241, 43);
         contentPane.add(btnManageStudentInfo);
-        
-        JButton btnManageReserve = new JButton("Manage Reservations");
-        btnManageReserve.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                S_Reservation SReservation = new S_Reservation("userID");
-                SReservation.setVisible(true);
-                dispose();
-            }
-        });
-        btnManageReserve.setForeground(Color.WHITE);
-        btnManageReserve.setFont(new Font("Arial", Font.BOLD, 15));
-        btnManageReserve.setBackground(new Color(0, 128, 128));
-        btnManageReserve.setBounds(107, 297, 241, 43);
-        contentPane.add(btnManageReserve);
         
         JLabel lblNewLabel = new JLabel("");
         Image img = new ImageIcon(this.getClass().getResource("/stwo.png")).getImage();

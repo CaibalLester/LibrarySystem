@@ -268,6 +268,7 @@ public class S_StudentInfo extends JFrame {
 		contentPane.add(use);
 		
 		displayUserInfo(userId);
+		displayme(userId);
 	}
 	
 	 public void insertData(String FullName, String Gender, String Email, String ContactNumber, String EmergencyNumber, String Program, String YearLevel, String StudentAddress, String user_id) {
@@ -309,6 +310,34 @@ public class S_StudentInfo extends JFrame {
 	                FullName.setText(fetchedUsername); 
 	                Email.setText(fetchedPassword); 
 	                USERME.setText(fetchedUser); 
+	            } else {
+	                System.out.println("User not found");
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	 
+	 private void displayme(String userId) {
+	        Connection con = dbConnect.con; 
+	        String query = "SELECT * FROM students WHERE user_id = ?";
+	        try (PreparedStatement stmt = con.prepareStatement(query)) {
+	            stmt.setString(1, userId);
+	            ResultSet rs = stmt.executeQuery();
+	            if (rs.next()) {
+	                String fetchedUsername = rs.getString("ContactNumber");
+	                String fetchedPassword = rs.getString("EmergencyNumber");
+	                String fetchedPorogram= rs.getString("Program");
+	                String fetchedUStudentAddress= rs.getString("StudentAddress");
+
+
+
+	                ContactNumber.setText(fetchedUsername); 
+	                EmergencyContact.setText(fetchedPassword); 
+	                Program.setText(fetchedPorogram); 
+	                StudentAddress.setText(fetchedUStudentAddress); 
+	                
+	                
 	            } else {
 	                System.out.println("User not found");
 	            }

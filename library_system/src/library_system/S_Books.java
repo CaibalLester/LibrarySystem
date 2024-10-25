@@ -52,6 +52,7 @@ public class S_Books extends JFrame {
     private DbConnect dbConnect;
     private JTextField book_id;
     private DefaultTableModel model1;
+    private String userId;
 
     /**
      * Launch the application.
@@ -60,7 +61,10 @@ public class S_Books extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    S_Books frame = new S_Books();
+                	DbConnect dbConnect = new DbConnect();
+                    dbConnect.connect();  
+                    String userId = "sampleUserId";
+                    S_Books frame = new S_Books(userId);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -72,7 +76,8 @@ public class S_Books extends JFrame {
     /**
      * Create the frame.
      */
-    public S_Books() {
+    public S_Books(String userId) {
+    	this.userId = userId;
         dbConnect = new DbConnect();  
         dbConnect.connect(); 
         setBackground(new Color(255, 255, 255));
@@ -197,7 +202,7 @@ public class S_Books extends JFrame {
         btnBack = new JButton("Back");
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                StudentDashboard studentDashboard = new StudentDashboard("userId");
+                StudentDashboard studentDashboard = new StudentDashboard(userId);
                 studentDashboard.setVisible(true);
                 dispose();
             }
@@ -358,7 +363,7 @@ public class S_Books extends JFrame {
         try {
             Connection con = dbConnect.con; // Use the connection from DbConnect
             Statement stmt = con.createStatement();
-            String query = "SELECT * FROM studentbooks";
+            String query = "SELECT * FROM bookborrowing";
             ResultSet rs = stmt.executeQuery(query);
 
             // Clear existing rows in table_1 before adding new data
@@ -390,10 +395,10 @@ public class S_Books extends JFrame {
             author.setText(model.getValueAt(row, 2).toString()); 
             isbn.setText(model.getValueAt(row, 3).toString()); 
             publisher.setText(model.getValueAt(row, 4).toString()); 
-            yearpublished.setText(model.getValueAt(row, 5).toString()); // Year Published
-            quantity.setText(model.getValueAt(row, 6).toString()); // Quantity
-            pages.setText(model.getValueAt(row, 7).toString()); // Pages
-            String selectedStatus = model.getValueAt(row, 8).toString(); // Status
+            yearpublished.setText(model.getValueAt(row, 5).toString()); 
+            quantity.setText(model.getValueAt(row, 6).toString()); 
+            pages.setText(model.getValueAt(row, 7).toString());
+            String selectedStatus = model.getValueAt(row, 8).toString(); 
             status.setSelectedItem(selectedStatus);
             book_id.setText(model.getValueAt(row, 0).toString());
         }
@@ -401,7 +406,7 @@ public class S_Books extends JFrame {
     
     public void insertData(String Title, String Author, String ISBN, String Publisher, String YearPublished, String Quantity, String Pages, String Status, String BookID) {
         Connection con = dbConnect.con; 
-        String query = "INSERT INTO studentbooks (`Title`, `Author`, `ISBN`, `Publisher`, `YearPublished`, `Quantity`, `Pages`, `Status`, `BookID`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO bookborrowing (`Title`, `Author`, `ISBN`, `Publisher`, `YearPublished`, `Quantity`, `Pages`, `Status`, `BookID`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pst = con.prepareStatement(query)) {
             pst.setString(1, Title);
             pst.setString(2, Author);
