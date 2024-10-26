@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 25, 2024 at 08:50 AM
+-- Generation Time: Oct 26, 2024 at 02:22 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -55,46 +55,20 @@ INSERT INTO `book` (`BookID`, `Title`, `Author`, `ISBN`, `Publisher`, `YearPubli
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bookborrowing`
+-- Table structure for table `borrow`
 --
 
-CREATE TABLE `bookborrowing` (
-  `BorrowingID` int NOT NULL,
-  `BookID` int DEFAULT NULL,
-  `StudentID` int DEFAULT NULL,
-  `FullName` varchar(255) DEFAULT NULL,
-  `Title` varchar(255) DEFAULT NULL,
-  `Author` varchar(255) DEFAULT NULL,
-  `ISBN` varchar(50) DEFAULT NULL,
-  `Publisher` varchar(255) DEFAULT NULL,
-  `YearPublished` year DEFAULT NULL,
-  `Quantity` int DEFAULT NULL,
-  `Pages` int DEFAULT NULL,
-  `Status` varchar(50) DEFAULT NULL,
-  `BorrowDate` date DEFAULT NULL,
-  `ReturnDate` date DEFAULT NULL,
-  `BookStatus` varchar(50) DEFAULT NULL,
-  `DueDate` date DEFAULT NULL,
-  `FineAmount` decimal(10,2) DEFAULT NULL,
-  `DateFineIssued` date DEFAULT NULL,
-  `PaymentDate` date DEFAULT NULL,
-  `FineNotes` text,
-  `ReservationDate` date DEFAULT NULL,
-  `ReservationExpiryDate` date DEFAULT NULL,
-  `PickupDate` date DEFAULT NULL,
-  `ReservationNotes` text
+CREATE TABLE `borrow` (
+  `id` int NOT NULL,
+  `reservation_id` int NOT NULL,
+  `borrow_date` date NOT NULL,
+  `return_date` date NOT NULL,
+  `due_date` date NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `fines` int DEFAULT NULL,
+  `payment_date` date DEFAULT NULL,
+  `notes` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `bookborrowing`
---
-
-INSERT INTO `bookborrowing` (`BorrowingID`, `BookID`, `StudentID`, `FullName`, `Title`, `Author`, `ISBN`, `Publisher`, `YearPublished`, `Quantity`, `Pages`, `Status`, `BorrowDate`, `ReturnDate`, `BookStatus`, `DueDate`, `FineAmount`, `DateFineIssued`, `PaymentDate`, `FineNotes`, `ReservationDate`, `ReservationExpiryDate`, `PickupDate`, `ReservationNotes`) VALUES
-(1, 14, 2, 'Caibal Lester', 'Lester', 'Caibal', '4', 'c', '2005', 6, 7, 'Reserved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 14, NULL, NULL, 'Lester', 'Caibal', '4', 'c', '2005', 6, 7, 'Reserved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 16, NULL, NULL, 'Shiro', 'Caibal', '4', 'c', '2005', 6, 7, 'Reserved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 19, 2, NULL, 'Shiro', 'Caibal', '4', 'c', '2005', 6, 7, 'Reserved', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 20, 2, NULL, 'Lixert', 'Lax', '19', 'Lao', '2002', 3, 4, 'Checked Out', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -125,6 +99,30 @@ INSERT INTO `register` (`user_id`, `username`, `password`, `email`, `fullname`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reservation`
+--
+
+CREATE TABLE `reservation` (
+  `id` int NOT NULL,
+  `student_id` int NOT NULL,
+  `book_id` int NOT NULL,
+  `reservation_date` date NOT NULL,
+  `expiry_date` date NOT NULL,
+  `pickup_date` date NOT NULL,
+  `return_date` date NOT NULL,
+  `notes` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `reservation`
+--
+
+INSERT INTO `reservation` (`id`, `student_id`, `book_id`, `reservation_date`, `expiry_date`, `pickup_date`, `return_date`, `notes`) VALUES
+(1, 2, 14, '2024-10-27', '2024-10-28', '2024-10-28', '2024-10-31', 'PROCESSING');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `students`
 --
 
@@ -146,7 +144,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`StudentID`, `FullName`, `Gender`, `Email`, `ContactNumber`, `EmergencyNumber`, `Program`, `YearLevel`, `StudentAddress`, `user_id`) VALUES
-(2, 'Zester Caibal', 'Male', 'lestercaibal@gmail.com', '09912736453', '09987654323', 'BSIT', 1, 'Pambisan', 1);
+(2, 'Lester Caibal', 'Male', 'lestercaibal@gmail.com', '09912736453', '09987654323', 'BSIT', 1, 'Pambisan', 1);
 
 --
 -- Indexes for dumped tables
@@ -159,18 +157,24 @@ ALTER TABLE `book`
   ADD PRIMARY KEY (`BookID`);
 
 --
--- Indexes for table `bookborrowing`
+-- Indexes for table `borrow`
 --
-ALTER TABLE `bookborrowing`
-  ADD PRIMARY KEY (`BorrowingID`),
-  ADD KEY `StudentID` (`StudentID`),
-  ADD KEY `BookID` (`BookID`);
+ALTER TABLE `borrow`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `register`
 --
 ALTER TABLE `register`
   ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `reservation`
+--
+ALTER TABLE `reservation`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `book_id` (`book_id`),
+  ADD KEY `student_id` (`student_id`);
 
 --
 -- Indexes for table `students`
@@ -191,16 +195,22 @@ ALTER TABLE `book`
   MODIFY `BookID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `bookborrowing`
+-- AUTO_INCREMENT for table `borrow`
 --
-ALTER TABLE `bookborrowing`
-  MODIFY `BorrowingID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `borrow`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
   MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `reservation`
+--
+ALTER TABLE `reservation`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `students`
@@ -213,11 +223,11 @@ ALTER TABLE `students`
 --
 
 --
--- Constraints for table `bookborrowing`
+-- Constraints for table `reservation`
 --
-ALTER TABLE `bookborrowing`
-  ADD CONSTRAINT `bookborrowing_ibfk_1` FOREIGN KEY (`StudentID`) REFERENCES `students` (`StudentID`),
-  ADD CONSTRAINT `bookborrowing_ibfk_2` FOREIGN KEY (`BookID`) REFERENCES `book` (`BookID`);
+ALTER TABLE `reservation`
+  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`BookID`),
+  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `students` (`StudentID`);
 
 --
 -- Constraints for table `students`
