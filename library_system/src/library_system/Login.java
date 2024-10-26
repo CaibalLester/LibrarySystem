@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -28,6 +29,7 @@ public class Login extends JFrame {
     private JPanel contentPane;
     private JTextField username;
     private JTextField password;
+    private String userId, role;
     private DbConnect dbConnect;
 
     public static void main(String[] args) {
@@ -63,7 +65,7 @@ public class Login extends JFrame {
         contentPane.add(username);
         username.setColumns(10);
         
-        password = new JTextField();
+        password = new JPasswordField();
         password.setBackground(new Color(255, 255, 255));
         password.setFont(new Font("Arial", Font.PLAIN, 16));
         password.setColumns(10);
@@ -77,13 +79,6 @@ public class Login extends JFrame {
         txtrLogin.setBackground(new Color(0, 128, 128));
         txtrLogin.setBounds(115, 24, 112, 40);
         contentPane.add(txtrLogin);
-        
-        JComboBox<String> comboBox = new JComboBox<>();
-        comboBox.setBackground(new Color(255, 255, 255));
-        comboBox.setModel(new DefaultComboBoxModel<>(new String[] {"Librarian", "Student"}));
-        comboBox.setFont(new Font("Arial", Font.PLAIN, 16));
-        comboBox.setBounds(252, 163, 181, 28);
-        contentPane.add(comboBox);
         
         JTextArea txtrUsername_1 = new JTextArea();
         txtrUsername_1.setText("Username :");
@@ -101,25 +96,16 @@ public class Login extends JFrame {
         txtrPassword_1.setBounds(115, 127, 125, 30);
         contentPane.add(txtrPassword_1);
         
-        JTextArea txtrUserRole = new JTextArea();
-        txtrUserRole.setText("User Role :");
-        txtrUserRole.setForeground(Color.WHITE);
-        txtrUserRole.setFont(new Font("Arial", Font.BOLD, 20));
-        txtrUserRole.setBackground(new Color(0, 128, 128));
-        txtrUserRole.setBounds(115, 163, 111, 30);
-        contentPane.add(txtrUserRole);
-        
         JButton btnLogin = new JButton("Login");
         btnLogin.setForeground(new Color(0, 128, 128));
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String user = username.getText();
                 String pass = password.getText();
-                String role = comboBox.getSelectedItem().toString();
 
-                String userId = authenticate(user, pass, role); 
+                authenticate(user,pass);
                 if (userId != null) {
-                    if (userId.equals("Librarian")) {
+                    if (role.equals("Librarian")) {
                         LibrarianDashboard librarianDashboard = new LibrarianDashboard(userId); 
                         librarianDashboard.setVisible(true);
                     } else {
@@ -152,28 +138,39 @@ public class Login extends JFrame {
         lblNewLabel_1_1.setIcon(new ImageIcon(lineim));
         lblNewLabel_1_1.setBounds(-43, 203, 350, 77);
         contentPane.add(lblNewLabel_1_1);
+        
+        JButton btnGoback = new JButton("Go back");
+        btnGoback.setForeground(new Color(255, 255, 255));
+        btnGoback.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		MainFrame Main = new MainFrame();
+        		Main.setVisible(true);
+				dispose();
+        	}
+        });
+        btnGoback.setBounds(10, 11, 95, 28);
+        btnGoback.setFont(new Font("Arial", Font.BOLD, 15));
+        btnGoback.setBackground(new Color(0, 128, 128));
+        contentPane.add(btnGoback);
     }
 
-    private String authenticate(String username, String password, String role) {
+    private void authenticate(String username, String password) {
         try {
             Connection con = dbConnect.con;
-            String query = "SELECT user_id FROM register WHERE username = ? AND password = ? AND userrole = ?";
+            String query = "SELECT user_id, userrole FROM register WHERE username = ? AND password = ?";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, username);
             pst.setString(2, password);
-            pst.setString(3, role);
 
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return rs.getString("user_id"); 
+                userId = rs.getString("user_id");
+                role = rs.getString("userrole");
             } else {
-                return null;
+            	userId = null;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
     }
-
-
 }

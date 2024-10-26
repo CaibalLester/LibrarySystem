@@ -14,6 +14,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import com.toedter.calendar.JDateChooser;
 
@@ -22,18 +29,29 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private DefaultTableModel model;
 	private JTable table_1;
+	private DefaultTableModel model2;
 	private JTextField txtUsername;
-	private JTextField textField_1;
-	private JTextField textField_3;
-	private JTextField textField_4;
 	private JTextField textField_6;
 	private JTextField textField_8;
 	private JTextField textField_10;
-	private JTextField textField_13;
 	private JTextField textField_14;
 	private JTextField textField_15;
 	private JTextField textField_19;
+	private JDateChooser dateChooser;
+	private JDateChooser dateChooser_1;
+	private JDateChooser dateChooser_2;
+	private JDateChooser dateChooser_4;
+	private JDateChooser dateChooser_4_1;
+	private JDateChooser dateChooser_4_1_1;
+	private JDateChooser dateChooser_4_1_2;
+	private JDateChooser dateChooser_4_1_3;
+	private int resID;
+	private int borID; 
+	private JTextField textField;
+	private JTextField textField_1;
+	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 
 	/**
 	 * Launch the application.
@@ -79,13 +97,16 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(
+		model2 = new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"Student ID", "Full Name", "Book Title", "Reservation Date", "Reservation Expiry Date", "Pick-up Date", "Return Date", "Notes"
+					"ID","Student ID", "Full Name", "Book Title", "Reservation Date", "Reservation Expiry Date", "Pick-up Date", "Return Date", "Notes"
 			}
-		));
+		);
+		
+		table.setModel(model2);
+        scrollPane.setViewportView(table);
 		
 		JTextArea txtrManageStudentResrvation = new JTextArea();
 		txtrManageStudentResrvation.setText("Manage Student Resrvation");
@@ -109,13 +130,16 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		
 		table_1 = new JTable();
 		scrollPane_1.setViewportView(table_1);
-		table_1.setModel(new DefaultTableModel(
+		model = new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-					"Student ID", "Full Name", "Book Title", "Author", "Borrow Date", "Return Date", "Status of Borrowed Book", "Due Date", "Fine Amount", "Date Fine Issued", "Payment Date", "Notes"
+					"ID", "Student ID", "Full Name", "Book Title", "Author", "Borrow Date", "Return Date", "Status of Borrowed Book", "Due Date", "Fine Amount", "Payment Date", "Notes"
 			}
-		));
+		);
+
+        table_1.setModel(model);
+        scrollPane_1.setViewportView(table_1);
 		
 		txtUsername = new JTextField();
 		txtUsername.setToolTipText("user");
@@ -124,27 +148,6 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		txtUsername.setBackground(new Color(177, 216, 216));
 		txtUsername.setBounds(547, 149, 174, 23);
 		contentPane.add(txtUsername);
-		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Arial", Font.PLAIN, 14));
-		textField_1.setColumns(10);
-		textField_1.setBackground(new Color(177, 216, 216));
-		textField_1.setBounds(547, 198, 174, 23);
-		contentPane.add(textField_1);
-		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("Arial", Font.PLAIN, 14));
-		textField_3.setColumns(10);
-		textField_3.setBackground(new Color(177, 216, 216));
-		textField_3.setBounds(547, 250, 174, 23);
-		contentPane.add(textField_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Arial", Font.PLAIN, 14));
-		textField_4.setColumns(10);
-		textField_4.setBackground(new Color(177, 216, 216));
-		textField_4.setBounds(547, 298, 174, 23);
-		contentPane.add(textField_4);
 		
 		textField_6 = new JTextField();
 		textField_6.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -166,13 +169,6 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		textField_10.setBackground(new Color(177, 216, 216));
 		textField_10.setBounds(965, 149, 170, 23);
 		contentPane.add(textField_10);
-		
-		textField_13 = new JTextField();
-		textField_13.setFont(new Font("Arial", Font.PLAIN, 14));
-		textField_13.setColumns(10);
-		textField_13.setBackground(new Color(177, 216, 216));
-		textField_13.setBounds(547, 508, 216, 23);
-		contentPane.add(textField_13);
 		
 		textField_14 = new JTextField();
 		textField_14.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -210,6 +206,22 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		contentPane.add(btnBack);
 		
 		JButton btnEdit_1 = new JButton("Edit");
+		btnEdit_1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		int studid = Integer.parseInt(textField_15.getText());
+		    	int bookid = Integer.parseInt(textField_14.getText());
+                String resdate = dateChooser_4_1_3.getDate().toString();
+                String expdate = dateChooser_4_1.getDate().toString();
+                String pickup = dateChooser_4_1_1.getDate().toString();
+                String retdate = dateChooser_4_1_2.getDate().toString();
+                String note = textField_6.getText();
+                int id = Integer.parseInt(textField_1.getText());
+                
+                System.out.println("Updating Reservation No" + id + ":" + studid + ", " + bookid + ", " + resdate + ", " + expdate + ", " + pickup + ", " + retdate + ", " + note);
+                updateDataRes(id, studid, bookid, resdate, expdate, pickup, retdate, note);                
+               
+		    }
+		});
 		btnEdit_1.setForeground(Color.WHITE);
 		btnEdit_1.setFont(new Font("Arial", Font.BOLD, 15));
 		btnEdit_1.setBackground(new Color(41, 82, 82));
@@ -231,43 +243,35 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		contentPane.add(btnSubmit);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+		    	int studid = Integer.parseInt(textField_15.getText());
+		    	int bookid = Integer.parseInt(textField_14.getText());
+		    	String resdate = dateChooser_4_1_3.getDate().toString();
+                String expdate = dateChooser_4_1.getDate().toString();
+                String pickup = dateChooser_4_1_1.getDate().toString();
+                String retdate = dateChooser_4_1_2.getDate().toString();
+                String note = textField_6.getText();
+                
+                System.out.println("Inserting Reservation: " + studid + ", " + bookid + ", " + resdate + ", " + expdate + ", " + pickup + ", " + retdate + ", " + note);
+                insertDataRes(studid, bookid, resdate, expdate, pickup, retdate, note);
+                
+               
+		    }
+		});
 		btnSave.setForeground(Color.WHITE);
 		btnSave.setFont(new Font("Arial", Font.BOLD, 15));
 		btnSave.setBackground(new Color(41, 82, 82));
 		btnSave.setBounds(1036, 456, 99, 30);
 		contentPane.add(btnSave);
 		
-		JTextArea txtrStudenId = new JTextArea();
-		txtrStudenId.setText("Studen ID :");
-		txtrStudenId.setForeground(Color.WHITE);
-		txtrStudenId.setFont(new Font("Arial", Font.BOLD, 14));
-		txtrStudenId.setBackground(new Color(0, 128, 128));
-		txtrStudenId.setBounds(547, 123, 111, 23);
-		contentPane.add(txtrStudenId);
-		
-		JTextArea txtrFullName = new JTextArea();
-		txtrFullName.setText("Full Name :");
-		txtrFullName.setForeground(Color.WHITE);
-		txtrFullName.setFont(new Font("Arial", Font.BOLD, 14));
-		txtrFullName.setBackground(new Color(0, 128, 128));
-		txtrFullName.setBounds(547, 175, 111, 23);
-		contentPane.add(txtrFullName);
-		
-		JTextArea txtrBookTitle = new JTextArea();
-		txtrBookTitle.setText("Book Title :");
-		txtrBookTitle.setForeground(Color.WHITE);
-		txtrBookTitle.setFont(new Font("Arial", Font.BOLD, 14));
-		txtrBookTitle.setBackground(new Color(0, 128, 128));
-		txtrBookTitle.setBounds(547, 228, 111, 23);
-		contentPane.add(txtrBookTitle);
-		
-		JTextArea txtrAuthor = new JTextArea();
-		txtrAuthor.setText("Author :");
-		txtrAuthor.setForeground(Color.WHITE);
-		txtrAuthor.setFont(new Font("Arial", Font.BOLD, 14));
-		txtrAuthor.setBackground(new Color(0, 128, 128));
-		txtrAuthor.setBounds(547, 277, 111, 23);
-		contentPane.add(txtrAuthor);
+		JTextArea txtrResID = new JTextArea();
+		txtrResID.setText("Reservation ID :");
+		txtrResID.setForeground(Color.WHITE);
+		txtrResID.setFont(new Font("Arial", Font.BOLD, 14));
+		txtrResID.setBackground(new Color(0, 128, 128));
+		txtrResID.setBounds(547, 123, 134, 23);
+		contentPane.add(txtrResID);
 		
 		JTextArea txtrBorrowDate = new JTextArea();
 		txtrBorrowDate.setText("Borrow Date :");
@@ -309,14 +313,6 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		txtrFineAmount.setBounds(965, 124, 111, 23);
 		contentPane.add(txtrFineAmount);
 		
-		JTextArea txtrDateFineIssued = new JTextArea();
-		txtrDateFineIssued.setText("Date Fine Issued :");
-		txtrDateFineIssued.setForeground(Color.WHITE);
-		txtrDateFineIssued.setFont(new Font("Arial", Font.BOLD, 14));
-		txtrDateFineIssued.setBackground(new Color(0, 128, 128));
-		txtrDateFineIssued.setBounds(965, 175, 139, 23);
-		contentPane.add(txtrDateFineIssued);
-		
 		JTextArea txtrPaymentDate = new JTextArea();
 		txtrPaymentDate.setText("Payment Date :");
 		txtrPaymentDate.setForeground(Color.WHITE);
@@ -341,24 +337,16 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		txtrStudentId.setBounds(547, 394, 111, 23);
 		contentPane.add(txtrStudentId);
 		
-		JTextArea txtrFullName_1 = new JTextArea();
-		txtrFullName_1.setText("Full Name :");
-		txtrFullName_1.setForeground(Color.WHITE);
-		txtrFullName_1.setFont(new Font("Arial", Font.BOLD, 14));
-		txtrFullName_1.setBackground(new Color(0, 128, 128));
-		txtrFullName_1.setBounds(547, 442, 111, 23);
-		contentPane.add(txtrFullName_1);
-		
-		JTextArea txtrBookTitle_1 = new JTextArea();
-		txtrBookTitle_1.setText("Book Title :");
-		txtrBookTitle_1.setForeground(Color.WHITE);
-		txtrBookTitle_1.setFont(new Font("Arial", Font.BOLD, 14));
-		txtrBookTitle_1.setBackground(new Color(0, 128, 128));
-		txtrBookTitle_1.setBounds(547, 486, 111, 23);
-		contentPane.add(txtrBookTitle_1);
+		JTextArea txtrBookID = new JTextArea();
+		txtrBookID.setText("Book ID :");
+		txtrBookID.setForeground(Color.WHITE);
+		txtrBookID.setFont(new Font("Arial", Font.BOLD, 14));
+		txtrBookID.setBackground(new Color(0, 128, 128));
+		txtrBookID.setBounds(547, 442, 111, 23);
+		contentPane.add(txtrBookID);
 		
 		JTextArea txtrResrvationDate = new JTextArea();
-		txtrResrvationDate.setText("Resrvation Date :");
+		txtrResrvationDate.setText("Reservation Date :");
 		txtrResrvationDate.setForeground(Color.WHITE);
 		txtrResrvationDate.setFont(new Font("Arial", Font.BOLD, 14));
 		txtrResrvationDate.setBackground(new Color(0, 128, 128));
@@ -394,43 +382,252 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		txtrReservationNotes.setForeground(Color.WHITE);
 		txtrReservationNotes.setFont(new Font("Arial", Font.BOLD, 14));
 		txtrReservationNotes.setBackground(new Color(0, 128, 128));
-		txtrReservationNotes.setBounds(792, 530, 111, 23);
+		txtrReservationNotes.setBounds(792, 530, 185, 23);
 		contentPane.add(txtrReservationNotes);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
 		dateChooser.setBounds(758, 149, 166, 23);
 		contentPane.add(dateChooser);
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1 = new JDateChooser();
 		dateChooser_1.setBounds(758, 198, 166, 23);
 		contentPane.add(dateChooser_1);
 		
-		JDateChooser dateChooser_2 = new JDateChooser();
+		dateChooser_2 = new JDateChooser();
 		dateChooser_2.setBounds(758, 298, 166, 23);
 		contentPane.add(dateChooser_2);
 		
-		JDateChooser dateChooser_3 = new JDateChooser();
-		dateChooser_3.setBounds(965, 198, 166, 23);
-		contentPane.add(dateChooser_3);
-		
-		JDateChooser dateChooser_4 = new JDateChooser();
+		dateChooser_4 = new JDateChooser();
 		dateChooser_4.setBounds(965, 250, 166, 23);
 		contentPane.add(dateChooser_4);
 		
-		JDateChooser dateChooser_4_1 = new JDateChooser();
+		dateChooser_4_1 = new JDateChooser();
 		dateChooser_4_1.setBounds(792, 419, 216, 23);
 		contentPane.add(dateChooser_4_1);
 		
-		JDateChooser dateChooser_4_1_1 = new JDateChooser();
+		dateChooser_4_1_1 = new JDateChooser();
 		dateChooser_4_1_1.setBounds(792, 463, 216, 23);
 		contentPane.add(dateChooser_4_1_1);
 		
-		JDateChooser dateChooser_4_1_2 = new JDateChooser();
+		dateChooser_4_1_2 = new JDateChooser();
 		dateChooser_4_1_2.setBounds(792, 508, 216, 23);
 		contentPane.add(dateChooser_4_1_2);
 		
-		JDateChooser dateChooser_4_1_3 = new JDateChooser();
+		dateChooser_4_1_3 = new JDateChooser();
 		dateChooser_4_1_3.setBounds(547, 552, 216, 23);
 		contentPane.add(dateChooser_4_1_3);
+		
+		textField = new JTextField();
+		textField.setEnabled(true);
+		textField.setEditable(false);
+		textField.setBounds(547, 198, 174, 23);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setEnabled(true);
+		textField_1.setEditable(false);
+		textField_1.setBounds(547, 508, 216, 23);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JTextArea txtrBorID = new JTextArea();
+		txtrBorID.setText("Borrow ID :");
+		txtrBorID.setForeground(Color.WHITE);
+		txtrBorID.setFont(new Font("Arial", Font.BOLD, 14));
+		txtrBorID.setBackground(new Color(0, 128, 128));
+		txtrBorID.setBounds(547, 173, 134, 23);
+		contentPane.add(txtrBorID);
+		
+		JTextArea txtrResID_1 = new JTextArea();
+		txtrResID_1.setText("Reservation ID :");
+		txtrResID_1.setForeground(Color.WHITE);
+		txtrResID_1.setFont(new Font("Arial", Font.BOLD, 14));
+		txtrResID_1.setBackground(new Color(0, 128, 128));
+		txtrResID_1.setBounds(547, 485, 111, 23);
+		contentPane.add(txtrResID_1);
+		
+		BorrowTable();
+		ReserveTable();
+		
+		table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int selectedRow = table.getSelectedRow();
+                displaySelRowRes(selectedRow);
+            }
+        });
+		
+		table_1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int selectedRow = table_1.getSelectedRow();
+                displaySelRowBor(selectedRow);
+            }
+        });
 	}
+	
+	// Method to load data into the table
+    private void BorrowTable() {
+        DbConnect dbConnect = new DbConnect();
+        dbConnect.connect(); // Establish connection
+
+        try {
+            Connection con = dbConnect.con; // Use the connection from DbConnect
+            Statement stmt = con.createStatement();
+            String query = "SELECT borrow.id, reservation_id, borrow_date, borrow.return_date, due_date, borrow.status, fines, payment_date, borrow.notes, Title, Author, fullname, StudentID FROM borrow INNER JOIN reservation ON reservation.id = reservation_id INNER JOIN book ON bookID = book_id INNER JOIN students ON studentID = student_id";
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                	rs.getString("borrow.id"),
+                	rs.getString("StudentID"),
+                    rs.getString("fullname"),
+                    rs.getString("Title"),
+                    rs.getString("Author"),
+                    rs.getDate("borrow_date"),
+                    rs.getDate("return_date"),
+                    rs.getString("status"),
+                    rs.getDate("due_date"),
+                    rs.getInt("fines"),
+                    rs.getDate("payment_date"),
+                    rs.getString("notes")
+                });
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+ // Method to load data into the table
+    private void ReserveTable() {
+        DbConnect dbConnect = new DbConnect();
+        dbConnect.connect(); // Establish connection
+
+        try {
+            Connection con = dbConnect.con; // Use the connection from DbConnect
+            Statement stmt = con.createStatement();
+            String query = "SELECT id, Title, reservation_date, expiry_date, pickup_date, return_date, notes, fullname, StudentID FROM reservation INNER JOIN book ON bookID = book_id INNER JOIN students ON studentID = student_id";
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                model2.addRow(new Object[]{
+                	rs.getString("id"),
+                	rs.getString("StudentID"),
+                    rs.getString("fullname"),
+                    rs.getString("Title"),
+                    rs.getDate("reservation_date"),
+                    rs.getDate("expiry_date"),
+                    rs.getDate("pickup_date"),
+                    rs.getDate("return_date"),
+                    rs.getString("notes"),
+                });
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void displaySelRowRes(int row) {
+        if (row >= 0) {
+            resID = Integer.parseInt(model2.getValueAt(row, 0).toString()); 
+        }
+        
+        DbConnect dbConnect = new DbConnect();
+        dbConnect.connect(); // Establish connection
+        
+        try {
+        	Connection con = dbConnect.con; // Use the connection from DbConnect
+            String query = "SELECT * FROM reservation WHERE id = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setInt(1, resID);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()) {
+            		textField_1.setText(rs.getString("id"));
+                	textField_15.setText(rs.getString("student_id"));
+                	textField_14.setText(rs.getString("book_id"));
+                	dateChooser_4_1_3.setDate(rs.getDate("reservation_date"));
+                	dateChooser_4_1.setDate(rs.getDate("expiry_date"));
+                	dateChooser_4_1_1.setDate(rs.getDate("pickup_date"));
+                	dateChooser_4_1_2.setDate(rs.getDate("return_date"));
+                	textField_19.setText(rs.getString("notes"));
+            }
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
+    }
+    
+    private void displaySelRowBor(int row) {
+        if (row >= 0) {
+            borID = Integer.parseInt(model.getValueAt(row, 0).toString()); 
+        }
+        
+        DbConnect dbConnect = new DbConnect();
+        dbConnect.connect(); // Establish connection
+        
+        try {
+        	Connection con = dbConnect.con; // Use the connection from DbConnect
+            String query = "SELECT * FROM borrow WHERE id = ?";
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setInt(1, resID);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()) {                	
+                	textField.setText(rs.getString("id"));
+                	txtUsername.setText(rs.getString("reservation_id"));
+                	dateChooser.setDate(rs.getDate("borrow_date"));
+                	dateChooser_1.setDate(rs.getDate("return_date"));
+                	textField_8.setText(rs.getString("status"));
+                    dateChooser_2.setDate(rs.getDate("due_date"));
+                    textField_10.setText(rs.getString("fines"));
+                    dateChooser_4.setDate(rs.getDate("payment_date"));
+                    textField_6.setText(rs.getString("notes"));
+            }
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+    }
+    
+    public void insertDataRes(int student_id, int book_id, String reservation_date, String expiry_date, String pickup_date, String return_date, String notes) {
+    	DbConnect dbConnect = new DbConnect();
+        dbConnect.connect(); // Establish connection
+        Connection con = dbConnect.con;  
+        String query = "INSERT INTO reservation (`student_id`, `book_id`, `reservation_date`, `expiry_date`, `pickup_date`, `return_date`, `notes`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setInt(1, student_id);
+            pst.setInt(2, book_id);
+            pst.setString(3, formatter.format(reservation_date));
+            pst.setString(4, formatter.format(expiry_date));
+            pst.setString(5,  formatter.format(pickup_date));
+            pst.setString(6, formatter.format(return_date));
+            pst.setString(7, notes);
+            pst.executeUpdate();
+            System.out.println("Reservation Info Inserted");
+            javax.swing.JOptionPane.showMessageDialog(contentPane, "Reservation Info Inserted");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateDataRes(int id, int student_id, int book_id, String reservation_date, String expiry_date, String pickup_date, String return_date, String notes) {
+    	DbConnect dbConnect = new DbConnect();
+        dbConnect.connect(); // Establish connection
+        Connection con = dbConnect.con; 
+        String query = "UPDATE reservation SET `student_id` = ?, `book_id` = ?, `reservation_date` = ?, `expiry_date` = ?, `pickup_date` = ?, `return_date` = ?, `notes` = ? WHERE id = ?";
+        try (PreparedStatement pst = con.prepareStatement(query)) {
+            pst.setInt(1, student_id);
+            pst.setInt(2, book_id);
+            pst.setString(3, formatter.format(reservation_date));
+            pst.setString(4, formatter.format(expiry_date));
+            pst.setString(5, formatter.format(pickup_date));
+            pst.setString(6, formatter.format(return_date));
+            pst.setString(7, notes);
+            pst.setInt(8, id);
+            pst.executeUpdate();
+            System.out.println("Reservation Info Updated");
+            javax.swing.JOptionPane.showMessageDialog(contentPane, "Reservation Info Updated");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

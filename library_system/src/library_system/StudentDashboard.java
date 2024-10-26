@@ -28,10 +28,10 @@ public class StudentDashboard extends JFrame {
     private JTextArea username;
     private String userId;
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-                StudentDashboard frame = new StudentDashboard("userId");
+                StudentDashboard frame = new StudentDashboard(userId);
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -145,7 +145,7 @@ public class StudentDashboard extends JFrame {
         JButton btnManageReserve = new JButton("Manage Reservations");
         btnManageReserve.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                S_Reservation SReservation = new S_Reservation("userID");
+                S_Reservation SReservation = new S_Reservation(userId);
                 SReservation.setVisible(true);
                 dispose();
             }

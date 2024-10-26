@@ -81,7 +81,7 @@ public class Register extends JFrame {
 		txtrPassword.setBackground(new Color(0, 128, 128));
 		contentPane.add(txtrPassword);
 		
-		password = new JTextField();
+		password = new JPasswordField();
 		password.setBounds(110, 217, 216, 30);
 		password.setBackground(new Color(255, 255, 255));
 		password.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -164,6 +164,20 @@ public class Register extends JFrame {
 		btnSubmit.setBackground(new Color(41, 82, 82));
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 15));
 		contentPane.add(btnSubmit);
+		
+		JButton btnGoback = new JButton("Go back");
+        btnGoback.setForeground(new Color(255, 255, 255));
+        btnGoback.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		MainFrame Main = new MainFrame();
+        		Main.setVisible(true);
+				dispose();
+        	}
+        });
+        btnGoback.setBounds(10, 11, 95, 28);
+        btnGoback.setFont(new Font("Arial", Font.BOLD, 15));
+        btnGoback.setBackground(new Color(0, 128, 128));
+        contentPane.add(btnGoback);
 		
 		JLabel lblNewLabel = new JLabel("");
 		Image img = new ImageIcon(this.getClass().getResource("/lone.png")).getImage();

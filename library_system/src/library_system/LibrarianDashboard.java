@@ -32,11 +32,11 @@ public class LibrarianDashboard extends JFrame {
 	private String userId;
 
 
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LibrarianDashboard frame = new LibrarianDashboard("userId");
+					LibrarianDashboard frame = new LibrarianDashboard(userId);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +49,7 @@ public class LibrarianDashboard extends JFrame {
 	public LibrarianDashboard(String userId) {
 		this.userId = userId;
 		dbConnect = new DbConnect();  
-	        dbConnect.connect(); 
+	    dbConnect.connect(); 
 	        
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 465, 395);
@@ -86,7 +86,7 @@ public class LibrarianDashboard extends JFrame {
 		txtrName.setBackground(new Color(177, 216, 216));
 		contentPane.add(txtrName);
 		
-		JTextArea libnum = new JTextArea();
+		libnum = new JTextArea();
 		libnum.setBounds(262, 62, 134, 22);
 		libnum.setText("***");
 		libnum.setForeground(new Color(0, 128, 128));
@@ -94,7 +94,7 @@ public class LibrarianDashboard extends JFrame {
 		libnum.setBackground(new Color(177, 216, 216));
 		contentPane.add(libnum);
 		
-		JTextArea libname = new JTextArea();
+		libname = new JTextArea();
 		libname.setBounds(183, 85, 167, 22);
 		libname.setText("***");
 		libname.setForeground(new Color(0, 128, 128));
