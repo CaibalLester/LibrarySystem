@@ -51,7 +51,7 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 	private int borID; 
 	private JTextField textField;
 	private JTextField textField_1;
-	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	/**
 	 * Launch the application.
@@ -210,10 +210,10 @@ public class L_ReservationAccountabilityManagement extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         		int studid = Integer.parseInt(textField_15.getText());
 		    	int bookid = Integer.parseInt(textField_14.getText());
-                String resdate = dateChooser_4_1_3.getDate().toString();
-                String expdate = dateChooser_4_1.getDate().toString();
-                String pickup = dateChooser_4_1_1.getDate().toString();
-                String retdate = dateChooser_4_1_2.getDate().toString();
+                Date resdate = dateChooser_4_1_3.getDate();
+                Date expdate = dateChooser_4_1.getDate();
+                Date pickup = dateChooser_4_1_1.getDate();
+                Date retdate = dateChooser_4_1_2.getDate();
                 String note = textField_6.getText();
                 int id = Integer.parseInt(textField_1.getText());
                 
@@ -247,10 +247,10 @@ public class L_ReservationAccountabilityManagement extends JFrame {
         	public void actionPerformed(ActionEvent e) {
 		    	int studid = Integer.parseInt(textField_15.getText());
 		    	int bookid = Integer.parseInt(textField_14.getText());
-		    	String resdate = dateChooser_4_1_3.getDate().toString();
-                String expdate = dateChooser_4_1.getDate().toString();
-                String pickup = dateChooser_4_1_1.getDate().toString();
-                String retdate = dateChooser_4_1_2.getDate().toString();
+                Date resdate = dateChooser_4_1_3.getDate();
+                Date expdate = dateChooser_4_1.getDate();
+                Date pickup = dateChooser_4_1_1.getDate();
+                Date retdate = dateChooser_4_1_2.getDate();
                 String note = textField_6.getText();
                 
                 System.out.println("Inserting Reservation: " + studid + ", " + bookid + ", " + resdate + ", " + expdate + ", " + pickup + ", " + retdate + ", " + note);
@@ -502,7 +502,7 @@ public class L_ReservationAccountabilityManagement extends JFrame {
     private void ReserveTable() {
         DbConnect dbConnect = new DbConnect();
         dbConnect.connect(); // Establish connection
-
+        
         try {
             Connection con = dbConnect.con; // Use the connection from DbConnect
             Statement stmt = con.createStatement();
@@ -588,28 +588,29 @@ public class L_ReservationAccountabilityManagement extends JFrame {
         }
     }
     
-    public void insertDataRes(int student_id, int book_id, String reservation_date, String expiry_date, String pickup_date, String return_date, String notes) {
+    public void insertDataRes(int student_id, int book_id, Date reservation_date, Date expiry_date, Date pickup_date, Date return_date, String notes) {
     	DbConnect dbConnect = new DbConnect();
         dbConnect.connect(); // Establish connection
-        Connection con = dbConnect.con;  
+        Connection con = dbConnect.con; 
         String query = "INSERT INTO reservation (`student_id`, `book_id`, `reservation_date`, `expiry_date`, `pickup_date`, `return_date`, `notes`) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pst = con.prepareStatement(query)) {
             pst.setInt(1, student_id);
             pst.setInt(2, book_id);
             pst.setString(3, formatter.format(reservation_date));
             pst.setString(4, formatter.format(expiry_date));
-            pst.setString(5,  formatter.format(pickup_date));
+            pst.setString(5, formatter.format(pickup_date));
             pst.setString(6, formatter.format(return_date));
             pst.setString(7, notes);
             pst.executeUpdate();
             System.out.println("Reservation Info Inserted");
             javax.swing.JOptionPane.showMessageDialog(contentPane, "Reservation Info Inserted");
+            ReserveTable();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
-    public void updateDataRes(int id, int student_id, int book_id, String reservation_date, String expiry_date, String pickup_date, String return_date, String notes) {
+    public void updateDataRes(int id, int student_id, int book_id, Date reservation_date, Date expiry_date, Date pickup_date, Date return_date, String notes) {
     	DbConnect dbConnect = new DbConnect();
         dbConnect.connect(); // Establish connection
         Connection con = dbConnect.con; 
@@ -626,6 +627,7 @@ public class L_ReservationAccountabilityManagement extends JFrame {
             pst.executeUpdate();
             System.out.println("Reservation Info Updated");
             javax.swing.JOptionPane.showMessageDialog(contentPane, "Reservation Info Updated");
+            ReserveTable();
         } catch (SQLException e) {
             e.printStackTrace();
         }
