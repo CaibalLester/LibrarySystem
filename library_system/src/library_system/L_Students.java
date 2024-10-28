@@ -14,6 +14,9 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -21,6 +24,8 @@ import javax.swing.DefaultComboBoxModel;
 public class L_Students extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private static String userId;
+	private DefaultTableModel model;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -35,11 +40,11 @@ public class L_Students extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					L_Students frame = new L_Students();
+					L_Students frame = new L_Students(userId);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +56,8 @@ public class L_Students extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public L_Students() {
+	public L_Students(String userID) {
+		userId = userID;
 		setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1310, 648);
@@ -138,7 +144,7 @@ public class L_Students extends JFrame {
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setFont(new Font("Arial", Font.BOLD, 15));
 		btnBack.setBackground(new Color(41, 82, 82));
-		btnBack.setBounds(1172, 556, 99, 30);
+		btnBack.setBounds(1162, 556, 99, 30);
 		contentPane.add(btnBack);
 		
 		JTextArea txtrPassword_1_1 = new JTextArea();
@@ -265,5 +271,42 @@ public class L_Students extends JFrame {
 		comboBox_1.setBounds(1017, 424, 240, 27);
 		contentPane.add(comboBox_1);
 	}
+	
+	private void BorrowTable() {
+        DbConnect dbConnect = new DbConnect();
+        dbConnect.connect(); // Establish connection
+
+        try {
+            Connection con = dbConnect.con; // Use the connection from DbConnect
+            Statement stmt = con.createStatement();
+            String query = "SELECT id, borrow.StudentID, FullName, Title, Author, BorrowDate, DueDate, borrow.FineAmount, DateFineIssued, PaymentDate, FineNotes, ReservationDate, ReservationExpiryDate, PickupDate, ReservationNotes, borrow.BookID\r\n"
+            		+ "FROM borrow INNER JOIN book ON book.BookID = borrow.BookID INNER JOIN students ON students.StudentID = borrow.StudentID;";
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                		rs.getInt("id"),
+                		rs.getString("FullName"),
+                		rs.getString("Title"),
+                		rs.getString("Author"),
+                		rs.getDate("BorrowDate"),
+                		rs.getDate("DueDate"),
+                		rs.getDouble("FineAmount"),
+                		rs.getDate("DateFineIssued"),
+                		rs.getDate("PaymentDate"),
+                		rs.getString("FineNotes"),
+                		rs.getDate("ReservationDate"),
+                		rs.getDate("ReservationExpiryDate"),
+                		rs.getDate("PickupDate"),
+                		rs.getString("ReservationNotes"),
+                		rs.getInt("BookID"),
+                		rs.getInt("StudentID"),
+                });
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

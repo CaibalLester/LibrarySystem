@@ -147,7 +147,7 @@ public class LibrarianDashboard extends JFrame {
 		JButton btnManageStudents = new JButton("Manage Students");
 		btnManageStudents.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				L_Students Students = new L_Students();
+				L_Students Students = new L_Students(userId);
 				Students.setVisible(true);
 				dispose();
 			}
