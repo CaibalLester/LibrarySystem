@@ -133,7 +133,7 @@ public class LibrarianDashboard extends JFrame {
 		JButton btnManageMyInfo = new JButton("Manage My Info");
 		btnManageMyInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				L_LibrarianInfo LibrarianInfo = new L_LibrarianInfo();
+				L_LibrarianInfo LibrarianInfo = new L_LibrarianInfo(userId);
 				LibrarianInfo.setVisible(true);
 				dispose(); 
 			}
