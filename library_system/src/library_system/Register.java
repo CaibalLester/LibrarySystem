@@ -1,6 +1,7 @@
 package library_system;
 
 import java.awt.EventQueue;
+import org.mindrot.jbcrypt.BCrypt;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
@@ -206,17 +207,14 @@ public class Register extends JFrame {
 
 	private void insertData(String username, String password, String email, String fullname, String userrole) {
 		String query = "INSERT INTO register (username, password, email, fullname, userrole) VALUES (?, ?, ?, ?, ?)";
-
+		String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 		try {
 		    PreparedStatement pst = db.con.prepareStatement(query);
 		    pst.setString(1, username);
-		    pst.setString(2, password);
+		    pst.setString(2, hashedPassword);
 		    pst.setString(3, email);
 		    pst.setString(4, fullname);
 		    pst.setString(5, userrole);
-		 
-		    System.out.println("Executing query: " + query);
-		    System.out.println("Values: " + username + ", " + password + ", " + email + ", " + fullname + ", " + userrole);
 		    pst.executeUpdate();
 		    JOptionPane.showMessageDialog(null, "User registered successfully!");
 		} catch (SQLException e) {

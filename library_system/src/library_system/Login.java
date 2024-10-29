@@ -12,16 +12,14 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Image;
-
 import javax.swing.JTextArea;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JLabel;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class Login extends JFrame {
 
@@ -152,25 +150,55 @@ public class Login extends JFrame {
         btnGoback.setFont(new Font("Arial", Font.BOLD, 15));
         btnGoback.setBackground(new Color(0, 128, 128));
         contentPane.add(btnGoback);
+        
+        hashed();
     }
 
     private void authenticate(String username, String password) {
         try {
             Connection con = dbConnect.con;
-            String query = "SELECT user_id, userrole FROM register WHERE username = ? AND password = ?";
-            PreparedStatement pst = con.prepareStatement(query);
-            pst.setString(1, username);
-            pst.setString(2, password);
-
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                userId = rs.getString("user_id");
-                role = rs.getString("userrole");
+            String passmatch = "SELECT password FROM register WHERE username = ?";
+            PreparedStatement pstmt = con.prepareStatement(passmatch);
+            pstmt.setString(1, username);
+            ResultSet res = pstmt.executeQuery();
+            if(res.next()) {
+            	String hashedPassword = res.getString(1);
+            	if(BCrypt.checkpw(password, hashedPassword)) {
+		            String query = "SELECT user_id, userrole FROM register WHERE username = ?";
+		            PreparedStatement pst = con.prepareStatement(query);
+		            pst.setString(1, username);
+		            ResultSet rs = pst.executeQuery();
+		            if (rs.next()) {
+		                userId = rs.getString("user_id");
+		                role = rs.getString("userrole");
+		            } else {
+		            	userId = null;
+		            }
+            	} else {
+            		System.out.println("Wrong Password");
+                    javax.swing.JOptionPane.showMessageDialog(contentPane, "Wrong Password");
+            	}
             } else {
-            	userId = null;
+            	System.out.println("User Doesn't Exists");
+                javax.swing.JOptionPane.showMessageDialog(contentPane, "User Doesn't Exists");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void hashed() {
+    	String hashedPassword = BCrypt.hashpw("les", BCrypt.gensalt());
+    	String hashedPassword1 = BCrypt.hashpw("caiballester", BCrypt.gensalt());
+    	String hashedPassword2 = BCrypt.hashpw("joyce", BCrypt.gensalt());
+    	String hashedPassword3 = BCrypt.hashpw("kath", BCrypt.gensalt());
+    	String hashedPassword4 = BCrypt.hashpw("jhoanna", BCrypt.gensalt());
+    	System.out.println(hashedPassword);
+    	System.out.println(hashedPassword1);
+    	System.out.println(hashedPassword2);
+    	System.out.println(hashedPassword3);
+    	System.out.println(hashedPassword4);
+    	
+    	
     }
 }
