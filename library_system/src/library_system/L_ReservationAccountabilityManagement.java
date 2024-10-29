@@ -30,6 +30,7 @@ import javax.swing.JComboBox;
 public class L_ReservationAccountabilityManagement extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private static String userId;
 	private JPanel contentPane;
 	private DefaultTableModel model;
 	private JTable table_1;
@@ -54,11 +55,11 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					L_ReservationAccountabilityManagement frame = new L_ReservationAccountabilityManagement();
+					L_ReservationAccountabilityManagement frame = new L_ReservationAccountabilityManagement(userId);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -70,8 +71,8 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public L_ReservationAccountabilityManagement() {
-		
+	public L_ReservationAccountabilityManagement(String userID) {
+		userId = userID;
 		supply_comboBox(); 
 		
 		setResizable(false);
@@ -144,7 +145,7 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LibrarianDashboard librarianDashboard = new LibrarianDashboard("userID");
+				LibrarianDashboard librarianDashboard = new LibrarianDashboard(userId);
 				librarianDashboard.setVisible(true);
 				dispose();
 			}
@@ -158,6 +159,7 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		int selectedRow = table_1.getSelectedRow();
         		int id = Integer.parseInt(textField.getText());
         		Date borrowDate = dateChooser.getDate();
         		Date dueDate = dateChooser_2.getDate();
@@ -173,6 +175,58 @@ public class L_ReservationAccountabilityManagement extends JFrame {
         		int studentID = Integer.parseInt(comboBox.getSelectedItem().toString());
 
                 updateData(id,borrowDate, dueDate, fineAmount, dateFineIssued, paymentDate, fineNotes, reservationDate, reservationExpiryDate, pickupDate, reservationNotes, bookID, studentID);
+                
+                model.setValueAt(id, selectedRow, 0);
+                // --------------------------------------
+                if(borrowDate != null) {
+                	model.setValueAt(formatter.format(borrowDate), selectedRow, 4);
+                } else {
+                	model.setValueAt("", selectedRow, 4);
+                }
+                
+                if(dueDate != null) {
+                	model.setValueAt(formatter.format(dueDate), selectedRow, 5);
+                } else {
+                	model.setValueAt("", selectedRow, 5);
+                }
+                // ---------------------------------------
+                model.setValueAt(fineAmount, selectedRow, 6);
+                // ---------------------------------------
+                if(dateFineIssued != null) {
+                	model.setValueAt(formatter.format(dateFineIssued), selectedRow, 7);
+                } else {
+                	model.setValueAt("", selectedRow, 7);
+                }
+                
+                if(paymentDate != null) {
+                	model.setValueAt(formatter.format(paymentDate), selectedRow, 8);
+                } else {
+                	model.setValueAt("", selectedRow, 8);
+                }
+                // ---------------------------------------
+                model.setValueAt(fineNotes, selectedRow, 9);
+                // ---------------------------------------
+                if(reservationDate != null) {
+                	model.setValueAt(formatter.format(reservationDate), selectedRow, 10);
+                } else {
+                	model.setValueAt("", selectedRow, 10);
+                }
+                
+                if(reservationExpiryDate != null) {
+                	model.setValueAt(formatter.format(reservationExpiryDate), selectedRow,11);
+                } else {
+                	model.setValueAt("", selectedRow, 11);
+                }
+                
+                if(pickupDate != null) {
+                	model.setValueAt(formatter.format(pickupDate), selectedRow, 12);
+                } else {
+                	model.setValueAt("", selectedRow,12);
+                }
+                // ---------------------------------------
+                model.setValueAt(reservationNotes, selectedRow, 13);
+                model.setValueAt(bookID, selectedRow, 14);
+                model.setValueAt(studentID, selectedRow, 15);
 		    }
 		});
 		btnEdit.setForeground(Color.WHITE);
@@ -343,8 +397,10 @@ public class L_ReservationAccountabilityManagement extends JFrame {
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		int selectedRow = table_1.getSelectedRow();
         		int id = Integer.parseInt(textField.getText());
                 deleteData(id);
+                model.removeRow(selectedRow);
 		    }
 		});
 		btnDelete.setForeground(Color.WHITE);
@@ -499,9 +555,38 @@ public class L_ReservationAccountabilityManagement extends JFrame {
             pst.executeUpdate();
             System.out.println("Borrow Books Inserted");
             javax.swing.JOptionPane.showMessageDialog(contentPane, "Borrow Books Inserted");
-            L_ReservationAccountabilityManagement frame = new L_ReservationAccountabilityManagement();
-			frame.setVisible(true);
-			dispose();
+
+            try {
+                Statement st = con.createStatement();
+                String qry = "SELECT id, borrow.StudentID, FullName, Title, Author, BorrowDate, DueDate, borrow.FineAmount, DateFineIssued, PaymentDate, FineNotes, ReservationDate, ReservationExpiryDate, PickupDate, ReservationNotes, borrow.BookID\r\n"
+                		+ "FROM borrow INNER JOIN book ON book.BookID = borrow.BookID INNER JOIN students ON students.StudentID = borrow.StudentID WHERE id = (SELECT MAX(id) FROM borrow);";
+                ResultSet res = st.executeQuery(qry);
+
+                while (res.next()) {
+                    model.addRow(new Object[]{
+                    		res.getInt("id"),
+                    		res.getString("FullName"),
+                    		res.getString("Title"),
+                    		res.getString("Author"),
+                    		res.getDate("BorrowDate"),
+                    		res.getDate("DueDate"),
+                    		res.getDouble("FineAmount"),
+                    		res.getDate("DateFineIssued"),
+                    		res.getDate("PaymentDate"),
+                    		res.getString("FineNotes"),
+                    		res.getDate("ReservationDate"),
+                    		res.getDate("ReservationExpiryDate"),
+                    		res.getDate("PickupDate"),
+                    		res.getString("ReservationNotes"),
+                    		res.getInt("BookID"),
+                    		res.getInt("StudentID"),
+                    });
+                }
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -548,9 +633,6 @@ public class L_ReservationAccountabilityManagement extends JFrame {
             
             System.out.println("Borrow Books Updated");
             javax.swing.JOptionPane.showMessageDialog(contentPane, "Borrow Books Updated");
-            L_ReservationAccountabilityManagement frame = new L_ReservationAccountabilityManagement();
-			frame.setVisible(true);
-			dispose();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -593,9 +675,6 @@ public class L_ReservationAccountabilityManagement extends JFrame {
             
             System.out.println("Deleted Successfully! Borrow ID: " + id);
             javax.swing.JOptionPane.showMessageDialog(contentPane, "Deleted Successfully! Borrow ID: " + id);
-            L_ReservationAccountabilityManagement frame = new L_ReservationAccountabilityManagement();
-			frame.setVisible(true);
-			dispose();
         } catch (SQLException e) {
             e.printStackTrace();
         }	

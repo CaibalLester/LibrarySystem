@@ -31,6 +31,7 @@ public class S_StudentInfo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JButton btnSubmit;
 	private JTextField FullName;
     private JComboBox<String> Gender;
     private JTextField Email;
@@ -49,7 +50,8 @@ public class S_StudentInfo extends JFrame {
     private JTextArea syearlevel;
     private JTextArea saddress;
     private DbConnect dbConnect;
-    private String userId;
+    private static String userId;
+    private boolean test;
     
 
 
@@ -58,8 +60,7 @@ public class S_StudentInfo extends JFrame {
             public void run() {
                 try {
                     DbConnect dbConnect = new DbConnect();
-                    dbConnect.connect();  
-                    String userId = "sampleUserId";  
+                    dbConnect.connect();    
                     S_StudentInfo frame = new S_StudentInfo(userId, dbConnect);  
                     frame.setVisible(true);
                 } catch (Exception e) {
@@ -71,8 +72,8 @@ public class S_StudentInfo extends JFrame {
 
 
 
-	public S_StudentInfo(String userId, DbConnect dbConnect) {
-		this.userId = userId;
+	public S_StudentInfo(String userID, DbConnect dbConnect) {
+		userId = userID;
         this.dbConnect = dbConnect; 
         
 		setBackground(new Color(255, 255, 255));
@@ -91,7 +92,7 @@ public class S_StudentInfo extends JFrame {
 		txtrStudentInformation.setFont(new Font("Arial", Font.BOLD, 30));
 		txtrStudentInformation.setBackground(new Color(0, 128, 128));
 		
-		JButton btnSubmit = new JButton("Submit");
+		btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	String fullname = FullName.getText();
@@ -296,6 +297,7 @@ public class S_StudentInfo extends JFrame {
 		
 		displayUserInfo(userId);
 		displayme(userId);
+		remove();
 		
 		JLabel lblNewLabel = new JLabel("");
         Image imgss = new ImageIcon(this.getClass().getResource("/board.png")).getImage();
@@ -355,9 +357,6 @@ public class S_StudentInfo extends JFrame {
 		    }
 		}
 
-	 
-
-	 
 	 private void displayUserInfo(String userId) {
 	        Connection con = dbConnect.con; 
 	        String query = "SELECT user_id, fullname, email FROM register WHERE user_id = ?";
@@ -388,6 +387,7 @@ public class S_StudentInfo extends JFrame {
 	            stmt.setString(1, userId);
 	            ResultSet rs = stmt.executeQuery();
 	            if (rs.next()) {
+	            	test = true;
 	                String fetchedUsername = rs.getString("ContactNumber");
 	                String fetchedPassword = rs.getString("EmergencyNumber");
 	                String fetchedPorogram= rs.getString("Program");
@@ -402,10 +402,17 @@ public class S_StudentInfo extends JFrame {
 	                
 	                
 	            } else {
+	            	test = false;
 	                System.out.println("User not found");
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
+
+	 private void remove() {
+		 if(test) {
+			 contentPane.remove(btnSubmit);
+		 }
+	 }
 }

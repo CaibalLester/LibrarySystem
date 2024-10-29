@@ -54,6 +54,7 @@ public class StudentDashboard extends JFrame {
         contentPane.setLayout(null);
 
         JTextArea txtrStudentDashboard = new JTextArea();
+        txtrStudentDashboard.setEditable(false);
         txtrStudentDashboard.setText("Student Dashboard");
         txtrStudentDashboard.setForeground(new Color(0, 128, 128));
         txtrStudentDashboard.setFont(new Font("Arial", Font.BOLD, 30));
@@ -62,6 +63,7 @@ public class StudentDashboard extends JFrame {
         contentPane.add(txtrStudentDashboard);
         
         JTextArea txtrStudentNumber = new JTextArea();
+        txtrStudentNumber.setEditable(false);
         txtrStudentNumber.setText("Student Number :");
         txtrStudentNumber.setForeground(new Color(0, 128, 128));
         txtrStudentNumber.setFont(new Font("Arial", Font.BOLD, 15));
@@ -70,6 +72,7 @@ public class StudentDashboard extends JFrame {
         contentPane.add(txtrStudentNumber);
         
         JTextArea txtrName = new JTextArea();
+        txtrName.setEditable(false);
         txtrName.setText("Name : ");
         txtrName.setForeground(new Color(0, 128, 128));
         txtrName.setFont(new Font("Arial", Font.BOLD, 15));
@@ -78,6 +81,7 @@ public class StudentDashboard extends JFrame {
         contentPane.add(txtrName);
         
         fullname = new JTextArea();
+        fullname.setEditable(false);
         fullname.setText("***");
         fullname.setForeground(new Color(0, 128, 128));
         fullname.setFont(new Font("Arial", Font.BOLD, 15));
@@ -86,6 +90,7 @@ public class StudentDashboard extends JFrame {
         contentPane.add(fullname);
         
         username = new JTextArea();
+        username.setEditable(false);
         username.setText("***");
         username.setForeground(new Color(0, 128, 128));
         username.setFont(new Font("Arial", Font.BOLD, 15));
@@ -96,7 +101,7 @@ public class StudentDashboard extends JFrame {
         JButton btnManageBorrowing = new JButton("Manage Borrowed Books");
         btnManageBorrowing.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                S_BorrowingComplianceManagement BorrowingComplianceManagement = new S_BorrowingComplianceManagement();
+                S_BorrowingComplianceManagement BorrowingComplianceManagement = new S_BorrowingComplianceManagement(userId);
                 BorrowingComplianceManagement.setVisible(true);
                 dispose();
             }
@@ -107,19 +112,19 @@ public class StudentDashboard extends JFrame {
         btnManageBorrowing.setBounds(107, 138, 241, 43);
         contentPane.add(btnManageBorrowing);
         
-        JButton btnManageBooks = new JButton("Manage Books");
-        btnManageBooks.addActionListener(new ActionListener() {
+        JButton btnSearchBooks = new JButton("Books");
+        btnSearchBooks.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                S_Books SBooks = new S_Books();
+                S_Books SBooks = new S_Books(userId);
                 SBooks.setVisible(true);
                 dispose();
             }
         });
-        btnManageBooks.setForeground(Color.WHITE);
-        btnManageBooks.setFont(new Font("Arial", Font.BOLD, 15));
-        btnManageBooks.setBackground(new Color(0, 128, 128));
-        btnManageBooks.setBounds(107, 244, 241, 43);
-        contentPane.add(btnManageBooks);
+        btnSearchBooks.setForeground(Color.WHITE);
+        btnSearchBooks.setFont(new Font("Arial", Font.BOLD, 15));
+        btnSearchBooks.setBackground(new Color(0, 128, 128));
+        btnSearchBooks.setBounds(107, 244, 241, 43);
+        contentPane.add(btnSearchBooks);
         
         JButton btnManageStudentInfo = new JButton("Manage My Info");
         btnManageStudentInfo.addActionListener(new ActionListener() {
@@ -141,20 +146,6 @@ public class StudentDashboard extends JFrame {
         btnManageStudentInfo.setBackground(new Color(0, 128, 128));
         btnManageStudentInfo.setBounds(107, 191, 241, 43);
         contentPane.add(btnManageStudentInfo);
-        
-        JButton btnManageReserve = new JButton("Manage Reservations");
-        btnManageReserve.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                S_Reservation SReservation = new S_Reservation(userId);
-                SReservation.setVisible(true);
-                dispose();
-            }
-        });
-        btnManageReserve.setForeground(Color.WHITE);
-        btnManageReserve.setFont(new Font("Arial", Font.BOLD, 15));
-        btnManageReserve.setBackground(new Color(0, 128, 128));
-        btnManageReserve.setBounds(107, 297, 241, 43);
-        contentPane.add(btnManageReserve);
         
         JLabel lblNewLabel = new JLabel("");
         Image img = new ImageIcon(this.getClass().getResource("/stwo.png")).getImage();

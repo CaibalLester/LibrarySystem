@@ -30,6 +30,7 @@ import java.sql.SQLException;
 public class L_Books extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    private static String userId;
     private JPanel contentPane;
     private JTable table;
     private JTextField title;
@@ -44,11 +45,11 @@ public class L_Books extends JFrame {
     private DbConnect db; 
 
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    L_Books frame = new L_Books();
+                    L_Books frame = new L_Books(userId);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -58,7 +59,8 @@ public class L_Books extends JFrame {
     }
 
 
-    public L_Books() {	
+    public L_Books(String userID) {	
+    	userId = userID;
         db = new DbConnect();
         db.connect();
         
@@ -216,7 +218,7 @@ public class L_Books extends JFrame {
         JButton btnBack = new JButton("Back");
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                LibrarianDashboard librarianDashboard = new LibrarianDashboard("userID");
+                LibrarianDashboard librarianDashboard = new LibrarianDashboard(userId);
                 librarianDashboard.setVisible(true);
                 dispose();
             }

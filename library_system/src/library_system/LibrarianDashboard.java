@@ -62,6 +62,7 @@ public class LibrarianDashboard extends JFrame {
 		
 		
 		JTextArea txtrLibrarianDashboard = new JTextArea();
+		txtrLibrarianDashboard.setEditable(false);
 		txtrLibrarianDashboard.setBounds(114, 9, 310, 43);
 		txtrLibrarianDashboard.setText("Librarian Dashboard");
 		txtrLibrarianDashboard.setForeground(new Color(0, 128, 128));
@@ -71,6 +72,7 @@ public class LibrarianDashboard extends JFrame {
 		
 		
 		JTextArea txtrLibrarianNumber = new JTextArea();
+		txtrLibrarianNumber.setEditable(false);
 		txtrLibrarianNumber.setBounds(113, 62, 144, 22);
 		txtrLibrarianNumber.setText("Librarian Number :");
 		txtrLibrarianNumber.setForeground(new Color(0, 128, 128));
@@ -79,7 +81,8 @@ public class LibrarianDashboard extends JFrame {
 		contentPane.add(txtrLibrarianNumber);
 		
 		JTextArea txtrName = new JTextArea();
-		txtrName.setBounds(113, 85, 60, 22);
+		txtrName.setEditable(false);
+		txtrName.setBounds(101, 85, 60, 22);
 		txtrName.setText("Name : ");
 		txtrName.setForeground(new Color(0, 128, 128));
 		txtrName.setFont(new Font("Arial", Font.BOLD, 15));
@@ -87,6 +90,7 @@ public class LibrarianDashboard extends JFrame {
 		contentPane.add(txtrName);
 		
 		libnum = new JTextArea();
+		libnum.setEditable(false);
 		libnum.setBounds(262, 62, 134, 22);
 		libnum.setText("***");
 		libnum.setForeground(new Color(0, 128, 128));
@@ -95,6 +99,7 @@ public class LibrarianDashboard extends JFrame {
 		contentPane.add(libnum);
 		
 		libname = new JTextArea();
+		libname.setEditable(false);
 		libname.setBounds(183, 85, 167, 22);
 		libname.setText("***");
 		libname.setForeground(new Color(0, 128, 128));
@@ -105,7 +110,7 @@ public class LibrarianDashboard extends JFrame {
 		JButton btnManageStudentBooks = new JButton("Manage Student Books");
 		btnManageStudentBooks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-						L_ReservationAccountabilityManagement ReservationAccountabilityManagement = new L_ReservationAccountabilityManagement();
+						L_ReservationAccountabilityManagement ReservationAccountabilityManagement = new L_ReservationAccountabilityManagement(userId);
 						ReservationAccountabilityManagement.setVisible(true);
 						dispose(); 
 			}
@@ -119,7 +124,7 @@ public class LibrarianDashboard extends JFrame {
 		JButton btnManageBook = new JButton("Manage Books");
 		btnManageBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				L_Books l_Books = new L_Books();
+				L_Books l_Books = new L_Books(userId);
 				l_Books.setVisible(true);
 				dispose(); 
 			}
