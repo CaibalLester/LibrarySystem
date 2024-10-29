@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 29, 2024 at 05:56 PM
+-- Generation Time: Oct 29, 2024 at 06:43 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -117,7 +117,7 @@ INSERT INTO `librarian` (`LibrarianID`, `Fullname`, `Gender`, `Email`, `ContactN
 CREATE TABLE `register` (
   `user_id` int NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `email` varchar(50) NOT NULL,
   `fullname` varchar(50) NOT NULL,
   `userrole` varchar(50) NOT NULL
@@ -128,11 +128,12 @@ CREATE TABLE `register` (
 --
 
 INSERT INTO `register` (`user_id`, `username`, `password`, `email`, `fullname`, `userrole`) VALUES
-(1, 'Les', 'les', 'lestercaibal@gmail.com', 'Lester Caibal', 'Student'),
-(2, 'Kath', 'kath', 'riverakatherine@gmail.com', 'Katherine Rivera', 'Librarian'),
-(3, 'Jhoanna', 'jhoanna', 'Dolores@gmail.com', 'Jhoanna Dolores', 'Librarian'),
-(4, 'Joyce', 'joyce', 'Joyce@gmail.com', 'Joyce Morales', 'Student'),
-(5, 'Lyx', 'caiballester', 'caiballester@gmail.com', 'Les Cai', 'Student');
+(1, 'Les', '$2a$10$aubE1kQgm3V/vVGiSrQV0edXTqUqivBVJceW2t2bXftmpIE1KA2zq', 'lestercaibal@gmail.com', 'Lester Caibal', 'Student'),
+(2, 'Kath', '$2a$10$QAqeZ0SDcj8FETC9CpKtr.g97vXscJr1RAZiAq4FNtMroFzoAYMDu', 'riverakatherine@gmail.com', 'Katherine Rivera', 'Librarian'),
+(3, 'Jhoanna', '$2a$10$5GDbxsMlt0HiYpjRz7orTuMstRP6ltFf9TV8I6BMLgrZrCGoTrw5q', 'Dolores@gmail.com', 'Jhoanna Dolores', 'Librarian'),
+(4, 'Joyce', '$2a$10$t8u57Ns0u8/hbwPrTV9VwOhurmM.uEZltCQ995RxEQOO/8W4zZ/T6', 'Joyce@gmail.com', 'Joyce Morales', 'Student'),
+(5, 'Lyx', '$2a$10$rBmDn1saiuOivnaUbRMnn.cjSgayXIJZdfGpdceo/UaUJnBDfqE8q', 'caiballester@gmail.com', 'Les Cai', 'Student'),
+(7, 'Testing', '$2a$10$jCsImnAm28bWq/eWmdNa9O.O8CWIzG7U/eFm9oiD7vIkoQBDIvaJi', 'Testing@gmail.com', 'Testing', 'Student');
 
 -- --------------------------------------------------------
 
@@ -227,7 +228,7 @@ ALTER TABLE `librarian`
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `students`
