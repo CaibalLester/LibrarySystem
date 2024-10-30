@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 29, 2024 at 06:43 PM
+-- Generation Time: Oct 30, 2024 at 09:52 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -44,13 +44,11 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`BookID`, `Title`, `Author`, `ISBN`, `Publisher`, `YearPublished`, `Quantity`, `Pages`, `Status`) VALUES
-(14, 'Lester', 'Caibal', 4, 'c', 5, 6, 7, 'Checked Out'),
-(15, 'Mi', 'b', 4, 'c', 5, 6, 7, 'Checked Out'),
-(16, 'Shiro', 'Caibal', 4, 'c', 5, 6, 7, 'Reserved'),
-(17, 'Myx', 'Les', 1, 'Lala', 2, 3, 4, 'Available'),
-(18, 'Leslie', 'Try', 10, 'Cai', 11, 12, 13, 'Available'),
-(19, 'Shiro', 'Caibal', 4, 'c', 5, 6, 7, 'Reserved'),
-(20, 'Lixert', 'Lax', 19, 'Lao', 2, 3, 4, 'Checked Out');
+(14, 'Effective Java', 'Joshua Bloch', 1234, 'Addison-Wesley', 2018, 6, 416, 'Checked Out'),
+(15, 'Clean Code', 'Robert C. Martin', 41313, 'Prentice Hall', 2008, 6, 72, 'Checked Out'),
+(16, 'The Pragmatic Programmer', 'Andrew Hunt', 12121, 'Addison-Wesley', 2020, 8, 123, 'Reserved'),
+(17, 'Refactoring: Improving the Design of Existing Code', 'Martin Fowler', 9181, 'Stuart Russell', 2019, 33, 4, 'Available'),
+(18, 'Java: The Complete Reference', 'Herbert Schildt', 10, 'McGraw-Hill', 2011, 12, 1324, 'Available');
 
 -- --------------------------------------------------------
 
@@ -79,10 +77,7 @@ CREATE TABLE `borrow` (
 --
 
 INSERT INTO `borrow` (`id`, `BorrowDate`, `DueDate`, `FineAmount`, `DateFineIssued`, `PaymentDate`, `FineNotes`, `ReservationDate`, `ReservationExpiryDate`, `PickupDate`, `ReservationNotes`, `BookID`, `StudentID`) VALUES
-(1, '2024-10-31', '2024-11-04', 0, NULL, NULL, 'Test', '2024-10-29', '2024-10-31', '2024-10-31', 'For REFERENCES', 14, 2),
-(2, '2024-10-31', '2024-11-03', 0, NULL, NULL, 'None', '2024-10-29', '2024-10-31', '2024-10-31', 'For SCHOOL PROJECTS', 14, 2),
-(5, '2024-10-31', '2024-11-02', 0, NULL, NULL, '', '2024-10-29', '2024-10-31', '2024-10-31', 'For SCHOOL ASSIGNMENT', 18, 2),
-(6, '2024-11-02', '2024-11-05', NULL, NULL, NULL, NULL, '2024-10-30', '2024-11-02', '2024-11-03', 'For PROJECT', 17, 2);
+(7, '2024-10-31', '2024-11-03', 100, '2024-10-12', '2024-10-16', 'None', '2024-10-29', '2024-10-31', '2024-10-31', 'For SCHOOL PROJECTS', 14, 2);
 
 -- --------------------------------------------------------
 
@@ -133,7 +128,9 @@ INSERT INTO `register` (`user_id`, `username`, `password`, `email`, `fullname`, 
 (3, 'Jhoanna', '$2a$10$5GDbxsMlt0HiYpjRz7orTuMstRP6ltFf9TV8I6BMLgrZrCGoTrw5q', 'Dolores@gmail.com', 'Jhoanna Dolores', 'Librarian'),
 (4, 'Joyce', '$2a$10$t8u57Ns0u8/hbwPrTV9VwOhurmM.uEZltCQ995RxEQOO/8W4zZ/T6', 'Joyce@gmail.com', 'Joyce Morales', 'Student'),
 (5, 'Lyx', '$2a$10$rBmDn1saiuOivnaUbRMnn.cjSgayXIJZdfGpdceo/UaUJnBDfqE8q', 'caiballester@gmail.com', 'Les Cai', 'Student'),
-(7, 'Testing', '$2a$10$jCsImnAm28bWq/eWmdNa9O.O8CWIzG7U/eFm9oiD7vIkoQBDIvaJi', 'Testing@gmail.com', 'Testing', 'Student');
+(7, 'Testing', '$2a$10$jCsImnAm28bWq/eWmdNa9O.O8CWIzG7U/eFm9oiD7vIkoQBDIvaJi', 'Testing@gmail.com', 'Testing', 'Student'),
+(8, 'lester', '$2a$10$/Hh.nwJ4RhGHyVZDPEukWOBtE5iA971uzrXOyGfhhZg1Yr53CmTVO', 'lester@gmail.com', 'Lester Caibal', 'Student'),
+(9, 'Andry', '$2a$10$fhqKwva/2nA7yh26Ua4CT.2z4D4M/Yrf6u227uyTHIqlk6UzGQkSm', 'andrea@gmail.com', 'Andrea Hoson', 'Student');
 
 -- --------------------------------------------------------
 
@@ -159,8 +156,9 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`StudentID`, `FullName`, `Gender`, `Email`, `ContactNumber`, `EmergencyNumber`, `Program`, `YearLevel`, `StudentAddress`, `user_id`) VALUES
-(2, 'Lester Caibal', 'Male', 'lestercaibal@gmail.com', '09912736453', '09987654323', 'BSIT', 1, 'Pambisan', 1),
-(3, 'Joyce ', 'Female', 'Joyce@gmail.com', '09123456789', '09987654321', 'STEM', 3, 'Calapan', 4);
+(2, 'Lester', 'Male', 'lestercaibal@gmail.com', '09912736453', '09987654323', 'BSIS', 1, 'Pambisan', 1),
+(3, 'Joyce ', 'Female', 'Joyce@gmail.com', '09123456789', '09987654321', 'STEM', 3, 'Calapan', 4),
+(5, 'Hazel', 'Male', 'Hazel@gmail.com', '00000', '2222222', 'BSIT', 1, 'Masipit', 9);
 
 --
 -- Indexes for dumped tables
@@ -216,7 +214,7 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT for table `borrow`
 --
 ALTER TABLE `borrow`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `librarian`
@@ -228,13 +226,13 @@ ALTER TABLE `librarian`
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `StudentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `StudentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
