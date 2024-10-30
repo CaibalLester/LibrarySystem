@@ -66,7 +66,7 @@ public class L_LibrarianInfo extends JFrame {
 		setResizable(false);
 		setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1310, 648);
+		setBounds(100, 100, 1260, 627);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 128, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -77,7 +77,7 @@ public class L_LibrarianInfo extends JFrame {
 		textArea = new JTextArea();
 		textArea.setLineWrap(true);
 		textArea.setBackground(new Color(72, 209, 204));
-		textArea.setBounds(1025, 333, 217, 115);
+		textArea.setBounds(940, 335, 217, 115);
 		contentPane.add(textArea);
 		
 		JTextArea txtrPassword = new JTextArea();
@@ -116,21 +116,21 @@ public class L_LibrarianInfo extends JFrame {
 		textField.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField.setColumns(10);
 		textField.setBackground(new Color(177, 216, 216));
-		textField.setBounds(1025, 123, 216, 30);
+		textField.setBounds(940, 125, 216, 30);
 		contentPane.add(textField);
 		
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_1.setColumns(10);
 		textField_1.setBackground(new Color(177, 216, 216));
-		textField_1.setBounds(1025, 207, 216, 30);
+		textField_1.setBounds(940, 209, 216, 30);
 		contentPane.add(textField_1);
 		
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_2.setColumns(10);
 		textField_2.setBackground(new Color(177, 216, 216));
-		textField_2.setBounds(1025, 247, 216, 30);
+		textField_2.setBounds(940, 249, 216, 30);
 		contentPane.add(textField_2);
 		
 		JTextArea txtrFullName_1_3 = new JTextArea();
@@ -173,7 +173,7 @@ public class L_LibrarianInfo extends JFrame {
 		btnSubmit.setForeground(Color.WHITE);
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 15));
 		btnSubmit.setBackground(new Color(41, 82, 82));
-		btnSubmit.setBounds(1142, 460, 99, 30);
+		btnSubmit.setBounds(1057, 462, 99, 30);
 		contentPane.add(btnSubmit);
 		
 		JTextArea txtrUsername_1 = new JTextArea();
@@ -181,7 +181,7 @@ public class L_LibrarianInfo extends JFrame {
 		txtrUsername_1.setForeground(new Color(0, 128, 128));
 		txtrUsername_1.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrUsername_1.setBackground(Color.WHITE);
-		txtrUsername_1.setBounds(878, 122, 111, 30);
+		txtrUsername_1.setBounds(793, 124, 111, 30);
 		contentPane.add(txtrUsername_1);
 		
 		JTextArea txtrPassword_1 = new JTextArea();
@@ -189,7 +189,7 @@ public class L_LibrarianInfo extends JFrame {
 		txtrPassword_1.setForeground(new Color(0, 128, 128));
 		txtrPassword_1.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrPassword_1.setBackground(Color.WHITE);
-		txtrPassword_1.setBounds(902, 166, 107, 30);
+		txtrPassword_1.setBounds(817, 168, 107, 30);
 		contentPane.add(txtrPassword_1);
 		
 		JTextArea txtrEmail_1 = new JTextArea();
@@ -197,7 +197,7 @@ public class L_LibrarianInfo extends JFrame {
 		txtrEmail_1.setForeground(new Color(0, 128, 128));
 		txtrEmail_1.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrEmail_1.setBackground(Color.WHITE);
-		txtrEmail_1.setBounds(922, 206, 65, 30);
+		txtrEmail_1.setBounds(837, 208, 65, 30);
 		contentPane.add(txtrEmail_1);
 		
 		JTextArea txtrFullName_1 = new JTextArea();
@@ -205,7 +205,7 @@ public class L_LibrarianInfo extends JFrame {
 		txtrFullName_1.setForeground(new Color(0, 128, 128));
 		txtrFullName_1.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrFullName_1.setBackground(Color.WHITE);
-		txtrFullName_1.setBounds(822, 246, 188, 30);
+		txtrFullName_1.setBounds(737, 248, 188, 30);
 		contentPane.add(txtrFullName_1);
 		
 		JTextArea txtrEmergencyContact_1 = new JTextArea();
@@ -213,7 +213,7 @@ public class L_LibrarianInfo extends JFrame {
 		txtrEmergencyContact_1.setForeground(new Color(0, 128, 128));
 		txtrEmergencyContact_1.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrEmergencyContact_1.setBackground(Color.WHITE);
-		txtrEmergencyContact_1.setBounds(791, 286, 202, 30);
+		txtrEmergencyContact_1.setBounds(706, 288, 202, 30);
 		contentPane.add(txtrEmergencyContact_1);
 		
 		JTextArea txtrFullName_1_3_1 = new JTextArea();
@@ -221,14 +221,14 @@ public class L_LibrarianInfo extends JFrame {
 		txtrFullName_1_3_1.setForeground(new Color(0, 128, 128));
 		txtrFullName_1_3_1.setFont(new Font("Arial", Font.BOLD, 20));
 		txtrFullName_1_3_1.setBackground(Color.WHITE);
-		txtrFullName_1_3_1.setBounds(808, 327, 198, 30);
+		txtrFullName_1_3_1.setBounds(723, 329, 198, 30);
 		contentPane.add(txtrFullName_1_3_1);
 		
 		textField_4 = new JTextField();
 		textField_4.setFont(new Font("Arial", Font.PLAIN, 16));
 		textField_4.setColumns(10);
 		textField_4.setBackground(new Color(177, 216, 216));
-		textField_4.setBounds(1025, 287, 216, 30);
+		textField_4.setBounds(940, 289, 216, 30);
 		contentPane.add(textField_4);
 		
 		JButton btnBack = new JButton("Back");
@@ -242,72 +242,72 @@ public class L_LibrarianInfo extends JFrame {
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setFont(new Font("Arial", Font.BOLD, 15));
 		btnBack.setBackground(new Color(41, 82, 82));
-		btnBack.setBounds(1142, 532, 99, 30);
+		btnBack.setBounds(1075, 539, 99, 30);
 		contentPane.add(btnBack);
 		
 		txtrUsername_2 = new JTextArea();
 		txtrUsername_2.setEditable(false);
 		txtrUsername_2.setText("*****");
-		txtrUsername_2.setForeground(Color.WHITE);
+		txtrUsername_2.setForeground(new Color(0, 128, 128));
 		txtrUsername_2.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2.setBackground(new Color(0, 128, 128));
-		txtrUsername_2.setBounds(304, 126, 374, 30);
+		txtrUsername_2.setBackground(new Color(255, 255, 255));
+		txtrUsername_2.setBounds(304, 126, 321, 30);
 		contentPane.add(txtrUsername_2);
 		
 		txtrUsername_2_1 = new JTextArea();
 		txtrUsername_2_1.setEditable(false);
 		txtrUsername_2_1.setText("*****");
-		txtrUsername_2_1.setForeground(Color.WHITE);
+		txtrUsername_2_1.setForeground(new Color(0, 128, 128));
 		txtrUsername_2_1.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_1.setBackground(new Color(0, 128, 128));
-		txtrUsername_2_1.setBounds(304, 166, 374, 30);
+		txtrUsername_2_1.setBackground(new Color(255, 255, 255));
+		txtrUsername_2_1.setBounds(304, 166, 321, 30);
 		contentPane.add(txtrUsername_2_1);
 		
 		txtrUsername_2_2 = new JTextArea();
 		txtrUsername_2_2.setEditable(false);
 		txtrUsername_2_2.setText("*****");
-		txtrUsername_2_2.setForeground(Color.WHITE);
+		txtrUsername_2_2.setForeground(new Color(0, 128, 128));
 		txtrUsername_2_2.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_2.setBackground(new Color(0, 128, 128));
-		txtrUsername_2_2.setBounds(304, 206, 374, 30);
+		txtrUsername_2_2.setBackground(new Color(255, 255, 255));
+		txtrUsername_2_2.setBounds(304, 206, 321, 30);
 		contentPane.add(txtrUsername_2_2);
 		
 		txtrUsername_2_3 = new JTextArea();
 		txtrUsername_2_3.setEditable(false);
 		txtrUsername_2_3.setText("*****");
-		txtrUsername_2_3.setForeground(Color.WHITE);
+		txtrUsername_2_3.setForeground(new Color(0, 128, 128));
 		txtrUsername_2_3.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_3.setBackground(new Color(0, 128, 128));
-		txtrUsername_2_3.setBounds(304, 246, 374, 30);
+		txtrUsername_2_3.setBackground(new Color(255, 255, 255));
+		txtrUsername_2_3.setBounds(304, 246, 321, 30);
 		contentPane.add(txtrUsername_2_3);
 		
 		txtrUsername_2_4 = new JTextArea();
 		txtrUsername_2_4.setEditable(false);
 		txtrUsername_2_4.setText("*****");
-		txtrUsername_2_4.setForeground(Color.WHITE);
+		txtrUsername_2_4.setForeground(new Color(0, 128, 128));
 		txtrUsername_2_4.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_4.setBackground(new Color(0, 128, 128));
-		txtrUsername_2_4.setBounds(304, 286, 374, 30);
+		txtrUsername_2_4.setBackground(new Color(255, 255, 255));
+		txtrUsername_2_4.setBounds(304, 286, 321, 30);
 		contentPane.add(txtrUsername_2_4);
 		
 		txtrUsername_2_5_2 = new JTextArea();
 		txtrUsername_2_5_2.setEditable(false);
 		txtrUsername_2_5_2.setText("*****");
-		txtrUsername_2_5_2.setForeground(Color.WHITE);
+		txtrUsername_2_5_2.setForeground(new Color(0, 128, 128));
 		txtrUsername_2_5_2.setFont(new Font("Arial", Font.BOLD, 20));
-		txtrUsername_2_5_2.setBackground(new Color(0, 128, 128));
-		txtrUsername_2_5_2.setBounds(304, 327, 374, 66);
+		txtrUsername_2_5_2.setBackground(new Color(255, 255, 255));
+		txtrUsername_2_5_2.setBounds(304, 327, 321, 66);
 		contentPane.add(txtrUsername_2_5_2);
 		
 		comboBox = new JComboBox<>();
 		comboBox.setModel(new DefaultComboBoxModel<>(new String[] {"", "Male", "Female"}));
-		comboBox.setBounds(1025, 166, 216, 27);
+		comboBox.setBounds(940, 168, 216, 27);
 		contentPane.add(comboBox);
 		
 		JLabel lblNewLabel = new JLabel("");
         Image img = new ImageIcon(this.getClass().getResource("/white.png")).getImage();
         lblNewLabel.setIcon(new ImageIcon(img));
-        lblNewLabel.setBounds(35, 108, 1229, 398);
+        lblNewLabel.setBounds(67, 112, 1229, 398);
         contentPane.add(lblNewLabel);
         
         fetchInfo(userId);

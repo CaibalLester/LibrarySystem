@@ -202,12 +202,12 @@ public class S_BorrowingComplianceManagement extends JFrame {
 		txtrBookId.setForeground(Color.WHITE);
 		txtrBookId.setFont(new Font("Arial", Font.BOLD, 14));
 		txtrBookId.setBackground(new Color(0, 128, 128));
-		txtrBookId.setBounds(246, 429, 111, 23);
+		txtrBookId.setBounds(1058, 22, 111, 23);
 		contentPane.add(txtrBookId);
 		
 		comboBox = new JComboBox<>();
 		comboBox.setModel(new DefaultComboBoxModel<>(bookids.toArray(new Integer[0])));
-		comboBox.setBounds(246, 455, 166, 22);
+		comboBox.setBounds(1058, 48, 166, 22);
 		contentPane.add(comboBox);
 		
 		JButton btnSubmit = new JButton("Save");
